@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2024-03-30T15:49:21 IST" name="Default suite" finished-at="2024-03-30T15:49:42 IST" duration-ms="20958">
+    <groups>
+    </groups>
+    <test started-at="2024-03-30T15:49:21 IST" name="Default test" finished-at="2024-03-30T15:49:42 IST" duration-ms="20958">
+      <class name="allPages.InvestorSetup">
+        <test-method is-config="true" signature="launch()[pri:0, instance:allPages.InvestorSetup@37ceb1df]" started-at="2024-03-30T15:49:21 IST" name="launch" finished-at="2024-03-30T15:49:21 IST" duration-ms="7" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- launch -->
+        <test-method is-config="true" signature="setUp()[pri:0, instance:allPages.InvestorSetup@37ceb1df]" started-at="2024-03-30T15:49:21 IST" name="setUp" finished-at="2024-03-30T15:49:23 IST" duration-ms="2637" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="TC29()[pri:29, instance:allPages.InvestorSetup@37ceb1df]" started-at="2024-03-30T15:49:23 IST" name="TC29" finished-at="2024-03-30T15:49:38 IST" duration-ms="15056" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC29 -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:allPages.InvestorSetup@37ceb1df]" started-at="2024-03-30T15:49:38 IST" name="tearDown" finished-at="2024-03-30T15:49:42 IST" duration-ms="3211" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- allPages.InvestorSetup -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>
