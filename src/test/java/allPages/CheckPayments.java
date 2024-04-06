@@ -34,9 +34,9 @@ public class CheckPayments extends Locators {
 		WebDriverManager.chromedriver().setup();
 		driver=new ChromeDriver();
 		driver.manage().window().maximize(); 
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
-		driver.get("http://192.168.1.36:81/#/auth");
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
+		driver.get("http://192.168.1.36:90/#/auth");
 		File file=new File("C:\\Users\\thirumaran\\eclipse-workspace\\PowerFundOnee\\Data.properties");
 		FileInputStream FIS=new FileInputStream(file);
 		Properties prop=new Properties();
@@ -49,7 +49,7 @@ public class CheckPayments extends Locators {
 				driver.quit();
 			}
 
-	@Test
+	@Test(priority = 1,retryAnalyzer = ReRunFailedTestCase.class)
 	public void CheckPaymentsClick() throws InterruptedException {
 		PropertyFileReader.propertyRead();
 		String EmailId=PropertyFileReader.propertymap.get("EmailId");
@@ -62,7 +62,7 @@ public class CheckPayments extends Locators {
 		driver.findElement(By.xpath(CheckPayBtn)).click();
 	}
 	
-	@Test
+	@Test(priority = 2,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC01() throws InterruptedException {
 		CheckPaymentsClick();
 		String CPBankDDName=PropertyFileReader.propertymap.get("CPBankDDName");
@@ -73,7 +73,7 @@ public class CheckPayments extends Locators {
 		driver.findElement(By.xpath(CPBankSrch)).sendKeys(CPBankSrchBtn);
 	}
 
-	@Test
+	@Test(priority = 3,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC02() throws InterruptedException {
 		TC01();
 		String CPAddInstlrDD=PropertyFileReader.propertymap.get("CPAddInstlrDD");
@@ -85,7 +85,7 @@ public class CheckPayments extends Locators {
 		driver.findElement(By.xpath(CPAddCustName)).sendKeys(CPAddCusName);
 	}
 	
-	@Test
+	@Test(priority = 4,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC03() throws InterruptedException {
 		TC02();
 		Thread.sleep(2000);
@@ -106,14 +106,14 @@ public class CheckPayments extends Locators {
 		ele1.click();
 	}
 	
-	@Test
+	@Test(priority = 5,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC04() throws InterruptedException {
 		TC02();
 		driver.findElement(By.xpath(CPAddSrchBtn)).click();
 		driver.findElement(By.xpath(CPCusEditBckBtn)).click();
 	}
 	
-	@Test
+	@Test(priority = 6,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC05() throws InterruptedException, AWTException {
 		TC03();
 		String CPCusEditChkNam=PropertyFileReader.propertymap.get("CPCusEditChkNam");
@@ -148,6 +148,5 @@ public class CheckPayments extends Locators {
 		driver.findElement(By.name(CPCusEdiBnkAcc)).sendKeys(CPCusEditBnkAcc);
 		driver.findElement(By.name(CPCusEdiBnkAccRout)).sendKeys(CPCusEditBnkAccRout);
 		driver.findElement(By.xpath(CPCusEditSavBtn)).click();
-		
 }
 }

@@ -3,12 +3,12 @@ package allPages;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.lang.Thread.UncaughtExceptionHandler;
 import java.time.Duration;
 import java.util.List;
 import java.util.Properties;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -20,11 +20,13 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import allPages.ReRunFailedTestCase;
 
 public class AllReportModules extends Locators{
 	public static WebDriver driver;
 	public static WebDriverWait wait;
 	public static WebElement ele1,ele2,ele3,ele4,ele5;
+	
 	@BeforeMethod
 	public void setUp() throws IOException{
 		WebDriverManager.chromedriver().setup();
@@ -32,7 +34,7 @@ public class AllReportModules extends Locators{
 		driver.manage().window().maximize(); 
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
 		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
-		driver.get("http://192.168.1.36:81/#/auth");
+		driver.get("http://192.168.1.36:90/#/auth");
 		File file=new File("C:\\Users\\thirumaran\\eclipse-workspace\\PowerFundOnee\\Data.properties");
 		FileInputStream FIS=new FileInputStream(file);
 		Properties prop=new Properties();
@@ -45,7 +47,7 @@ public class AllReportModules extends Locators{
 		driver.quit();
 	}
 
-	@Test
+	@Test(retryAnalyzer = ReRunFailedTestCase.class)
 	public void OSReportBtn() throws InterruptedException {
 		PropertyFileReader.propertyRead();
 		String EmailId=PropertyFileReader.propertymap.get("EmailId");
@@ -59,7 +61,7 @@ public class AllReportModules extends Locators{
 		driver.findElement(By.xpath(OSReportBtn)).click();
 	}
 
-	@Test
+	@Test(retryAnalyzer = ReRunFailedTestCase.class)
 	public void TapeReportBtn() throws InterruptedException {
 		PropertyFileReader.propertyRead();
 		String EmailId=PropertyFileReader.propertymap.get("EmailId");
@@ -73,7 +75,7 @@ public class AllReportModules extends Locators{
 		driver.findElement(By.xpath(TapeReprtBtn)).click();
 	}
 
-	@Test
+	@Test(retryAnalyzer = ReRunFailedTestCase.class)
 	public void ACHTransactionBtn() throws InterruptedException {
 		PropertyFileReader.propertyRead();
 		String EmailId=PropertyFileReader.propertymap.get("EmailId");
@@ -87,7 +89,7 @@ public class AllReportModules extends Locators{
 		driver.findElement(By.xpath(ACHTransBtn)).click();
 	}
 
-	@Test
+	@Test(retryAnalyzer = ReRunFailedTestCase.class)
 	public void InvoiceLog() throws InterruptedException {
 		PropertyFileReader.propertyRead();
 		String EmailId=PropertyFileReader.propertymap.get("EmailId");
@@ -101,7 +103,7 @@ public class AllReportModules extends Locators{
 		driver.findElement(By.xpath(InvoiceLogBtn)).click();
 	}
 
-	@Test
+	@Test(retryAnalyzer = ReRunFailedTestCase.class)
 	public void ActivityReport() throws InterruptedException {
 		PropertyFileReader.propertyRead();
 		String EmailId=PropertyFileReader.propertymap.get("EmailId");
@@ -115,29 +117,30 @@ public class AllReportModules extends Locators{
 		driver.findElement(By.xpath(ActRepBtn)).click();
 	}
 
-	@Test
+	@Test(priority = 1,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC01() throws InterruptedException {
 		OSReportBtn();
 		String OSRepBankName=PropertyFileReader.propertymap.get("OSRepBankName");
 
-		ele1=driver.findElement(By.name(OSBankName));
+		ele1=driver.findElement(By.xpath(OSBankName));
 		Select sel=new Select(ele1);
 		sel.selectByVisibleText(OSRepBankName);
 	}
 
-	@Test
+	@Test(priority = 2,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC02() throws InterruptedException {
 		OSReportBtn();
+		Thread.sleep(2000);
 		driver.findElement(By.xpath(OSReportExpBtn)).click();
 	}
 
-	@Test
+	@Test(priority = 3,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC03() throws InterruptedException {
 		OSReportBtn();
 		String OSReportCusName=PropertyFileReader.propertymap.get("OSReportCusName");
 		String OSRepBankName=PropertyFileReader.propertymap.get("OSRepBankName");
 		Thread.sleep(2000);
-		ele1=driver.findElement(By.name(OSBankName));
+		ele1=driver.findElement(By.xpath(OSBankName));
 		Select sel=new Select(ele1);
 		sel.selectByVisibleText(OSRepBankName);
 		driver.findElement(By.xpath(OSCusName)).sendKeys(OSReportCusName);
@@ -149,14 +152,14 @@ public class AllReportModules extends Locators{
 		ele2.click();
 	}
 
-	@Test
+	@Test(priority = 4,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC04() throws InterruptedException {
 		OSReportBtn();
 		String OSReportCusName=PropertyFileReader.propertymap.get("OSReportCusName");
 		String OSRepBankName=PropertyFileReader.propertymap.get("OSRepBankName");
 		String OSAddNtTxt=PropertyFileReader.propertymap.get("OSAddNtTxt");
 		Thread.sleep(2000);
-		ele1=driver.findElement(By.name(OSBankName));
+		ele1=driver.findElement(By.xpath(OSBankName));
 		Select sel=new Select(ele1);
 		sel.selectByVisibleText(OSRepBankName);
 		driver.findElement(By.xpath(OSCusName)).sendKeys(OSReportCusName);
@@ -166,16 +169,15 @@ public class AllReportModules extends Locators{
 		ele2=driver.findElement(By.xpath(OSAddNtTxtBox));
 		ele2.sendKeys(OSAddNtTxt);
 		ele2.clear();
-
 	}
 
-	@Test
+	@Test(priority = 5,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC05() throws InterruptedException {
 		OSReportBtn();
 		String OSReportCusName=PropertyFileReader.propertymap.get("OSReportCusName");
 		String OSRepBankName=PropertyFileReader.propertymap.get("OSRepBankName");
 		Thread.sleep(2000);
-		ele1=driver.findElement(By.name(OSBankName));
+		ele1=driver.findElement(By.xpath(OSBankName));
 		Select sel=new Select(ele1);
 		sel.selectByVisibleText(OSRepBankName);
 		driver.findElement(By.xpath(OSCusName)).sendKeys(OSReportCusName);
@@ -185,14 +187,14 @@ public class AllReportModules extends Locators{
 		driver.findElement(By.xpath(OSAddNtClsBtn)).click();
 	}
 
-	@Test
+	@Test(priority = 6,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC06() throws InterruptedException {
 		OSReportBtn();
 		String OSReportCusName=PropertyFileReader.propertymap.get("OSReportCusName");
 		String OSRepBankName=PropertyFileReader.propertymap.get("OSRepBankName");
 		String OSAddNtTxt=PropertyFileReader.propertymap.get("OSAddNtTxt");
 		Thread.sleep(2000);
-		ele1=driver.findElement(By.name(OSBankName));
+		ele1=driver.findElement(By.xpath(OSBankName));
 		Select sel=new Select(ele1);
 		sel.selectByVisibleText(OSRepBankName);
 		driver.findElement(By.xpath(OSCusName)).sendKeys(OSReportCusName);
@@ -204,13 +206,13 @@ public class AllReportModules extends Locators{
 		ele2.click();
 	}
 
-	@Test
+	@Test(priority = 7,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC07() throws InterruptedException {
 		OSReportBtn();
 		String OSReportCusName=PropertyFileReader.propertymap.get("OSReportCusName");
 		String OSRepBankName=PropertyFileReader.propertymap.get("OSRepBankName");
 		Thread.sleep(2000);
-		ele1=driver.findElement(By.name(OSBankName));
+		ele1=driver.findElement(By.xpath(OSBankName));
 		Select sel=new Select(ele1);
 		sel.selectByVisibleText(OSRepBankName);
 		driver.findElement(By.xpath(OSCusName)).sendKeys(OSReportCusName);
@@ -218,13 +220,13 @@ public class AllReportModules extends Locators{
 		driver.findElement(By.xpath(OSAddNtViewBtn)).click();
 	}
 
-	@Test
+	@Test(priority = 8,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC08() throws InterruptedException {
 		OSReportBtn();
 		String OSReportCusName=PropertyFileReader.propertymap.get("OSReportCusName");
 		String OSRepBankName=PropertyFileReader.propertymap.get("OSRepBankName");
 		Thread.sleep(2000);
-		ele1=driver.findElement(By.name(OSBankName));
+		ele1=driver.findElement(By.xpath(OSBankName));
 		Select sel=new Select(ele1);
 		sel.selectByVisibleText(OSRepBankName);
 		driver.findElement(By.xpath(OSCusName)).sendKeys(OSReportCusName);
@@ -252,10 +254,9 @@ public class AllReportModules extends Locators{
 				System.out.println("Mandatory field is not shown");
 			}
 		}
-
 	}
 
-	@Test
+	@Test(priority = 9,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC09() throws InterruptedException {
 		TC08();
 		String OSAddManDueMnth=PropertyFileReader.propertymap.get("OSAddManDueMnth");
@@ -286,13 +287,13 @@ public class AllReportModules extends Locators{
 		driver.findElement(By.xpath(OSAddRcdPyCLrBtn)).click();
 	}
 
-	@Test
+	@Test(priority = 10,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC10() throws InterruptedException {
 		TC08();
 		driver.findElement(By.xpath(OSAddRcdPyClsBtn)).click();
 	}
 
-	@Test
+	@Test(priority = 11,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC11() throws InterruptedException {
 		TC08();
 		String OSAddManDueMnth=PropertyFileReader.propertymap.get("OSAddManDueMnth");
@@ -323,13 +324,13 @@ public class AllReportModules extends Locators{
 		driver.findElement(By.xpath(OSAddRcdPySubBtn)).click();
 	}
 
-	@Test
+	@Test(priority = 12,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC12() throws InterruptedException {
 		OSReportBtn();
 		String OSReportCusName=PropertyFileReader.propertymap.get("OSReportCusName");
 		String OSRepBankName=PropertyFileReader.propertymap.get("OSRepBankName");
 		Thread.sleep(2000);
-		ele1=driver.findElement(By.name(OSBankName));
+		ele1=driver.findElement(By.xpath(OSBankName));
 		Select sel=new Select(ele1);
 		sel.selectByVisibleText(OSRepBankName);
 		driver.findElement(By.xpath(OSCusName)).sendKeys(OSReportCusName);
@@ -359,34 +360,34 @@ public class AllReportModules extends Locators{
 		}
 	}
 
-	@Test
+	@Test(priority = 13,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC13() throws InterruptedException {
 		TC12();
 		driver.findElement(By.xpath(OSAddManClsBtn)).click();
 	}
 
-	@Test
+	@Test(priority = 14,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC14() throws InterruptedException {
 		TC12();
 		String OSAddManDueMnth=PropertyFileReader.propertymap.get("OSAddManDueMnth");
 		driver.findElement(By.name(OSAddManDueMnt)).sendKeys(OSAddManDueMnth);
 	}
 
-	@Test
+	@Test(priority = 15,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC15() throws InterruptedException {
 		TC12();
 		String OSAddMonPayAmnt=PropertyFileReader.propertymap.get("OSAddMonPayAmnt");
 		driver.findElement(By.name(OSAddMonPayAmt)).sendKeys(OSAddMonPayAmnt);
 	}
 
-	@Test
+	@Test(priority = 16,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC16() throws InterruptedException {
 		TC12();
 		String OSAddManSchDat=PropertyFileReader.propertymap.get("OSAddManSchDat");
 		driver.findElement(By.name(OSAddManSchDate)).sendKeys(OSAddManSchDat);
 	}
 
-	@Test
+	@Test(priority = 17,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC18() throws InterruptedException {
 		TC12();
 		String OSAddManDueMnth=PropertyFileReader.propertymap.get("OSAddManDueMnth");
@@ -402,14 +403,13 @@ public class AllReportModules extends Locators{
 		driver.findElement(By.xpath(OSAddManSavBtn)).click();
 	}
 
-
-	@Test
+	@Test(priority = 18,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC19() throws InterruptedException {
 		OSReportBtn();
 		String OSReportCusName=PropertyFileReader.propertymap.get("OSReportCusName");
 		String OSRepBankName=PropertyFileReader.propertymap.get("OSRepBankName");
 		Thread.sleep(2000);
-		ele1=driver.findElement(By.name(OSBankName));
+		ele1=driver.findElement(By.xpath(OSBankName));
 		Select sel=new Select(ele1);
 		sel.selectByVisibleText(OSRepBankName);
 		driver.findElement(By.xpath(OSCusName)).sendKeys(OSReportCusName);
@@ -422,11 +422,11 @@ public class AllReportModules extends Locators{
 		driver.findElement(By.xpath(OSACtBckBtn)).click();
 	}
 
-	@Test
+	@Test(priority = 19,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC20() throws InterruptedException {
 		TapeReportBtn();
 		String TapeRptInsDD=PropertyFileReader.propertymap.get("TapeRptInsDD");
-		ele1=driver.findElement(By.name(TapeRepInstlrDD));
+		ele1=driver.findElement(By.xpath(TapeRepInstlrDD));
 		Select sel=new Select(ele1);
 		sel.selectByVisibleText(TapeRptInsDD);
 		driver.findElement(By.id(TapeRepRunRep)).click();
@@ -434,7 +434,7 @@ public class AllReportModules extends Locators{
 		driver.findElement(By.xpath(TapeRepDwldBtn)).click();
 	}
 
-	@Test
+	@Test(priority = 20,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC21() throws InterruptedException {
 		ACHTransactionBtn();
 		String ACHTransDD=PropertyFileReader.propertymap.get("ACHTransDD");
@@ -446,7 +446,7 @@ public class AllReportModules extends Locators{
 		ele2.sendKeys(ACHTransFrmDate);
 	}
 
-	@Test
+	@Test(priority = 21,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC22() throws InterruptedException {
 		ACHTransactionBtn();
 		String ACHTransDD=PropertyFileReader.propertymap.get("ACHTransDD");
@@ -464,7 +464,7 @@ public class AllReportModules extends Locators{
 		driver.findElement(By.xpath(ACHTransFileLog)).click();
 	}
 
-	@Test
+	@Test(priority = 22,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC23() throws InterruptedException {
 		ACHTransactionBtn();
 		String ACHTransDD=PropertyFileReader.propertymap.get("ACHTransDD");
@@ -482,7 +482,7 @@ public class AllReportModules extends Locators{
 		driver.findElement(By.xpath(ACHTransExcelExp)).click();
 	}
 
-	@Test
+	@Test(priority =23,retryAnalyzer = ReRunFailedTestCase.class )
 	public void TC24() throws InterruptedException {
 		ACHTransactionBtn();
 		String ACHTransDD=PropertyFileReader.propertymap.get("ACHTransDD");
@@ -500,7 +500,7 @@ public class AllReportModules extends Locators{
 		driver.findElement(By.xpath(ACHTransBckBtn)).click();
 	}
 
-	@Test
+	@Test(priority = 24,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC25() throws InterruptedException {
 		ACHTransactionBtn();
 		String ACHTransDD=PropertyFileReader.propertymap.get("ACHTransDD");
@@ -521,7 +521,7 @@ public class AllReportModules extends Locators{
 		driver.findElement(By.id(ACHTransCusEditBCkBtn)).click();
 	}
 
-	@Test
+	@Test(priority = 25,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC26() throws InterruptedException {
 		InvoiceLog();//1
 		String InvLogBnkDD=PropertyFileReader.propertymap.get("InvLogBnkDD");
@@ -539,34 +539,35 @@ public class AllReportModules extends Locators{
 		driver.findElement(By.xpath(InvLogCusNam)).sendKeys(InvLogCusName);
 	}
 
-	@Test
+	@Test(priority = 26,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC27() throws InterruptedException {
 		TC26();//2
 		String InvLogFrmDat=PropertyFileReader.propertymap.get("InvLogFrmDat");
 		driver.findElement(By.xpath(InvLogFrmDate)).sendKeys(InvLogFrmDat);
 	}
 
-	@Test
+	@Test(priority = 27,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC28() throws InterruptedException {
 		InvoiceLog();//3
 		driver.findElement(By.xpath(InvLogExprtBtn)).click();
 	}
 
-	@Test(description = "need to give new url")
+	@Test(priority = 28,retryAnalyzer = ReRunFailedTestCase.class, enabled=false, description = "URL loading time is very high")
 	public void TC29() throws InterruptedException {
 		TC26();//4
-
 		driver.findElement(By.xpath(InvLogCusEdtBtn)).click();
 		ele1=driver.findElement(By.id(InvLogPymtUrl));
 		String text = ele1.getText();
 		driver.get(text);
 		Thread.sleep(5000);
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
 		driver.findElement(By.name(InvLogPayURLRob)).click();
 		driver.findElement(By.name(InvLogPayURLAgre)).click();
 		driver.findElement(By.name(InvLogPayURLPay)).click();
 	}
 
-	@Test
+	@Test(priority = 29,retryAnalyzer = ReRunFailedTestCase.class, enabled=false)
 	public void TC30() throws InterruptedException {
 		TC26();//5
 		String ILPayURLName=PropertyFileReader.propertymap.get("ILPayURLName");
@@ -585,7 +586,7 @@ public class AllReportModules extends Locators{
 		driver.findElement(By.name(InvLogPayURLPay)).click();
 	}
 
-	@Test
+	@Test(priority = 30,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC31() throws InterruptedException {
 		TC26();	//6
 		driver.findElement(By.xpath(InvLogCusEdtBtn)).click();
@@ -598,7 +599,7 @@ public class AllReportModules extends Locators{
 		driver.findElement(By.id(InvLogRsndYes)).click();
 	}
 
-	@Test(description = "after finish TC29 then it can implement")
+	@Test(priority = 31,retryAnalyzer = ReRunFailedTestCase.class, description = "after finish TC29 then it can implement")
 	public void TC32() throws InterruptedException {
 		TC26();	//7
 		driver.findElement(By.xpath(InvLogCusEdtBtn)).click();
@@ -609,10 +610,9 @@ public class AllReportModules extends Locators{
 		element.click();
 		driver.findElement(By.xpath(InvLogRsndInv)).click();
 		driver.findElement(By.id(InvLogRsndYes)).click();
-
 	}
 
-	@Test(description = "after finish TC29 then it can implement")
+	@Test(priority = 32,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC33() throws InterruptedException {
 		TC26();	//8
 		driver.findElement(By.xpath(InvLogCusEdtBtn)).click();
@@ -622,10 +622,11 @@ public class AllReportModules extends Locators{
 		act.click().build().perform();
 		element.click();
 		driver.findElement(By.xpath(InvLogRsndInv)).click();
+		Thread.sleep(2000);
 		driver.findElement(By.xpath(InvLogRsndNo)).click();
 	}
 
-	@Test(description = "after finish TC29 then it can implement")
+	@Test(priority = 33,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC34() throws InterruptedException {
 		TC26();	//9
 		driver.findElement(By.xpath(InvLogCusEdtBtn)).click();
@@ -637,7 +638,7 @@ public class AllReportModules extends Locators{
 		driver.findElement(By.xpath(InvLogDwldInv)).click();
 	}
 
-	@Test
+	@Test(priority = 34,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC35() throws InterruptedException {
 		InvoiceLog();//10
 		String InvLogBnkDD=PropertyFileReader.propertymap.get("InvLogBnkDD");
@@ -662,7 +663,7 @@ public class AllReportModules extends Locators{
 		driver.findElement(By.xpath(InvLogDwldRecp)).click();
 	}
 
-	@Test
+	@Test(priority = 35,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC36() throws InterruptedException {
 		InvoiceLog();//11
 		String InvLogBnkDD=PropertyFileReader.propertymap.get("InvLogBnkDD");
@@ -687,11 +688,11 @@ public class AllReportModules extends Locators{
 		driver.findElement(By.xpath(InvLogDwldAll)).click();
 	}
 
-	@Test
+	@Test(priority = 36,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC37() throws InterruptedException {
 		InvoiceLog();//12
 		String InvLogBnkDD=PropertyFileReader.propertymap.get("InvLogBnkDD");
-		String InvLogPendCusName=PropertyFileReader.propertymap.get("InvLogPendCusName");
+		String InvLogPendCusName1=PropertyFileReader.propertymap.get("InvLogPendCusName1");
 		String InvPayTyp=PropertyFileReader.propertymap.get("InvPayTyp");
 		String InvLogVoidRemrk=PropertyFileReader.propertymap.get("InvLogVoidRemrk");
 
@@ -703,7 +704,7 @@ public class AllReportModules extends Locators{
 		Select sel2=new Select(ele2);
 		sel2.selectByVisibleText(InvPayTyp);
 		Thread.sleep(2000);
-		driver.findElement(By.xpath(InvLogCusNam)).sendKeys(InvLogPendCusName);
+		driver.findElement(By.xpath(InvLogCusNam)).sendKeys(InvLogPendCusName1);
 		driver.findElement(By.xpath(InvLogCusEdtBtn)).click();
 		Thread.sleep(2000);
 		WebElement element = driver.findElement(By.id(InvLogCusEdtActBtn));
@@ -712,10 +713,11 @@ public class AllReportModules extends Locators{
 		element.click();
 		driver.findElement(By.xpath(InvLogVoidInv)).click();
 		driver.findElement(By.name(InvLogVoidRmrk)).sendKeys(InvLogVoidRemrk);
+		Thread.sleep(2000);
 		driver.findElement(By.id(InvLogVoidYes)).click();
 	}
 
-	@Test
+	@Test(priority = 37,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC38() throws InterruptedException {
 		InvoiceLog();//13
 		String InvLogBnkDD=PropertyFileReader.propertymap.get("InvLogBnkDD");
@@ -738,10 +740,11 @@ public class AllReportModules extends Locators{
 		act.click().build().perform();
 		element.click();
 		driver.findElement(By.xpath(InvLogVoidInv)).click();
+		Thread.sleep(2000);
 		driver.findElement(By.xpath(InvLogVoidNo)).click();
 	}
 
-	@Test
+	@Test(priority = 38,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC39() throws InterruptedException {
 		InvoiceLog();//14
 		String InvLogBnkDD=PropertyFileReader.propertymap.get("InvLogBnkDD");
@@ -765,7 +768,6 @@ public class AllReportModules extends Locators{
 		element.click();
 		driver.findElement(By.xpath(InvLogCusEdtActBckBtn)).click();
 	}
-
 }
 
 

@@ -45,7 +45,9 @@ public class ViewUser extends Locators{
 		WebDriverManager.chromedriver().setup();
 		driver=new ChromeDriver();
 		driver.manage().window().maximize();
-		driver.get("http://192.168.1.36:81/#/auth");
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
+		driver.get("http://192.168.1.36:90/#/auth");
 		File file=new File("C:\\Users\\thirumaran\\eclipse-workspace\\PowerFundOnee\\Data.properties");
 		FileInputStream FIS=new FileInputStream(file);
 		Properties prop=new Properties();
@@ -58,7 +60,7 @@ public class ViewUser extends Locators{
 		driver.quit();
 	}
 	
-	@Test(priority = 1)
+	@Test(priority = 1,retryAnalyzer = ReRunFailedTestCase.class)
 	public void ViewUsersClick() throws InterruptedException {
 		PropertyFileReader.propertyRead();
 		String EmailId=PropertyFileReader.propertymap.get("EmailId");
@@ -73,9 +75,10 @@ public class ViewUser extends Locators{
 
 
 
-	@Test(priority = 2)
+	@Test(priority = 2,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC01() throws InterruptedException {
 		ViewUsersClick();
+		Thread.sleep(2000);
 		String ViewUserSts=PropertyFileReader.propertymap.get("ViewUserSts");
 		ele1=driver.findElement(By.xpath(ViewUserStsDD));
 		Select sel=new Select(ele1);
@@ -83,7 +86,7 @@ public class ViewUser extends Locators{
 		driver.findElement(By.xpath(ViewUserBtn)).click();
 	}
 	
-	@Test(priority =3)
+	@Test(priority =3,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC02() throws InterruptedException{
 		ViewUsersClick();
 		Thread.sleep(2000);
@@ -103,7 +106,7 @@ public class ViewUser extends Locators{
 			System.out.println("Page doesnot any warning message");
 		}
 	}
-	@Test(priority = 4)
+	@Test(priority = 4,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC03() throws InterruptedException{
 		ViewUsersClick();
 		Thread.sleep(2000);
@@ -130,7 +133,7 @@ public class ViewUser extends Locators{
 			System.out.println("Text field is not cleared");
 		}
 	}
-	@Test(description = "Need to add back button", priority = 5)
+	@Test(description = "Need to add back button", priority = 5,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC04() throws InterruptedException{
 		ViewUsersClick();
 		Thread.sleep(2000);
@@ -143,7 +146,7 @@ public class ViewUser extends Locators{
 		driver.findElement(By.xpath(ViewUserBckBtn)).click();
 	}
 
-	@Test(priority = 6)
+	@Test(priority = 6,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC05() throws InterruptedException{
 		PropertyFileReader.propertyRead();
 		String Firstname=PropertyFileReader.propertymap.get("Firstname");
@@ -194,7 +197,7 @@ public class ViewUser extends Locators{
 		driver.findElement(By.xpath(SaveBtn)).click();		
 	}
 
-	@Test(priority = 7)
+	@Test(priority = 7,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC06() throws InterruptedException{
 		String Firstname=PropertyFileReader.propertymap.get("Firstname");
 		String Lastname=PropertyFileReader.propertymap.get("Lastname");
@@ -242,7 +245,7 @@ public class ViewUser extends Locators{
 		driver.findElement(By.xpath(SaveBtn)).click();		
 	}
 
-	@Test(priority = 7,description = "change the ele1 mail id")
+	@Test(priority = 7,retryAnalyzer = ReRunFailedTestCase.class,description = "change the ele1 mail id")
 	public void TC07() throws InterruptedException{
 		ViewUsersClick();
 		String VUNewMailID=PropertyFileReader.propertymap.get("VUNewMailID");
@@ -250,7 +253,8 @@ public class ViewUser extends Locators{
 		Thread.sleep(2000);
 		ele1=driver.findElement(By.xpath(ViewUserSrchBtn));
 		ele1.click();
-		ele1.sendKeys("0211thiru@gmail.com");
+		ele1.sendKeys("thirumaran1995@outlook.com");
+		Thread.sleep(2000);
 		driver.findElement(By.xpath(ViewUserSrchEditBtn)).click();	
 		driver.findElement(By.xpath(VUEmailEditBtn)).click();	
 		Thread.sleep(2000);
@@ -261,10 +265,12 @@ public class ViewUser extends Locators{
 //		System.out.println("Please enter Verification Code from entered email id");
 //		String VerificationCode= scanner.nextLine();
 		driver.findElement(By.xpath(VUNewEmailEtrOTP)).sendKeys(VerificationCode);
-		driver.findElement(By.xpath(VUNewEmailUpdBtn)).click();;
+		Thread.sleep(5000);
+		driver.findElement(By.xpath(VUNewEmailUpdBtn)).click();
+		
 	}
 	
-	@Test (priority = 8)
+	@Test (priority = 8,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC08() throws InterruptedException{
 		PropertyFileReader.propertyRead();
 		String VUNewMailID=PropertyFileReader.propertymap.get("VUNewMailID");
@@ -274,7 +280,7 @@ public class ViewUser extends Locators{
 		driver.findElement(By.id(LoginBtn)).click();
 	}
 
-	@Test(priority = 9)
+	@Test(priority = 9,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC09() throws InterruptedException{
 		ViewUsersClick();
 		String VUNewMailID1=PropertyFileReader.propertymap.get("VUNewMailID1");
@@ -294,10 +300,11 @@ public class ViewUser extends Locators{
 //		System.out.println("Please enter Verification Code from entered email id");
 //		String VerificationCode= scanner.nextLine();
 		driver.findElement(By.xpath(VUNewEmailEtrOTP)).sendKeys(VerificationCode);
+		Thread.sleep(5000);
 		driver.findElement(By.xpath(VUNewEmailUpdBtn)).click();;
 	}
 	
-	@Test (priority = 10)
+	@Test (priority = 10,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC10() throws InterruptedException{
 		PropertyFileReader.propertyRead();
 		String VUNewMailID=PropertyFileReader.propertymap.get("VUNewMailID");
@@ -307,7 +314,7 @@ public class ViewUser extends Locators{
 		driver.findElement(By.id(LoginBtn)).click();
 	}
 	
-	@Test(priority = 11)
+	@Test(priority = 11,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC11() throws InterruptedException{
 		ViewUsersClick();
 		String ViewUserEmailSrch=PropertyFileReader.propertymap.get("ViewUserEmailSrch");
@@ -320,7 +327,7 @@ public class ViewUser extends Locators{
 		driver.findElement(By.xpath(VUNewEmailClsBtn)).click();	
 	}
 	
-	@Test( priority = 12)
+	@Test( priority = 12,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC12() throws InterruptedException{
 		ViewUsersClick();
 		String ViewUserEmailSrch=PropertyFileReader.propertymap.get("ViewUserEmailSrch");
@@ -337,7 +344,7 @@ public class ViewUser extends Locators{
 		driver.findElement(By.xpath(VUNewPassUpdBtn)).click();	
 	}
 
-	@Test (priority = 13)
+	@Test (priority = 13,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC13() throws InterruptedException{
 		PropertyFileReader.propertyRead();
 		String VUNewMailID=PropertyFileReader.propertymap.get("VUNewMailID");
@@ -348,7 +355,7 @@ public class ViewUser extends Locators{
 	}
 	
 
-	@Test( priority = 14)
+	@Test( priority = 14,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC14() throws InterruptedException{
 		ViewUsersClick();
 		String ViewUserEmailSrch=PropertyFileReader.propertymap.get("ViewUserEmailSrch");
@@ -365,31 +372,19 @@ public class ViewUser extends Locators{
 		driver.findElement(By.xpath(VUNewPassUpdBtn)).click();	
 	}
 	
-	@Test (priority = 15)
+	//this method modified below
+//	@Test (priority = 16)
+//	public void TC16() throws InterruptedException{
+//		PropertyFileReader.propertyRead();
+//		String VUNewMailID=PropertyFileReader.propertymap.get("VUNewMailID");
+//		String VUOldpass=PropertyFileReader.propertymap.get("VUOldpass");
+//		driver.findElement(By.name(Email)).sendKeys(VUNewMailID);
+//		driver.findElement(By.name(Password)).sendKeys(VUOldpass);
+//		driver.findElement(By.id(LoginBtn)).click();
+//	}
+	
+	@Test(priority = 15,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC15() throws InterruptedException{
-		PropertyFileReader.propertyRead();
-		String VUNewMailID=PropertyFileReader.propertymap.get("VUNewMailID");
-		String VUOldpass=PropertyFileReader.propertymap.get("VUOldpass");
-		driver.findElement(By.name(Email)).sendKeys(VUNewMailID);
-		driver.findElement(By.name(Password)).sendKeys(VUOldpass);
-		driver.findElement(By.id(LoginBtn)).click();
-	}
-	
-	@Test(priority = 16)
-	public void TC16() throws InterruptedException{
-		ViewUsersClick();
-		String ViewUserEmailSrch=PropertyFileReader.propertymap.get("ViewUserEmailSrch");
-		Thread.sleep(2000);
-		ele1=driver.findElement(By.xpath(ViewUserSrchBtn));
-		ele1.click();
-		ele1.sendKeys(ViewUserEmailSrch);
-		driver.findElement(By.xpath(ViewUserSrchEditBtn)).click();	
-		driver.findElement(By.xpath(VUPassEditBtn)).click();	
-		driver.findElement(By.xpath(VUNewPassClsBtn)).click();	
-	}
-	
-	@Test(priority = 17)
-	public void TC17() throws InterruptedException{
 		ViewUsersClick();
 		String VUDisMail1=PropertyFileReader.propertymap.get("VUDisMail1");
 		Thread.sleep(2000);
@@ -414,8 +409,8 @@ public class ViewUser extends Locators{
 		}	
 	}
 	
-	@Test (priority = 18)
-	public void TC18() throws InterruptedException{
+	@Test (priority = 16,retryAnalyzer = ReRunFailedTestCase.class)
+	public void TC16() throws InterruptedException{
 		PropertyFileReader.propertyRead();
 		String VUDisMail1=PropertyFileReader.propertymap.get("VUDisMail1");
 		String VUNewPass=PropertyFileReader.propertymap.get("VUNewPass");
@@ -429,27 +424,64 @@ public class ViewUser extends Locators{
 		System.out.println(text);
 	}
 	
-
-	@Test(priority = 19)
-	public void TC19() throws InterruptedException{
+	@Test(priority = 17,retryAnalyzer = ReRunFailedTestCase.class)
+	public void TC17() throws InterruptedException{
 		ViewUsersClick();
-		WebElement element= driver.findElement(By.name("status"));
-		Select select=new Select(element);
-		select.selectByIndex(2);
-		Thread.sleep(5000);
-		driver.findElement(By.xpath("//*[@id=\"kt_table_users\"]/tbody/tr/td[8]/div/div/a/span")).click();		
+		String ViewUserEmailSrch=PropertyFileReader.propertymap.get("ViewUserEmailSrch");
 		Thread.sleep(2000);
-		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div[2]/div/div[4]/div[3]/img")).click();
-		Thread.sleep(5000);
-		driver.findElement(By.xpath("//input[@name='yes']")).click();
+		ele1=driver.findElement(By.xpath(ViewUserSrchBtn));
+		ele1.click();
+		ele1.sendKeys(ViewUserEmailSrch);
+		driver.findElement(By.xpath(ViewUserSrchEditBtn)).click();	
+		driver.findElement(By.xpath(VUPassEditBtn)).click();	
+		driver.findElement(By.xpath(VUNewPassClsBtn)).click();	
+	}
+	
+	@Test(priority = 18,retryAnalyzer = ReRunFailedTestCase.class)
+	public void TC18() throws InterruptedException{
+		ViewUsersClick();
+		String ViewUserEmailSrch=PropertyFileReader.propertymap.get("ViewUserEmailSrch");
+		Thread.sleep(2000);
+		ele1=driver.findElement(By.xpath(ViewUserSrchBtn));
+		ele1.click();
+		ele1.sendKeys(ViewUserEmailSrch);
+		driver.findElement(By.xpath(ViewUserSrchEditBtn)).click();	
+		driver.findElement(By.xpath(VUEmailEditBtn)).click();
 		Thread.sleep(3000);
-		driver.findElement(By.xpath("//button[@title='Click here to update status']")).click();
+		driver.findElement(By.xpath(VUNewEmailClsBtn)).click();	
 	}
 
-	@Test(priority = 20)
+	@Test(priority = 19,retryAnalyzer = ReRunFailedTestCase.class)
+	public void TC19() throws InterruptedException{
+		ViewUsersClick();
+		String VUDisMail1=PropertyFileReader.propertymap.get("VUDisMail1");
+		Thread.sleep(2000);
+		ele1=driver.findElement(By.xpath(ViewUserSrchBtn));
+		ele1.click();
+		ele1.sendKeys(VUDisMail1);
+		driver.findElement(By.xpath(ViewUserSrchEditBtn)).click();	
+		Thread.sleep(3000);
+		WebElement ele1 = driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div[2]/div/div[4]/div[2]"));
+		String status="Disabled";
+		String text = ele1.getText();
+		System.out.println(text);
+		if(!(text==status)) {
+			driver.findElement(By.xpath(VUStusEditBtn)).click();
+			Thread.sleep(2000);
+			driver.findElement(By.xpath(VUStusEditRdoYes)).click();
+			Thread.sleep(3000);
+			driver.findElement(By.xpath(VUStusUpdBtn)).click();
+		}
+		else {
+			System.out.println("Status already in Enabled state");
+		}	
+	}
+
+	@Test(priority = 20,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC20() throws InterruptedException{
 		TC19();
 		Thread.sleep(3000);
+		String VUNewPass=PropertyFileReader.propertymap.get("VUNewPass");
 		WebElement ele1 = driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div[2]/div/div[2]/div[2]"));
 		String text1 = ele1.getText();
 		System.out.println(text1);
@@ -458,14 +490,14 @@ public class ViewUser extends Locators{
 		driver.findElement(By.xpath("//a[@class='menu-link px-5 bg-danger']")).click();
 		Thread.sleep(2000);
 		driver.findElement(By.name(Email)).sendKeys(text1);
-		Scanner scanner = new Scanner(System.in);
-		String inputText = scanner.nextLine();
-		driver.findElement(By.name(Password)).sendKeys(inputText);
+//		Scanner scanner = new Scanner(System.in);
+//		String inputText = scanner.nextLine();
+		driver.findElement(By.name(Password)).sendKeys(VUNewPass);
 		Thread.sleep(5000);
 		driver.findElement(By.id(LoginBtn)).click();	
 	}
 	
-	@Test(priority = 21)
+	@Test(priority = 21,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC21() throws InterruptedException{
 		ViewUsersClick();
 		String ViewUserEmailSrch=PropertyFileReader.propertymap.get("ViewUserEmailSrch");
@@ -478,7 +510,7 @@ public class ViewUser extends Locators{
 		driver.findElement(By.xpath(VUStsClsBtn)).click();	
 	}
 	
-	@Test(priority = 22)
+	@Test(priority = 22,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC22() throws InterruptedException{
 		ViewUsersClick();
 		Thread.sleep(2000);
@@ -492,9 +524,10 @@ public class ViewUser extends Locators{
 		Thread.sleep(2000);
 		driver.findElement(By.xpath("//button[@title='Clcik here to update']")).click();
 	}
-	@Test(priority = 23)
+	@Test(priority = 23,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC23() throws InterruptedException{
 		TC22();
+		String VUNewPass=PropertyFileReader.propertymap.get("VUNewPass");
 		WebElement ele1 = driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div[2]/div/div[2]/div[2]"));
 		String text = ele1.getText();
 		driver.findElement(By.xpath("//a[@class='btn btn-icon btn-md btn-active-color-primary mt-n2']")).click();
@@ -502,14 +535,14 @@ public class ViewUser extends Locators{
 		driver.findElement(By.xpath("//a[@class='menu-link px-5 bg-danger']")).click();
 		Thread.sleep(2000);
 		driver.findElement(By.name(Email)).sendKeys(text);
-		Scanner scanner = new Scanner(System.in);
-		String inputText = scanner.nextLine();
-		driver.findElement(By.name(Password)).sendKeys(inputText);
+//		Scanner scanner = new Scanner(System.in);
+//		String inputText = scanner.nextLine();
+		driver.findElement(By.name(Password)).sendKeys(VUNewPass);
 		Thread.sleep(5000);
 		driver.findElement(By.id(LoginBtn)).click();	
 	}
 	
-	@Test(priority = 24)
+	@Test(priority = 24,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC24() throws InterruptedException{
 		ViewUsersClick();
 		String ViewUserEmailSrch=PropertyFileReader.propertymap.get("ViewUserEmailSrch");
@@ -523,7 +556,7 @@ public class ViewUser extends Locators{
 		driver.findElement(By.xpath(VU2FAUpdBtn)).click();	
 	}
 	
-	@Test (priority = 25)
+	@Test (priority = 25,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC25() throws InterruptedException{
 		PropertyFileReader.propertyRead();
 		String ViewUserEmailSrch=PropertyFileReader.propertymap.get("ViewUserEmailSrch");
@@ -533,7 +566,7 @@ public class ViewUser extends Locators{
 		driver.findElement(By.id(LoginBtn)).click();
 	}
 	
-	@Test(priority = 26)
+	@Test(priority = 26,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC26() throws InterruptedException{
 		ViewUsersClick();
 		String ViewUserEmailSrch=PropertyFileReader.propertymap.get("ViewUserEmailSrch");
@@ -546,7 +579,7 @@ public class ViewUser extends Locators{
 		driver.findElement(By.xpath(VU2FAClsBtn)).click();	
 	}
 	
-	@Test(priority = 27)
+	@Test(priority = 27,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC27() throws InterruptedException{
 		ViewUsersClick();
 		String ViewUserEmailSrch=PropertyFileReader.propertymap.get("ViewUserEmailSrch");
@@ -574,7 +607,7 @@ public class ViewUser extends Locators{
 		driver.findElement(By.xpath(VUAccRgtsActSubBtn)).click();	
 	}
 	
-	@Test(priority = 29)
+	@Test(priority = 29,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC29() throws InterruptedException{
 		ViewUsersClick();
 		String ViewUserEmailSrch=PropertyFileReader.propertymap.get("ViewUserEmailSrch");
@@ -596,7 +629,7 @@ public class ViewUser extends Locators{
 		driver.findElement(By.xpath("//*[@id=\"#kt_aside_menu\"]/div[8]/span/span[2]")).click();
 	}
 	
-	@Test(priority = 30)
+	@Test(priority = 30,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC30() throws InterruptedException{
 		ViewUsersClick();
 		String ViewUserEmailSrch=PropertyFileReader.propertymap.get("ViewUserEmailSrch");
@@ -616,7 +649,7 @@ public class ViewUser extends Locators{
 		driver.findElement(By.xpath(VUAccRgtsActSubBtn)).click();
 	}
 	
-	@Test(priority = 31)
+	@Test(priority = 31,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC31() throws InterruptedException, AWTException{
 		ViewUsersClick();
 		Thread.sleep(2000);
@@ -642,7 +675,7 @@ public class ViewUser extends Locators{
 		driver.findElement(By.xpath("//button[@title='Click here to upload/change image']")).click();
 	}
 	
-	@Test(priority = 32)
+	@Test(priority = 32,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC32() throws InterruptedException, AWTException, IOException{
 		ViewUsersClick();
 		Thread.sleep(2000);
@@ -674,7 +707,7 @@ public class ViewUser extends Locators{
 	}
 	
 	
-	@Test(priority = 33)
+	@Test(priority = 33,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC33() throws InterruptedException, AWTException{
 		ViewUsersClick();
 		String ViewUserEmailSrch=PropertyFileReader.propertymap.get("ViewUserEmailSrch");
@@ -691,7 +724,7 @@ public class ViewUser extends Locators{
 		driver.findElement(By.xpath(VUAccRgtsActBckBtn)).click();
 	}
 	
-	@Test(priority = 34)
+	@Test(priority = 34,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC34() throws InterruptedException, AWTException{
 		ViewUsersClick();
 		String VUNewMailID=PropertyFileReader.propertymap.get("VUNewMailID");
@@ -718,7 +751,7 @@ public class ViewUser extends Locators{
 		driver.findElement(By.xpath(VUAccRgtsActSubBtn)).click();
 	}
 	
-	@Test(priority = 35)
+	@Test(priority = 35,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC35() throws InterruptedException, AWTException{
 		ViewUsersClick();
 		String VUNewMailID=PropertyFileReader.propertymap.get("VUNewMailID");
@@ -744,9 +777,6 @@ public class ViewUser extends Locators{
 		element.click();
 		driver.findElement(By.xpath(VUTestCckbxActEdtUsr)).click();
 	}
-	
-
-
 }
 
 

@@ -29,34 +29,33 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 public class CustomerList extends Locators {
 	public static WebDriver driver;
 	public static WebDriverWait wait;
-	public static WebElement ele1,ele2,ele3,ele4,ele5;
+	public static WebElement ele1,ele2,ele3,ele4,ele5,ele6;
 
-	@BeforeMethod
+	@Test
 	public void setUp() throws IOException{
 		WebDriverManager.chromedriver().setup();
 		driver=new ChromeDriver();
 		driver.manage().window().maximize(); 
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
-		driver.get("http://192.168.1.36:81/#/auth");
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
+		driver.get("http://192.168.1.36:90/#/auth");
 		File file=new File("C:\\Users\\thirumaran\\eclipse-workspace\\PowerFundOnee\\Data.properties");
 		FileInputStream FIS=new FileInputStream(file);
 		Properties prop=new Properties();
 		prop.load(FIS);	
 	}
 
-			@AfterMethod
-			public void tearDown() throws IOException, InterruptedException{
-				Thread.sleep(3000);
-				driver.quit();
-			}
+	@AfterMethod
+	public void tearDown() throws IOException, InterruptedException{
+		Thread.sleep(3000);
+		driver.quit();
+	}
 
-	@Test
+	@Test(retryAnalyzer = ReRunFailedTestCase.class)
 	public void CustomerListClick() throws InterruptedException {
 		PropertyFileReader.propertyRead();
 		String EmailId=PropertyFileReader.propertymap.get("EmailId");
 		String Passwrd=PropertyFileReader.propertymap.get("Passwrd");
-
 		driver.findElement(By.name(Email)).sendKeys(EmailId);
 		driver.findElement(By.name(Password)).sendKeys(Passwrd);
 		driver.findElement(By.id(LoginBtn)).click();
@@ -65,7 +64,7 @@ public class CustomerList extends Locators {
 		driver.findElement(By.xpath(CusListBtn)).click();
 	}
 
-	@Test
+	@Test(retryAnalyzer = ReRunFailedTestCase.class)
 	public void ACHFormClick() throws InterruptedException {
 		PropertyFileReader.propertyRead();
 		String EmailId=PropertyFileReader.propertymap.get("EmailId");
@@ -80,7 +79,7 @@ public class CustomerList extends Locators {
 	}
 
 
-	@Test(priority = 1)
+	@Test(priority = 1,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC01() throws InterruptedException {
 		CustomerListClick();
 		String CusBankNameDD=PropertyFileReader.propertymap.get("CusBankNameDD");
@@ -91,7 +90,7 @@ public class CustomerList extends Locators {
 		driver.findElement(By.id(CusListNameBox)).sendKeys(CusListName);
 	}
 
-	@Test(priority = 2)
+	@Test(priority = 2,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC02() throws InterruptedException {
 		CustomerListClick();
 		Thread.sleep(2000);
@@ -107,7 +106,7 @@ public class CustomerList extends Locators {
 		driver.findElement(By.xpath(CusListActSavBtn)).click();		
 	}
 
-	@Test
+	@Test(retryAnalyzer = ReRunFailedTestCase.class)
 	public void CusAddDetailsFull() throws InterruptedException {
 		CustomerListClick();
 		PropertyFileReader.propertyRead();
@@ -196,7 +195,7 @@ public class CustomerList extends Locators {
 		driver.findElement(By.name(CusInvBrnd)).sendKeys(CustInvBrnd);
 	}
 
-	@Test(priority=3)
+	@Test(priority=3,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC03() throws InterruptedException {
 		CusAddDetailsFull();
 		Thread.sleep(2000);
@@ -204,14 +203,14 @@ public class CustomerList extends Locators {
 	}
 
 
-	@Test(priority=4)
+	@Test(priority=4,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC04() throws InterruptedException {
 		CusAddDetailsFull();
 		Thread.sleep(2000);
 		driver.findElement(By.xpath(CusAddSavBtn)).click();
 	}
 
-	@Test(priority=5)
+	@Test(priority=5,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC05() throws InterruptedException {
 		CustomerListClick();
 		Thread.sleep(2000);
@@ -228,7 +227,7 @@ public class CustomerList extends Locators {
 	}
 
 
-	@Test(priority=6)
+	@Test(priority=6,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC06() throws InterruptedException {
 		CustomerListClick();
 		String CustInstDD=PropertyFileReader.propertymap.get("CustInstDD");
@@ -252,7 +251,7 @@ public class CustomerList extends Locators {
 		}
 	}
 
-	@Test(priority=7, description = "need to check working properly or not")
+	@Test(priority=7,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC07() throws InterruptedException {
 		CustomerListClick();
 		String CustInstDD=PropertyFileReader.propertymap.get("CustInstDD");
@@ -276,7 +275,7 @@ public class CustomerList extends Locators {
 		ele2.click();
 	}
 
-	@Test(priority=8,description = "need to check working properly or not")
+	@Test(priority=8,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC08() throws InterruptedException {
 		CustomerListClick();
 		String CustInstDD=PropertyFileReader.propertymap.get("CustInstDD");
@@ -296,11 +295,10 @@ public class CustomerList extends Locators {
 		driver.findElement(By.name(CusAddPortName)).sendKeys(CustAddPortName);
 		Thread.sleep(2000);
 		ele2=driver.findElement(By.xpath(CusAddPortSavBtn));
-		act.click().build().perform();
 		ele2.click();		
 	}
 
-	@Test(priority=9, description = "need to check working properly or not")
+	@Test(priority=9,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC09() throws InterruptedException {
 		CustomerListClick();
 		String CustInstDD=PropertyFileReader.propertymap.get("CustInstDD");
@@ -322,7 +320,7 @@ public class CustomerList extends Locators {
 		driver.findElement(By.xpath(CusAddPortClsBtn)).click();
 	}
 
-	@Test(priority=10,enabled = false, description = "need to find locators for save and clr button in edit portfolio")
+	@Test(priority=10,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC10() throws InterruptedException {
 		CustomerListClick();
 		String CustInstDD=PropertyFileReader.propertymap.get("CustInstDD");
@@ -340,35 +338,15 @@ public class CustomerList extends Locators {
 		Thread.sleep(3000);
 		ele2=driver.findElement(By.name(CusPort));
 		Select sel1=new Select(ele2);
-		sel1.selectByVisibleText(CustPort);
+		sel1.selectByIndex(2);
 		Thread.sleep(3000);
 		driver.findElement(By.xpath(CusAddPortEditBtn)).click();
 		Thread.sleep(2000);
 		ele3 = driver.findElement(By.name(CusAddPortName));
-		String InitialName = ele3.getAttribute("value");
-		System.out.println(InitialName);
-		for(int i=0;i<InitialName.length();i++) {
-			ele3.sendKeys("\b"); // "/b" means give backspace to the text box
-		}
-
-		ele3.sendKeys(ModifCustPort);
-		Thread.sleep(3000);
-		ele4=driver.findElement(By.xpath(CusAddPortSavBtn));
-		boolean enabled = ele4.isEnabled();
-		System.out.println(enabled);
-		act.moveToElement(ele4).perform();
-		act.click();
-		//		ele4.click();
-		//		String ModifiedName = ele4.getAttribute("value");
-		//		
-		//		if (InitialName.equals(ModifiedName)) {
-		//            System.out.println("Port name is updated");
-		//        } else {
-		//            System.out.println("Port name is not updated");
-		//        }		
+		ele3.sendKeys("\b"+"a");
+		driver.findElement(By.xpath(CusAddPortSavBtn)).click();
 	}
-
-	@Test(priority=11)
+	@Test(priority=11,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC11() throws InterruptedException {
 		CustomerListClick();
 		String CustInstDD=PropertyFileReader.propertymap.get("CustInstDD");
@@ -391,14 +369,14 @@ public class CustomerList extends Locators {
 		driver.findElement(By.xpath(CusAddPortClsBtn)).click();		
 	}
 
-	@Test(priority=12)
+	@Test(priority=12,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC12() throws InterruptedException {
 		CusAddDetailsFull();
 		Thread.sleep(2000);
 		driver.findElement(By.xpath(CusAddSavBtn)).click();
 	}
 
-	@Test(priority=13)
+	@Test(priority=13,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC13() throws InterruptedException {
 		CustomerListClick();
 		PropertyFileReader.propertyRead();
@@ -429,7 +407,7 @@ public class CustomerList extends Locators {
 		String CustBatt=PropertyFileReader.propertymap.get("CustBatt");
 		String CustWattPerPan=PropertyFileReader.propertymap.get("CustWattPerPan");
 		String CustInvBrnd=PropertyFileReader.propertymap.get("CustInvBrnd");
-		Thread.sleep(2000);
+		Thread.sleep(3000);
 		WebElement element = driver.findElement(By.xpath(CusLisActBtn));
 		Actions act=new Actions(driver);
 		act.click().build().perform();
@@ -483,9 +461,20 @@ public class CustomerList extends Locators {
 		driver.findElement(By.name(CusWattPerPan)).sendKeys(CustWattPerPan);
 		driver.findElement(By.name(CusInvBrnd)).sendKeys(CustInvBrnd);
 		driver.findElement(By.xpath(CusAddSavBtn)).click();
+		Thread.sleep(1000);
+		ele5=driver.findElement(By.xpath("(//div[text()='Duplicate ID, Given Id already exists'])"));
+		if(ele5.isDisplayed()) {
+			ele6=driver.findElement(By.name(CustID));
+			ele6.sendKeys(CustmrId + "1");
+			Thread.sleep(3000);
+			driver.findElement(By.xpath(CusAddSavBtn)).click();
+		}
+		else {
+			System.out.println("No duplicate message is shown");
+		}
 	}
 
-	@Test(priority=14)
+	@Test(priority=14,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC14() throws InterruptedException {
 		CustomerListClick();
 		PropertyFileReader.propertyRead();
@@ -573,9 +562,20 @@ public class CustomerList extends Locators {
 		driver.findElement(By.name(CusWattPerPan)).sendKeys(CustWattPerPan);
 		driver.findElement(By.name(CusInvBrnd)).sendKeys(CustInvBrnd);
 		driver.findElement(By.xpath(CusAddSavBtn)).click();
+		Thread.sleep(1000);
+		ele5=driver.findElement(By.xpath("(//div[text()='Duplicate ID, Given Id already exists'])"));
+		if(ele5.isDisplayed()) {
+			ele6=driver.findElement(By.name(CustID));
+			ele6.sendKeys(CustmrId + "1");
+			Thread.sleep(3000);
+			driver.findElement(By.xpath(CusAddSavBtn)).click();
+		}
+		else {
+			System.out.println("No duplicate message is shown");
+		}
 	}
 
-	@Test(priority=15)
+	@Test(priority=15,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC15() throws InterruptedException {
 		CustomerListClick();
 		Thread.sleep(3000);
@@ -591,7 +591,7 @@ public class CustomerList extends Locators {
 		driver.findElement(By.xpath(CusActBckbtn)).click();		
 	}
 
-	@Test(priority=16)
+	@Test(priority=16,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC16() throws InterruptedException {
 		CustomerListClick();
 		String CusBankNameDD=PropertyFileReader.propertymap.get("CusBankNameDD");
@@ -599,13 +599,13 @@ public class CustomerList extends Locators {
 		ele1 = driver.findElement(By.name(CusBankDD));
 		Select sel=new Select(ele1);
 		sel.selectByVisibleText(CusBankNameDD);
-		driver.findElement(By.id(CusListNameBox)).sendKeys(CusListName);
+		//driver.findElement(By.id(CusListNameBox)).sendKeys(CusListName);
 		driver.findElement(By.xpath(CusNameEditBtn)).click();
 		driver.findElement(By.xpath(CusAddNotesBtn)).click();
 		driver.findElement(By.xpath(CusNotesSavBtn)).click();		
 	}
 
-	@Test(priority=18)
+	@Test(priority=18,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC18() throws InterruptedException {
 		CustomerListClick();
 		String CusBankNameDD=PropertyFileReader.propertymap.get("CusBankNameDD");
@@ -613,13 +613,13 @@ public class CustomerList extends Locators {
 		ele1 = driver.findElement(By.name(CusBankDD));
 		Select sel=new Select(ele1);
 		sel.selectByVisibleText(CusBankNameDD);
-		driver.findElement(By.id(CusListNameBox)).sendKeys(CusListName);
+		//	driver.findElement(By.id(CusListNameBox)).sendKeys(CusListName);
 		driver.findElement(By.xpath(CusNameEditBtn)).click();
 		driver.findElement(By.xpath(CusAddNotesBtn)).click();
 		driver.findElement(By.xpath(CusNotesClsBtn)).click();	
 	}
 
-	@Test(priority=19)
+	@Test(priority=19,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC19() throws InterruptedException {
 		CustomerListClick();
 		String CusBankNameDD=PropertyFileReader.propertymap.get("CusBankNameDD");
@@ -628,7 +628,7 @@ public class CustomerList extends Locators {
 		ele1 = driver.findElement(By.name(CusBankDD));
 		Select sel=new Select(ele1);
 		sel.selectByVisibleText(CusBankNameDD);
-		driver.findElement(By.id(CusListNameBox)).sendKeys(CusListName);
+		//	driver.findElement(By.id(CusListNameBox)).sendKeys(CusListName);
 		driver.findElement(By.xpath(CusNameEditBtn)).click();
 		driver.findElement(By.xpath(CusAddNotesBtn)).click();
 		ele1=driver.findElement(By.xpath(CusNotesBtn));
@@ -637,7 +637,7 @@ public class CustomerList extends Locators {
 		driver.findElement(By.xpath(CusNotesSavBtn)).click();
 	}
 
-	@Test(priority=20)
+	@Test(priority=20,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC20() throws InterruptedException {
 		CustomerListClick();
 		String CusBankNameDD=PropertyFileReader.propertymap.get("CusBankNameDD");
@@ -645,7 +645,7 @@ public class CustomerList extends Locators {
 		ele1 = driver.findElement(By.name(CusBankDD));
 		Select sel=new Select(ele1);
 		sel.selectByVisibleText(CusBankNameDD);
-		driver.findElement(By.id(CusListNameBox)).sendKeys(CusListName);
+		//driver.findElement(By.id(CusListNameBox)).sendKeys(CusListName);
 		driver.findElement(By.xpath(CusNameEditBtn)).click();
 		Thread.sleep(2000);
 		WebElement element = driver.findElement(By.xpath(CusEditActBtn));
@@ -657,7 +657,7 @@ public class CustomerList extends Locators {
 		driver.findElement(By.xpath(CusEditClrBtn)).click();
 	}
 
-	@Test(priority=21)
+	@Test(priority=21,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC21() throws InterruptedException {
 		CustomerListClick();
 		String CusBankNameDD=PropertyFileReader.propertymap.get("CusBankNameDD");
@@ -666,7 +666,8 @@ public class CustomerList extends Locators {
 		ele1 = driver.findElement(By.name(CusBankDD));
 		Select sel=new Select(ele1);
 		sel.selectByVisibleText(CusBankNameDD);
-		driver.findElement(By.id(CusListNameBox)).sendKeys(CusListName);
+		//driver.findElement(By.id(CusListNameBox)).sendKeys(CusListName);
+
 		driver.findElement(By.xpath(CusNameEditBtn)).click();
 		Thread.sleep(2000);
 		WebElement element = driver.findElement(By.xpath(CusEditActBtn));
@@ -688,15 +689,16 @@ public class CustomerList extends Locators {
 		driver.findElement(By.xpath(CusEditUpdBtn)).click();
 	}
 
-	@Test(priority=22)
+	@Test(priority=22,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC22() throws InterruptedException {
 		CustomerListClick();
 		String CusBankNameDD=PropertyFileReader.propertymap.get("CusBankNameDD");
 		String CusListName=PropertyFileReader.propertymap.get("CusListName");
+		Thread.sleep(2000);
 		ele1 = driver.findElement(By.name(CusBankDD));
 		Select sel=new Select(ele1);
 		sel.selectByVisibleText(CusBankNameDD);
-		driver.findElement(By.id(CusListNameBox)).sendKeys(CusListName);
+		//driver.findElement(By.id(CusListNameBox)).sendKeys(CusListName);
 		driver.findElement(By.xpath(CusNameEditBtn)).click();
 		Thread.sleep(2000);
 		WebElement element = driver.findElement(By.xpath(CusEditActBtn));
@@ -711,15 +713,16 @@ public class CustomerList extends Locators {
 		driver.findElement(By.xpath(CusEditBckBtn)).click();		
 	}
 
-	@Test(priority=23)
+	@Test(priority=23,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC23() throws InterruptedException {
 		CustomerListClick();
 		String CusBankNameDD=PropertyFileReader.propertymap.get("CusBankNameDD");
 		String CusListName=PropertyFileReader.propertymap.get("CusListName");
+		Thread.sleep(2000);
 		ele1 = driver.findElement(By.name(CusBankDD));
 		Select sel=new Select(ele1);
 		sel.selectByVisibleText(CusBankNameDD);
-		driver.findElement(By.id(CusListNameBox)).sendKeys(CusListName);
+		//driver.findElement(By.id(CusListNameBox)).sendKeys(CusListName);
 		driver.findElement(By.xpath(CusNameEditBtn)).click();
 		Thread.sleep(2000);
 		WebElement element = driver.findElement(By.xpath(CusEditActBtn));
@@ -731,16 +734,17 @@ public class CustomerList extends Locators {
 		driver.findElement(By.xpath(CusEditPortSavBtn)).click();	
 	}
 
-	@Test(priority=24)
+	@Test(priority=24,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC24() throws InterruptedException {
 		CustomerListClick();
 		String CusBankNameDD=PropertyFileReader.propertymap.get("CusBankNameDD");
 		String CusListName=PropertyFileReader.propertymap.get("CusListName");
 		String CustPort=PropertyFileReader.propertymap.get("CustPort");
+		Thread.sleep(2000);
 		ele1 = driver.findElement(By.name(CusBankDD));
 		Select sel=new Select(ele1);
 		sel.selectByVisibleText(CusBankNameDD);
-		driver.findElement(By.id(CusListNameBox)).sendKeys(CusListName);
+		//driver.findElement(By.id(CusListNameBox)).sendKeys(CusListName);
 		driver.findElement(By.xpath(CusNameEditBtn)).click();
 		Thread.sleep(2000);
 		WebElement element = driver.findElement(By.xpath(CusEditActBtn));
@@ -754,7 +758,7 @@ public class CustomerList extends Locators {
 		driver.findElement(By.xpath(CusEditPortClrBtn)).click();	
 	}
 
-	@Test(priority=25)
+	@Test(priority=25,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC25() throws InterruptedException {
 		TC24();
 		String CustPort=PropertyFileReader.propertymap.get("CustPort");
@@ -763,13 +767,13 @@ public class CustomerList extends Locators {
 		driver.findElement(By.xpath(CusEditPortSavBtn)).click();	
 	}
 
-	@Test(priority=26)
+	@Test(priority=26,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC26() throws InterruptedException {
 		TC24();
 		driver.findElement(By.xpath(CusEditPortClseBtn)).click();
 	}
 
-	@Test(priority=27)
+	@Test(priority=27,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC27() throws InterruptedException {
 		CustomerListClick();
 		String CusBankNameDD=PropertyFileReader.propertymap.get("CusBankNameDD");
@@ -777,7 +781,7 @@ public class CustomerList extends Locators {
 		ele1 = driver.findElement(By.name(CusBankDD));
 		Select sel=new Select(ele1);
 		sel.selectByVisibleText(CusBankNameDD);
-		driver.findElement(By.id(CusListNameBox)).sendKeys(CusListName);
+		//driver.findElement(By.id(CusListNameBox)).sendKeys(CusListName);
 		driver.findElement(By.xpath(CusNameEditBtn)).click();
 		Thread.sleep(2000);
 		WebElement element = driver.findElement(By.xpath(CusEditActBtn));
@@ -789,7 +793,7 @@ public class CustomerList extends Locators {
 		driver.findElement(By.xpath(CusEditPortSavBtn)).click();	
 	}
 
-	@Test(priority=28)
+	@Test(priority=28,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC28() throws InterruptedException {
 		CustomerListClick();
 		String CusBankNameDD=PropertyFileReader.propertymap.get("CusBankNameDD");
@@ -797,7 +801,7 @@ public class CustomerList extends Locators {
 		ele1 = driver.findElement(By.name(CusBankDD));
 		Select sel=new Select(ele1);
 		sel.selectByVisibleText(CusBankNameDD);
-		driver.findElement(By.id(CusListNameBox)).sendKeys(CusListName);
+		//driver.findElement(By.id(CusListNameBox)).sendKeys(CusListName);
 		driver.findElement(By.xpath(CusNameEditBtn)).click();
 		Thread.sleep(2000);
 		WebElement element = driver.findElement(By.xpath(CusEditActBtn));
@@ -809,15 +813,16 @@ public class CustomerList extends Locators {
 		driver.findElement(By.xpath(CusEditPortClseBtn)).click();	
 	}
 
-	@Test(priority=29,enabled = false, description = "Act update button is not working")
+	@Test(priority=29,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC29() throws InterruptedException {
 		CustomerListClick();
 		String CusBankNameDD=PropertyFileReader.propertymap.get("CusBankNameDD");
 		String CusListName=PropertyFileReader.propertymap.get("CusListName");
+		Thread.sleep(2000);
 		ele1 = driver.findElement(By.name(CusBankDD));
 		Select sel=new Select(ele1);
 		sel.selectByVisibleText(CusBankNameDD);
-		driver.findElement(By.id(CusListNameBox)).sendKeys(CusListName);
+		//driver.findElement(By.id(CusListNameBox)).sendKeys(CusListName);
 		driver.findElement(By.xpath(CusNameEditBtn)).click();
 		Thread.sleep(2000);
 		WebElement element = driver.findElement(By.xpath(CusEditActBtn));
@@ -825,16 +830,24 @@ public class CustomerList extends Locators {
 		act.click().build().perform();
 		element.click();
 		driver.findElement(By.xpath(CusEditCusBtn)).click();
+		Thread.sleep(2000);
 		driver.findElement(By.xpath(CusEditLTFBtn)).click();
 		Thread.sleep(2000);
-		ele2 = driver.findElement(By.xpath(CusEditActBtn2));
-		act.click().build().perform();
+		WebElement ele2 = driver.findElement(By.xpath(CusEditActBtn2));
+		Thread.sleep(2000);
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollTo(0, 0)");
+		Thread.sleep(2000);
+		Actions act1=new Actions(driver);
+		Thread.sleep(2000);
+		act1.click().build().perform();
+		Thread.sleep(2000);
 		ele2.click();
-		Thread.sleep(4000);
+		Thread.sleep(2000);
 		driver.findElement(By.xpath(CusEditUpdBtn2)).click();
 	}
 
-	@Test(priority=30,enabled = false, description = "Act update button is not working")
+	@Test(priority=30,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC30() throws InterruptedException {
 		CustomerListClick();
 		String CusBankNameDD=PropertyFileReader.propertymap.get("CusBankNameDD");
@@ -842,7 +855,7 @@ public class CustomerList extends Locators {
 		ele1 = driver.findElement(By.name(CusBankDD));
 		Select sel=new Select(ele1);
 		sel.selectByVisibleText(CusBankNameDD);
-		driver.findElement(By.id(CusListNameBox)).sendKeys(CusListName);
+		//driver.findElement(By.id(CusListNameBox)).sendKeys(CusListName);
 		driver.findElement(By.xpath(CusNameEditBtn)).click();
 		Thread.sleep(2000);
 		WebElement element = driver.findElement(By.xpath(CusEditActBtn));
@@ -859,7 +872,7 @@ public class CustomerList extends Locators {
 		driver.findElement(By.xpath(CusEditUpdBtn2)).click();
 	}
 
-	@Test(priority=31,enabled = false, description = "Act update button is not working")
+	@Test(priority=31,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC31() throws InterruptedException {
 		CustomerListClick();
 		String CusBankNameDD=PropertyFileReader.propertymap.get("CusBankNameDD");
@@ -867,7 +880,7 @@ public class CustomerList extends Locators {
 		ele1 = driver.findElement(By.name(CusBankDD));
 		Select sel=new Select(ele1);
 		sel.selectByVisibleText(CusBankNameDD);
-		driver.findElement(By.id(CusListNameBox)).sendKeys(CusListName);
+		//driver.findElement(By.id(CusListNameBox)).sendKeys(CusListName);
 		driver.findElement(By.xpath(CusNameEditBtn)).click();
 		Thread.sleep(2000);
 		WebElement element = driver.findElement(By.xpath(CusEditActBtn));
@@ -884,7 +897,7 @@ public class CustomerList extends Locators {
 		driver.findElement(By.xpath(CusEditUpdBtn2)).click();
 	}
 
-	@Test(priority=32)
+	@Test(priority=32,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC32() throws InterruptedException {
 		CustomerListClick();
 		String CusBankNameDD=PropertyFileReader.propertymap.get("CusBankNameDD");
@@ -908,7 +921,7 @@ public class CustomerList extends Locators {
 		driver.findElement(By.xpath(CusEditBckBtn2)).click();
 	}
 
-	@Test(priority=71,enabled=false,description = "Update button in the action key is not working")
+	@Test(priority=71,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC33() throws InterruptedException {
 		CustomerListClick();
 		String CusBankNameDD=PropertyFileReader.propertymap.get("CusBankNameDD");
@@ -916,7 +929,7 @@ public class CustomerList extends Locators {
 		ele1 = driver.findElement(By.name(CusBankDD));
 		Select sel=new Select(ele1);
 		sel.selectByVisibleText(CusBankNameDD);
-		driver.findElement(By.id(CusListNameBox)).sendKeys(CusListName);
+		//driver.findElement(By.id(CusListNameBox)).sendKeys(CusListName);
 		driver.findElement(By.xpath(CusNameEditBtn)).click();
 		Thread.sleep(2000);
 		WebElement element = driver.findElement(By.xpath(CusEditActBtn));
@@ -931,9 +944,10 @@ public class CustomerList extends Locators {
 		act1.click().build().perform();
 		element1.click();
 		driver.findElement(By.xpath(CusEditUpdBtn1)).click();
-		
+
 	}
-	@Test
+
+	@Test(retryAnalyzer = ReRunFailedTestCase.class)
 	public void CusEditActBtn() throws InterruptedException {
 		CustomerListClick();
 		String CusBankNameDD=PropertyFileReader.propertymap.get("CusBankNameDD");
@@ -942,7 +956,7 @@ public class CustomerList extends Locators {
 		Select sel=new Select(ele1);
 		sel.selectByVisibleText(CusBankNameDD);
 		Thread.sleep(2000);
-		driver.findElement(By.id(CusListNameBox)).sendKeys(CusListName);
+		//driver.findElement(By.id(CusListNameBox)).sendKeys(CusListName);
 		driver.findElement(By.xpath(CusNameEditBtn)).click();
 		Thread.sleep(2000);
 		WebElement element = driver.findElement(By.xpath(CusEditActBtn));
@@ -951,9 +965,9 @@ public class CustomerList extends Locators {
 		element.click();		
 	}
 
-	
 
-	@Test (priority=33)
+
+	@Test (priority=33,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC34() throws InterruptedException {
 		CusEditActBtn();
 		driver.findElement(By.xpath(CusEditPaySchBtn)).click();
@@ -966,7 +980,7 @@ public class CustomerList extends Locators {
 		driver.findElement(By.xpath(CusEditActPayBckBtn)).click();		
 	}
 
-	@Test(priority=34)
+	@Test(priority=34,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC35() throws InterruptedException {
 		CusEditActBtn();
 		driver.findElement(By.xpath(CusEditActPayMergeBtn)).click();
@@ -978,7 +992,7 @@ public class CustomerList extends Locators {
 		driver.findElement(By.xpath(CusEditActMergeBckBtn)).click();
 	}
 
-	@Test(priority=35)
+	@Test(priority=35,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC36() throws InterruptedException {
 		CusEditActBtn();
 		driver.findElement(By.xpath(CusEditActPayMergeBtn)).click();
@@ -993,7 +1007,7 @@ public class CustomerList extends Locators {
 		}
 	}
 
-	@Test(priority=36)
+	@Test(priority=36,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC37() throws InterruptedException {
 		CusEditActBtn();
 		String CustChoseToMerge=PropertyFileReader.propertymap.get("CustChoseToMerge");
@@ -1006,7 +1020,7 @@ public class CustomerList extends Locators {
 	}
 
 
-	@Test(priority=37,enabled = false, description = "print button is not working")
+	@Test(priority=37,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC38() throws InterruptedException {
 		CusEditActBtn();
 		driver.findElement(By.xpath(CusEditViewRcdPaymtsBtn)).click();
@@ -1019,7 +1033,7 @@ public class CustomerList extends Locators {
 		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[1]/div/div/div[3]/div/a[7]/div/div/span")).click();
 	}
 
-	@Test(priority=38)
+	@Test(priority=38,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC39() throws InterruptedException {
 		CusEditActBtn();
 		driver.findElement(By.xpath(CusEditMntlyPymnBtn)).click();
@@ -1035,7 +1049,7 @@ public class CustomerList extends Locators {
 	}
 
 
-	@Test(priority=39)
+	@Test(priority=39,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC40() throws InterruptedException {
 		CusEditActBtn();
 		driver.findElement(By.xpath(CusEditMntlyPymnBtn)).click();
@@ -1047,24 +1061,24 @@ public class CustomerList extends Locators {
 		driver.findElement(By.xpath(CusEditMnthlyPymnBckBtn)).click();
 	}
 
-	@Test(priority=40)
+	@Test(priority=40,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC41() throws InterruptedException {
 		CusEditActBtn();
 		String CustMonltyAmt=PropertyFileReader.propertymap.get("CustMonltyAmt");
 		String CustMntlPayReason=PropertyFileReader.propertymap.get("CustMntlPayReason");
 		driver.findElement(By.xpath(CusEditMntlyPymnBtn)).click();
 		driver.findElement(By.name(CusEditMntlyPayTab)).sendKeys(CustMonltyAmt);
-//		Scanner scanner = new Scanner(System.in);
-//		System.out.println("--------------------------------------------------------------------------------------------------------------------------------");
-//		System.out.println("Please enter in the format like Feb/2024 (or) Mar/2024");
-//		String EffectiveDromDate= scanner.nextLine();
+		//		Scanner scanner = new Scanner(System.in);
+		//		System.out.println("--------------------------------------------------------------------------------------------------------------------------------");
+		//		System.out.println("Please enter in the format like Feb/2024 (or) Mar/2024");
+		//		String EffectiveDromDate= scanner.nextLine();
 		driver.findElement(By.xpath(CusEditMntlyEffFrom)).sendKeys("Feb/2023");
 		driver.findElement(By.name(CusEditMntlyRsonTab)).sendKeys(CustMntlPayReason);
 		Thread.sleep(2000);
 		driver.findElement(By.xpath(CusEditMntlyPymnSavBtn)).click();
 	}
 
-	@Test(priority=41)
+	@Test(priority=41,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC42() throws InterruptedException {
 		CusEditActBtn();
 		Thread.sleep(2000);
@@ -1087,7 +1101,7 @@ public class CustomerList extends Locators {
 		}	
 	}
 
-	@Test(priority=42,enabled = false, description = "This function is not working properly in the webpage")
+	@Test(priority=42,retryAnalyzer = ReRunFailedTestCase.class, description = "This function is not working properly in the webpage")
 	public void TC43() throws InterruptedException {
 		CusEditActBtn();
 		String CustCRMDD=PropertyFileReader.propertymap.get("CustCRMDD");
@@ -1112,8 +1126,7 @@ public class CustomerList extends Locators {
 		driver.findElement(By.xpath(CusEditCRMUpdBtn)).click();
 	}
 
-
-	@Test(priority=43)
+	@Test(priority=43,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC44() throws InterruptedException {
 		CusEditActBtn();
 		driver.findElement(By.xpath(CusEditCRMMonitBtn)).click();
@@ -1125,7 +1138,7 @@ public class CustomerList extends Locators {
 		driver.findElement(By.xpath(CusEditCrmBckBtn)).click();
 	}
 
-	@Test(priority=44)
+	@Test(priority=44,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC45() throws InterruptedException {
 		CusEditActBtn();
 		driver.findElement(By.xpath(CusEditDocStup)).click();
@@ -1141,7 +1154,7 @@ public class CustomerList extends Locators {
 		}
 	}
 
-	@Test(priority=45)
+	@Test(priority=45,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC46() throws InterruptedException, AWTException {
 		CusEditActBtn();
 		driver.findElement(By.xpath(CusEditDocStup)).click();
@@ -1162,7 +1175,7 @@ public class CustomerList extends Locators {
 		driver.findElement(By.xpath(CusEditDocStupSveBtn)).click();
 	}
 
-	@Test(priority=46)
+	@Test(priority=46,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC47() throws InterruptedException, AWTException {
 		CusEditActBtn();
 		driver.findElement(By.xpath(CusEditDocStup)).click();
@@ -1174,10 +1187,14 @@ public class CustomerList extends Locators {
 		driver.findElement(By.xpath(CusEditDocBckBtn)).click();
 	}
 
-	@Test(priority=47)
+	@Test(priority=47,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC48() throws InterruptedException, AWTException {
 		CusEditActBtn();
+		Thread.sleep(2000);
 		driver.findElement(By.xpath(CusEditDocEscProg)).click();
+		Thread.sleep(2000);
+		driver.findElement(By.id("selectedDate")).sendKeys("01-01-2023");
+		driver.findElement(By.xpath("(//button[text()='Calculate'])")).click();
 		Thread.sleep(2000);
 		ele1=driver.findElement(By.xpath(CusEditEscAgreBtn));
 		driver.findElement(By.xpath(CusEditEscRobtBtn)).click();
@@ -1187,7 +1204,7 @@ public class CustomerList extends Locators {
 		driver.findElement(By.xpath(CusEditEscUpdBtn)).click();
 	}
 
-	@Test(priority=48)
+	@Test(priority=48,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC49() throws InterruptedException, AWTException {
 		CustomerListClick();
 		String CusBankNameDD=PropertyFileReader.propertymap.get("CusBankNameDD");
@@ -1206,15 +1223,30 @@ public class CustomerList extends Locators {
 		driver.findElement(By.xpath(CusEditBackBtn)).click();
 	}
 
-	@Test(priority=49)
+	@Test(priority=49,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC50() throws InterruptedException, AWTException {
-		CusEditActBtn();
-		driver.findElement(By.xpath(CusEditViewBtn)).click();
+		CustomerListClick();
+		Thread.sleep(2000);
+		String CusBankNameDD=PropertyFileReader.propertymap.get("CusBankNameDD");
+		String CusListName=PropertyFileReader.propertymap.get("CusListName");
+		Thread.sleep(2000);
+		ele1 = driver.findElement(By.name(CusBankDD));
+		Select sel=new Select(ele1);
+		sel.selectByVisibleText("LA SOLAR");
+		Thread.sleep(2000);
+		//driver.findElement(By.id(CusListNameBox)).sendKeys(CusListName);
+		driver.findElement(By.xpath(CusNameEditBtn)).click();
+		Thread.sleep(2000);
+		ele1=driver.findElement(By.xpath(CusEditViewBtn));
+		//		JavascriptExecutor js=(JavascriptExecutor)driver;
+		//		js.executeScript("arguments[0].scrollIntoView(true);", ele1);
+		ele1.click();
+		Thread.sleep(2000);
 		driver.findElement(By.xpath(CusEditViewClseBtn)).click();		
 	}
 
 
-	@Test(priority=50)
+	@Test(priority=50,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC51() throws InterruptedException, AWTException {
 		ACHFormClick();
 		String ACHBankDD=PropertyFileReader.propertymap.get("ACHBankDD");
@@ -1233,7 +1265,7 @@ public class CustomerList extends Locators {
 	}
 
 
-	@Test(priority=51)
+	@Test(priority=51,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC52() throws InterruptedException, AWTException {
 		ACHFormClick();
 		String ACHBankDD=PropertyFileReader.propertymap.get("ACHBankDD");
@@ -1245,19 +1277,25 @@ public class CustomerList extends Locators {
 		sel1.selectByVisibleText(ACHBankDD);
 		ele2=driver.findElement(By.name(ACHType));
 		Select sel2=new Select(ele2);
-		sel2.selectByVisibleText(ACHAccType);
+		sel2.selectByVisibleText("ACH Pending");
 		ele3=driver.findElement(By.name(ACHStatus));
 		Select sel3=new Select(ele3);
 		sel3.selectByVisibleText(ACHAccStus);
-		driver.findElement(By.xpath(ACHBnkSrch)).sendKeys(ACHSrch);
+		//driver.findElement(By.xpath(ACHBnkSrch)).sendKeys(ACHSrch);
 		driver.findElement(By.xpath(ACHNameEditBtn)).click();
+		Thread.sleep(2000);
 		driver.findElement(By.xpath(ACHEditManEtry)).click();
+		Thread.sleep(2000);
 		driver.findElement(By.xpath(ACHEditUpdBtn)).click();
+		Thread.sleep(2000);
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
 		Thread.sleep(2000);
 		ele4=driver.findElement(By.xpath(ACHEditRobChckBox));
 		ele4.click();
 		driver.findElement(By.xpath(ACHCheckBox1)).click();
 		driver.findElement(By.xpath(ACHCheckBox2)).click();
+		Thread.sleep(2000);
 		driver.findElement(By.xpath(ACHEditUpdBtn1)).click();
 		Thread.sleep(2000);
 		ele5=driver.findElement(By.xpath(ACHEditMandChck));
@@ -1269,16 +1307,16 @@ public class CustomerList extends Locators {
 		}
 	}
 
-	@Test(priority=52)
+	@Test(priority=52,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC53() throws InterruptedException, AWTException {
 		ACHFormClick();
-		String ACHBankDD=PropertyFileReader.propertymap.get("ACHBankDD");
+		String ACHBankDD1=PropertyFileReader.propertymap.get("ACHBankDD1");
 		String ACHSrch=PropertyFileReader.propertymap.get("ACHSrch");
 		String ACHAccType=PropertyFileReader.propertymap.get("ACHAccType");
 		String ACHAccStus=PropertyFileReader.propertymap.get("ACHAccStus");
 		ele1=driver.findElement(By.xpath(ACHBankNameDD));
 		Select sel1=new Select(ele1);
-		sel1.selectByVisibleText(ACHBankDD);
+		sel1.selectByVisibleText(ACHBankDD1);
 		ele2=driver.findElement(By.name(ACHType));
 		Select sel2=new Select(ele2);
 		sel2.selectByVisibleText(ACHAccType);
@@ -1287,15 +1325,20 @@ public class CustomerList extends Locators {
 		sel3.selectByVisibleText(ACHAccStus);
 		driver.findElement(By.xpath(ACHBnkSrch)).sendKeys(ACHSrch);
 		driver.findElement(By.xpath(ACHNameEditBtn)).click();
+		Thread.sleep(2000);
 		driver.findElement(By.xpath(ACHEditManEtry)).click();
+		Thread.sleep(2000);
 		driver.findElement(By.xpath(ACHEditUpdBtn)).click();
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+		Thread.sleep(2000);
 		driver.findElement(By.xpath(ACHEditBckBtn)).click();
 	}
 
-	@Test(priority=53)
+	@Test(priority=53,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC54() throws InterruptedException, AWTException {
 		ACHFormClick();
-		String ACHBankDD=PropertyFileReader.propertymap.get("ACHBankDD");
+		String ACHBankDD1=PropertyFileReader.propertymap.get("ACHBankDD1");
 		String ACHSrch=PropertyFileReader.propertymap.get("ACHSrch");
 		String ACHAccType=PropertyFileReader.propertymap.get("ACHAccType");
 		String ACHAccStus=PropertyFileReader.propertymap.get("ACHAccStus");
@@ -1304,10 +1347,10 @@ public class CustomerList extends Locators {
 		String ACHAccNumb=PropertyFileReader.propertymap.get("ACHAccNumb");
 		String ACHAccRoutNumb=PropertyFileReader.propertymap.get("ACHAccRoutNumb");
 		String ACHBankLoc=PropertyFileReader.propertymap.get("ACHBankLoc");
-
+		Thread.sleep(2000);
 		ele1=driver.findElement(By.xpath(ACHBankNameDD));
 		Select sel1=new Select(ele1);
-		sel1.selectByVisibleText(ACHBankDD);
+		sel1.selectByVisibleText(ACHBankDD1);
 		ele2=driver.findElement(By.name(ACHType));
 		Select sel2=new Select(ele2);
 		sel2.selectByVisibleText(ACHAccType);
@@ -1330,16 +1373,16 @@ public class CustomerList extends Locators {
 		driver.findElement(By.xpath(ACHEditUpdBtn1)).click();
 	}
 
-	@Test(priority=54)
+	@Test(priority=54,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC55() throws InterruptedException, AWTException {
 		ACHFormClick();
-		String ACHBankDD=PropertyFileReader.propertymap.get("ACHBankDD");
+		String ACHBankDD1=PropertyFileReader.propertymap.get("ACHBankDD1");
 		String ACHSrch=PropertyFileReader.propertymap.get("ACHSrch");
 		String ACHAccType=PropertyFileReader.propertymap.get("ACHAccType");
 		String ACHAccStus=PropertyFileReader.propertymap.get("ACHAccStus");
 		ele1=driver.findElement(By.xpath(ACHBankNameDD));
 		Select sel1=new Select(ele1);
-		sel1.selectByVisibleText(ACHBankDD);
+		sel1.selectByVisibleText(ACHBankDD1);
 		ele2=driver.findElement(By.name(ACHType));
 		Select sel2=new Select(ele2);
 		sel2.selectByVisibleText(ACHAccType);
@@ -1351,16 +1394,16 @@ public class CustomerList extends Locators {
 		driver.findElement(By.xpath(ACHEditClsBtn)).click();
 	}
 
-	@Test(priority=55)
+	@Test(priority=55,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC56() throws InterruptedException {
 		ACHFormClick();
-		String ACHBankDD=PropertyFileReader.propertymap.get("ACHBankDD");
+		String ACHBankDD1=PropertyFileReader.propertymap.get("ACHBankDD1");
 		String ACHSrch=PropertyFileReader.propertymap.get("ACHSrch");
 		String ACHAccType=PropertyFileReader.propertymap.get("ACHAccType");
 		String ACHAccStus=PropertyFileReader.propertymap.get("ACHAccStus");
 		ele1=driver.findElement(By.xpath(ACHBankNameDD));
 		Select sel1=new Select(ele1);
-		sel1.selectByVisibleText(ACHBankDD);
+		sel1.selectByVisibleText(ACHBankDD1);
 		ele2=driver.findElement(By.name(ACHType));
 		Select sel2=new Select(ele2);
 		sel2.selectByVisibleText(ACHAccType);
@@ -1368,23 +1411,25 @@ public class CustomerList extends Locators {
 		Select sel3=new Select(ele3);
 		sel3.selectByVisibleText(ACHAccStus);
 		driver.findElement(By.xpath(ACHBnkSrch)).sendKeys(ACHSrch);
+		Thread.sleep(2000);
 		driver.findElement(By.xpath(ACHNameEditBtn)).click();
+		Thread.sleep(2000);
 		driver.findElement(By.xpath(ACHSndToCus)).click();
 		driver.findElement(By.xpath(ACHEditUpdBtn)).click();
 		driver.findElement(By.xpath(ACHSndBtn)).click();
 	}
 
 
-	@Test(priority=58)
+	@Test(priority=58,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC57() throws InterruptedException {
 		ACHFormClick();
-		String ACHBankDD=PropertyFileReader.propertymap.get("ACHBankDD");
+		String ACHBankDD1=PropertyFileReader.propertymap.get("ACHBankDD1");
 		String ACHSrch=PropertyFileReader.propertymap.get("ACHSrch");
 		String ACHAccType=PropertyFileReader.propertymap.get("ACHAccType");
 		String ACHAccStus=PropertyFileReader.propertymap.get("ACHAccStus");
 		ele1=driver.findElement(By.xpath(ACHBankNameDD));
 		Select sel1=new Select(ele1);
-		sel1.selectByVisibleText(ACHBankDD);
+		sel1.selectByVisibleText(ACHBankDD1);
 		ele2=driver.findElement(By.name(ACHType));
 		Select sel2=new Select(ele2);
 		sel2.selectByVisibleText(ACHAccType);
@@ -1392,7 +1437,9 @@ public class CustomerList extends Locators {
 		Select sel3=new Select(ele3);
 		sel3.selectByVisibleText(ACHAccStus);
 		driver.findElement(By.xpath(ACHBnkSrch)).sendKeys(ACHSrch);
+		Thread.sleep(4000);
 		driver.findElement(By.xpath(ACHNameEditBtn)).click();
+		Thread.sleep(2000);
 		driver.findElement(By.xpath(ACHSndToCus)).click();
 		driver.findElement(By.xpath(ACHEditUpdBtn)).click();
 		Thread.sleep(2000);
@@ -1403,24 +1450,27 @@ public class CustomerList extends Locators {
 		driver.findElement(By.xpath(ACHActSndToSls)).click();
 	}
 
-	@Test(priority=57)
+	@Test(priority=57,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC58() throws InterruptedException {
 		ACHFormClick();
-		String ACHBankDD=PropertyFileReader.propertymap.get("ACHBankDD");
+		String ACHBankDD1=PropertyFileReader.propertymap.get("ACHBankDD1");
 		String ACHSrch=PropertyFileReader.propertymap.get("ACHSrch");
 		String ACHAccType=PropertyFileReader.propertymap.get("ACHAccType");
 		String ACHAccStus=PropertyFileReader.propertymap.get("ACHAccStus");
 		ele1=driver.findElement(By.xpath(ACHBankNameDD));
 		Select sel1=new Select(ele1);
-		sel1.selectByVisibleText(ACHBankDD);
+		sel1.selectByVisibleText(ACHBankDD1);
 		ele2=driver.findElement(By.name(ACHType));
 		Select sel2=new Select(ele2);
 		sel2.selectByVisibleText(ACHAccType);
 		ele3=driver.findElement(By.name(ACHStatus));
 		Select sel3=new Select(ele3);
 		sel3.selectByVisibleText(ACHAccStus);
+		Thread.sleep(2000);
 		driver.findElement(By.xpath(ACHBnkSrch)).sendKeys(ACHSrch);
+		Thread.sleep(2000);
 		driver.findElement(By.xpath(ACHNameEditBtn)).click();
+		Thread.sleep(2000);
 		driver.findElement(By.xpath(ACHSndToCus)).click();
 		driver.findElement(By.xpath(ACHEditUpdBtn)).click();
 		Thread.sleep(2000);
@@ -1438,18 +1488,19 @@ public class CustomerList extends Locators {
 		else {
 			System.out.println("Mandatory Field alert toast is not appeared");
 		}
+		ele5.click();
 	}
 
-	@Test(priority=58)
+	@Test(priority=58,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC59() throws InterruptedException {
-		TC59();
+		TC58();
 		String ACHPayDate=PropertyFileReader.propertymap.get("ACHPayDate");
 		//mandatory ok button click
 		driver.findElement(By.xpath("//*[@id=\"kt_body\"]/div[2]/div/div[2]/div/div[2]/div/div/button")).click();
-//		Scanner scanner = new Scanner(System.in);
-//		System.out.println("--------------------------------------------------------------------------------------------------------------------------------");
-//		System.out.println("Please enter in the format like Feb/2024 (or) Mar/2024");
-//		String EffectiveFromDate= scanner.nextLine();
+		//		Scanner scanner = new Scanner(System.in);
+		//		System.out.println("--------------------------------------------------------------------------------------------------------------------------------");
+		//		System.out.println("Please enter in the format like Feb/2024 (or) Mar/2024");
+		//		String EffectiveFromDate= scanner.nextLine();
 		driver.findElement(By.xpath(ACHCngPayDteEffFrm)).sendKeys("Feb/2023");
 		ele1=driver.findElement(By.xpath(ACHCngpayDate));
 		Select sel=new Select(ele1);
@@ -1457,23 +1508,26 @@ public class CustomerList extends Locators {
 		driver.findElement(By.xpath(ACHActCngPayDteBtn)).click();
 	}
 
-	@Test(priority=59)
+	@Test(priority=59,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC60() throws InterruptedException {
 		ACHFormClick();
-		String ACHBankDD=PropertyFileReader.propertymap.get("ACHBankDD");
+		String ACHBankDD1=PropertyFileReader.propertymap.get("ACHBankDD1");
 		String ACHSrch1=PropertyFileReader.propertymap.get("ACHSrch1");
 		String ACHAccType=PropertyFileReader.propertymap.get("ACHAccType");
 		String ACHAccStus=PropertyFileReader.propertymap.get("ACHAccStus");
+		Thread.sleep(2000);
 		ele1=driver.findElement(By.xpath(ACHBankNameDD));
 		Select sel1=new Select(ele1);
-		sel1.selectByVisibleText(ACHBankDD);
+		sel1.selectByVisibleText(ACHBankDD1);
 		ele2=driver.findElement(By.name(ACHType));
 		Select sel2=new Select(ele2);
 		sel2.selectByVisibleText(ACHAccType);
 		ele3=driver.findElement(By.name(ACHStatus));
 		Select sel3=new Select(ele3);
 		sel3.selectByVisibleText(ACHAccStus);
+		Thread.sleep(2000);
 		driver.findElement(By.xpath(ACHBnkSrch)).sendKeys(ACHSrch1);
+		Thread.sleep(2000);
 		driver.findElement(By.xpath(ACHNameEditBtn)).click();
 		Thread.sleep(2000);
 		ele4 = driver.findElement(By.xpath(ACHPayStsActBtn));
@@ -1481,6 +1535,7 @@ public class CustomerList extends Locators {
 		act.click().build().perform();
 		ele4.click();
 		driver.findElement(By.xpath(ACHSkipPay)).click();
+		Thread.sleep(2000);
 		driver.findElement(By.name(ACHSkipPayAgreBtn)).click();
 		driver.findElement(By.xpath(ACHSkipPymntBtn)).click();
 		Thread.sleep(2000);
@@ -1493,41 +1548,44 @@ public class CustomerList extends Locators {
 		}
 	}
 
-	@Test(priority=60)
+	@Test(priority=60,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC61() throws InterruptedException {
 		TC60();
 		String ACHSkpPyReason=PropertyFileReader.propertymap.get("ACHSkpPyReason");
-//		Scanner scanner = new Scanner(System.in);
-//		System.out.println("Please enter in the format like Feb/2024 (or) Mar/2024");
-//		String StartMntDate= scanner.next();
-//		System.out.println("Please enter in the format like Mar/2024");
-//		String EndMntDate= scanner.next();
+		//		Scanner scanner = new Scanner(System.in);
+		//		System.out.println("Please enter in the format like Feb/2024 (or) Mar/2024");
+		//		String StartMntDate= scanner.next();
+		//		System.out.println("Please enter in the format like Mar/2024");
+		//		String EndMntDate= scanner.next();
 		driver.findElement(By.xpath("//*[@id=\"kt_body\"]/div[2]/div/div[2]/div/div[2]/div/div/button")).click();
 		driver.findElement(By.xpath(ACHSkpPyStrtMnth)).sendKeys("Feb/2023");
 		Thread.sleep(2000);
-		driver.findElement(By.xpath(ACHSkpPyEndMnth)).sendKeys("Mar/2023");
+		driver.findElement(By.xpath(ACHSkpPyEndMnth)).sendKeys("Apr/2023");
 		driver.findElement(By.name(ACHSkpPyRsn)).sendKeys(ACHSkpPyReason);
 		driver.findElement(By.xpath(ACHSkipPymntBtn)).click();
 	}
 
-	@Test(priority=61)
+	@Test(priority=61,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC62() throws InterruptedException {
 		ACHFormClick();
-		String ACHBankDD=PropertyFileReader.propertymap.get("ACHBankDD");
+		String ACHBankDD1=PropertyFileReader.propertymap.get("ACHBankDD1");
 		String ACHSrch=PropertyFileReader.propertymap.get("ACHSrch");
 		String ACHAccType=PropertyFileReader.propertymap.get("ACHAccType");
 		String ACHAccStus=PropertyFileReader.propertymap.get("ACHAccStus");
 		ele1=driver.findElement(By.xpath(ACHBankNameDD));
 		Select sel1=new Select(ele1);
-		sel1.selectByVisibleText(ACHBankDD);
+		sel1.selectByVisibleText(ACHBankDD1);
 		ele2=driver.findElement(By.name(ACHType));
 		Select sel2=new Select(ele2);
 		sel2.selectByVisibleText(ACHAccType);
 		ele3=driver.findElement(By.name(ACHStatus));
 		Select sel3=new Select(ele3);
 		sel3.selectByVisibleText(ACHAccStus);
+		Thread.sleep(2000);
 		driver.findElement(By.xpath(ACHBnkSrch)).sendKeys(ACHSrch);
+		Thread.sleep(2000);
 		driver.findElement(By.xpath(ACHNameEditBtn)).click();
+		Thread.sleep(2000);
 		driver.findElement(By.xpath(ACHSndToCus)).click();
 		driver.findElement(By.xpath(ACHEditUpdBtn)).click();
 		Thread.sleep(2000);
@@ -1538,24 +1596,27 @@ public class CustomerList extends Locators {
 		driver.findElement(By.xpath(ACHScdToCusBckBtn)).click();
 	}
 
-	@Test(priority=62)
+	@Test(priority=62,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC63() throws InterruptedException {
 		ACHFormClick();
-		String ACHBankDD=PropertyFileReader.propertymap.get("ACHBankDD");
+		String ACHBankDD1=PropertyFileReader.propertymap.get("ACHBankDD1");
 		String ACHSrch2=PropertyFileReader.propertymap.get("ACHSrch2");
 		String ACHAccType=PropertyFileReader.propertymap.get("ACHAccType");
 		String ACHAccStus=PropertyFileReader.propertymap.get("ACHAccStus");
 		String ACHSndToCusReq=PropertyFileReader.propertymap.get("ACHSndToCusReq");
+		Thread.sleep(2000);
 		ele1=driver.findElement(By.xpath(ACHBankNameDD));
 		Select sel1=new Select(ele1);
-		sel1.selectByVisibleText(ACHBankDD);
+		sel1.selectByVisibleText(ACHBankDD1);
 		ele2=driver.findElement(By.name(ACHType));
 		Select sel2=new Select(ele2);
 		sel2.selectByVisibleText(ACHAccType);
 		ele3=driver.findElement(By.name(ACHStatus));
 		Select sel3=new Select(ele3);
 		sel3.selectByVisibleText(ACHAccStus);
+		Thread.sleep(2000);
 		driver.findElement(By.xpath(ACHBnkSrch)).sendKeys(ACHSrch2);
+		Thread.sleep(2000);
 		driver.findElement(By.xpath(ACHNameEditBtn)).click();
 		Thread.sleep(2000);
 		driver.findElement(By.xpath(ACHSndToCus)).click();
@@ -1568,23 +1629,25 @@ public class CustomerList extends Locators {
 		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[2]/div/div[2]/div[8]/div/button")).click();
 	}
 
-	@Test(priority=63)
+	@Test(priority=63,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC64() throws InterruptedException {
 		ACHFormClick();
-		String ACHBankDD=PropertyFileReader.propertymap.get("ACHBankDD");
+		String ACHBankDD1=PropertyFileReader.propertymap.get("ACHBankDD1");
 		String ACHSrch1=PropertyFileReader.propertymap.get("ACHSrch1");
 		String ACHAccType=PropertyFileReader.propertymap.get("ACHAccType");
 		String ACHAccStus=PropertyFileReader.propertymap.get("ACHAccStus");
 		ele1=driver.findElement(By.xpath(ACHBankNameDD));
 		Select sel1=new Select(ele1);
-		sel1.selectByVisibleText(ACHBankDD);
+		sel1.selectByVisibleText(ACHBankDD1);
 		ele2=driver.findElement(By.name(ACHType));
 		Select sel2=new Select(ele2);
 		sel2.selectByVisibleText(ACHAccType);
 		ele3=driver.findElement(By.name(ACHStatus));
 		Select sel3=new Select(ele3);
 		sel3.selectByVisibleText(ACHAccStus);
+		Thread.sleep(2000);
 		driver.findElement(By.xpath(ACHBnkSrch)).sendKeys(ACHSrch1);
+		Thread.sleep(2000);
 		driver.findElement(By.xpath(ACHNameEditBtn)).click();
 		Thread.sleep(2000);
 		//xpath for action button 
@@ -1595,23 +1658,25 @@ public class CustomerList extends Locators {
 		driver.findElement(By.xpath(ACHActBckBtn)).click();
 	}
 
-	@Test(priority=64)
+	@Test(priority=64,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC65() throws InterruptedException {
 		ACHFormClick();
-		String ACHBankDD=PropertyFileReader.propertymap.get("ACHBankDD");
+		String ACHBankDD1=PropertyFileReader.propertymap.get("ACHBankDD1");
 		String ACHSrch2=PropertyFileReader.propertymap.get("ACHSrch2");
 		String ACHAccType=PropertyFileReader.propertymap.get("ACHAccType");
 		String ACHAccStus=PropertyFileReader.propertymap.get("ACHAccStus");
 		ele1=driver.findElement(By.xpath(ACHBankNameDD));
 		Select sel1=new Select(ele1);
-		sel1.selectByVisibleText(ACHBankDD);
+		sel1.selectByVisibleText(ACHBankDD1);
 		ele2=driver.findElement(By.name(ACHType));
 		Select sel2=new Select(ele2);
 		sel2.selectByVisibleText(ACHAccType);
 		ele3=driver.findElement(By.name(ACHStatus));
 		Select sel3=new Select(ele3);
 		sel3.selectByVisibleText(ACHAccStus);
+		Thread.sleep(2000);
 		driver.findElement(By.xpath(ACHBnkSrch)).sendKeys(ACHSrch2);
+		Thread.sleep(2000);
 		driver.findElement(By.xpath(ACHNameEditBtn)).click();
 		Thread.sleep(2000);
 		driver.findElement(By.xpath(ACHSndToSlsPerBtn)).click();
@@ -1619,23 +1684,25 @@ public class CustomerList extends Locators {
 		driver.findElement(By.xpath(ACHSndToSlsSndBtn)).click();
 	}
 
-	@Test(priority=65)
+	@Test(priority=65,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC66() throws InterruptedException {
 		ACHFormClick();
-		String ACHBankDD=PropertyFileReader.propertymap.get("ACHBankDD");
+		String ACHBankDD1=PropertyFileReader.propertymap.get("ACHBankDD1");
 		String ACHSrch2=PropertyFileReader.propertymap.get("ACHSrch2");
 		String ACHAccType=PropertyFileReader.propertymap.get("ACHAccType");
 		String ACHAccStus=PropertyFileReader.propertymap.get("ACHAccStus");
 		ele1=driver.findElement(By.xpath(ACHBankNameDD));
 		Select sel1=new Select(ele1);
-		sel1.selectByVisibleText(ACHBankDD);
+		sel1.selectByVisibleText(ACHBankDD1);
 		ele2=driver.findElement(By.name(ACHType));
 		Select sel2=new Select(ele2);
 		sel2.selectByVisibleText(ACHAccType);
 		ele3=driver.findElement(By.name(ACHStatus));
 		Select sel3=new Select(ele3);
 		sel3.selectByVisibleText(ACHAccStus);
+		Thread.sleep(2000);
 		driver.findElement(By.xpath(ACHBnkSrch)).sendKeys(ACHSrch2);
+		Thread.sleep(2000);
 		driver.findElement(By.xpath(ACHNameEditBtn)).click();
 		Thread.sleep(2000);
 		driver.findElement(By.xpath(ACHSndToSlsPerBtn)).click();
@@ -1648,23 +1715,24 @@ public class CustomerList extends Locators {
 		driver.findElement(By.xpath(ACHScdToCusBckBtn)).click();
 	}
 
-	@Test(priority=66)
+	@Test(priority=66,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC67() throws InterruptedException {
 		ACHFormClick();
-		String ACHBankDD=PropertyFileReader.propertymap.get("ACHBankDD");
+		String ACHBankDD1=PropertyFileReader.propertymap.get("ACHBankDD1");
 		String ACHSrch2=PropertyFileReader.propertymap.get("ACHSrch2");
 		String ACHAccType=PropertyFileReader.propertymap.get("ACHAccType");
 		String ACHAccStus=PropertyFileReader.propertymap.get("ACHAccStus");
 		String ACHPayDate=PropertyFileReader.propertymap.get("ACHPayDate");
 		ele1=driver.findElement(By.xpath(ACHBankNameDD));
 		Select sel1=new Select(ele1);
-		sel1.selectByVisibleText(ACHBankDD);
+		sel1.selectByVisibleText(ACHBankDD1);
 		ele2=driver.findElement(By.name(ACHType));
 		Select sel2=new Select(ele2);
 		sel2.selectByVisibleText(ACHAccType);
 		ele3=driver.findElement(By.name(ACHStatus));
 		Select sel3=new Select(ele3);
 		sel3.selectByVisibleText(ACHAccStus);
+		Thread.sleep(2000);
 		driver.findElement(By.xpath(ACHBnkSrch)).sendKeys(ACHSrch2);
 		driver.findElement(By.xpath(ACHNameEditBtn)).click();
 		Thread.sleep(2000);
@@ -1676,9 +1744,9 @@ public class CustomerList extends Locators {
 		act.click().build().perform();
 		ele4.click();
 		driver.findElement(By.xpath(ACHActCngPayDte)).click();
-//		Scanner scanner = new Scanner(System.in);
-//		System.out.println("Please enter in the format like Feb/2024 (or) Mar/2024");
-//		String EffectiveFrom= scanner.next();
+		//		Scanner scanner = new Scanner(System.in);
+		//		System.out.println("Please enter in the format like Feb/2024 (or) Mar/2024");
+		//		String EffectiveFrom= scanner.next();
 		driver.findElement(By.xpath(ACHCngPayDteEffFrm)).sendKeys("Feb/2023");
 		ele5=driver.findElement(By.xpath(ACHCngpayDate));
 		Select sel=new Select(ele5);
@@ -1686,17 +1754,18 @@ public class CustomerList extends Locators {
 		driver.findElement(By.xpath(ACHCngpayDateBtn)).click();
 	}
 
-	@Test(priority=67)
+	@Test(priority=67,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC68() throws InterruptedException {
 		ACHFormClick();
-		String ACHBankDD=PropertyFileReader.propertymap.get("ACHBankDD");
+		String ACHBankDD1=PropertyFileReader.propertymap.get("ACHBankDD1");
 		String ACHSrch2=PropertyFileReader.propertymap.get("ACHSrch2");
 		String ACHAccType=PropertyFileReader.propertymap.get("ACHAccType");
 		String ACHAccStus=PropertyFileReader.propertymap.get("ACHAccStus");
 		String ACHPayDate=PropertyFileReader.propertymap.get("ACHPayDate");
+		Thread.sleep(2000);
 		ele1=driver.findElement(By.xpath(ACHBankNameDD));
 		Select sel1=new Select(ele1);
-		sel1.selectByVisibleText(ACHBankDD);
+		sel1.selectByVisibleText(ACHBankDD1);
 		ele2=driver.findElement(By.name(ACHType));
 		Select sel2=new Select(ele2);
 		sel2.selectByVisibleText(ACHAccType);
@@ -1729,31 +1798,32 @@ public class CustomerList extends Locators {
 		driver.findElement(By.xpath("//*[@id=\"kt_body\"]/div[2]/div/div[2]/div/div[2]/div/div/button")).click();
 	}
 
-	@Test(priority=68)
+	@Test(priority=68,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC69() throws InterruptedException {
 		TC68();
 		String ACHSkpPyRson=PropertyFileReader.propertymap.get("ACHSkpPyRson");
-//		Scanner scanner = new Scanner(System.in);
-//		System.out.println("--------------------------------------------------------------------------------------------------------------------------------");
-//		System.out.println("Please enter in the format like Feb/2024 (or) Mar/2024");
-//		String StartMonth= scanner.nextLine();
+		//		Scanner scanner = new Scanner(System.in);
+		//		System.out.println("--------------------------------------------------------------------------------------------------------------------------------");
+		//		System.out.println("Please enter in the format like Feb/2024 (or) Mar/2024");
+		//		String StartMonth= scanner.nextLine();
 		driver.findElement(By.name(ACHSndToCusSkpPySrtMnt)).sendKeys("Feb/2023");
 		Thread.sleep(3000);
-//		Scanner scanner1 = new Scanner(System.in);
-//		System.out.println("--------------------------------------------------------------------------------------------------------------------------------");
-//		System.out.println("Please enter in the format like Feb/2024 (or) Mar/2024");
-//		String EndMonth= scanner1.nextLine();
+		//		Scanner scanner1 = new Scanner(System.in);
+		//		System.out.println("--------------------------------------------------------------------------------------------------------------------------------");
+		//		System.out.println("Please enter in the format like Feb/2024 (or) Mar/2024");
+		//		String EndMonth= scanner1.nextLine();
 		driver.findElement(By.name(ACHSndToCusSkpPyEndMnt)).sendKeys("Feb/2023");
 		driver.findElement(By.name(ACHSkpPyRsn)).sendKeys(ACHSkpPyRson);
 	}
 
-	@Test(priority=69)
+	@Test(priority=69,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC70() throws InterruptedException {
 		ACHFormClick();
 		String ACHBankDD=PropertyFileReader.propertymap.get("ACHBankDD");
 		String ACHSrch2=PropertyFileReader.propertymap.get("ACHSrch2");
 		String ACHAccType=PropertyFileReader.propertymap.get("ACHAccType");
 		String ACHAccStus=PropertyFileReader.propertymap.get("ACHAccStus");
+		Thread.sleep(2000);
 		ele1=driver.findElement(By.xpath(ACHBankNameDD));
 		Select sel1=new Select(ele1);
 		sel1.selectByVisibleText(ACHBankDD);
@@ -1763,7 +1833,9 @@ public class CustomerList extends Locators {
 		ele3=driver.findElement(By.name(ACHStatus));
 		Select sel3=new Select(ele3);
 		sel3.selectByVisibleText(ACHAccStus);
+		Thread.sleep(2000);
 		driver.findElement(By.xpath(ACHBnkSrch)).sendKeys(ACHSrch2);
+		Thread.sleep(2000);
 		driver.findElement(By.xpath(ACHNameEditBtn)).click();
 		Thread.sleep(2000);
 		driver.findElement(By.xpath(ACHSndToSlsPerBtn)).click();
@@ -1776,7 +1848,7 @@ public class CustomerList extends Locators {
 		driver.findElement(By.xpath(ACHScdToCusBckBtn)).click();
 	}
 
-	@Test(priority=70)
+	@Test(priority=70,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC71() throws InterruptedException {
 		ACHFormClick();
 		String ACHBankDD=PropertyFileReader.propertymap.get("ACHBankDD");
@@ -1784,6 +1856,7 @@ public class CustomerList extends Locators {
 		String ACHAccType=PropertyFileReader.propertymap.get("ACHAccType");
 		String ACHAccStus=PropertyFileReader.propertymap.get("ACHAccStus");
 		String ACHToMailId=PropertyFileReader.propertymap.get("ACHToMailId");
+		Thread.sleep(2000);
 		ele1=driver.findElement(By.xpath(ACHBankNameDD));
 		Select sel1=new Select(ele1);
 		sel1.selectByVisibleText(ACHBankDD);
@@ -1793,7 +1866,9 @@ public class CustomerList extends Locators {
 		ele3=driver.findElement(By.name(ACHStatus));
 		Select sel3=new Select(ele3);
 		sel3.selectByVisibleText(ACHAccStus);
+		Thread.sleep(2000);
 		driver.findElement(By.xpath(ACHBnkSrch)).sendKeys(ACHSrch2);
+		Thread.sleep(2000);
 		driver.findElement(By.xpath(ACHNameEditBtn)).click();
 		Thread.sleep(2000);
 		driver.findElement(By.xpath(ACHSndToSlsPerBtn)).click();

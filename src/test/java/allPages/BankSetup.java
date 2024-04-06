@@ -36,7 +36,7 @@ public class BankSetup extends Locators {
 		driver.manage().window().maximize(); 
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
 		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
-		driver.get("http://192.168.1.36:81/#/auth");
+		driver.get("http://192.168.1.36:90/#/auth");
 		File file=new File("C:\\Users\\thirumaran\\eclipse-workspace\\PowerFundOnee\\Data.properties");
 		FileInputStream FIS=new FileInputStream(file);
 		Properties prop=new Properties();
@@ -49,7 +49,7 @@ public class BankSetup extends Locators {
 		driver.quit();
 
 	}
-	@Test
+	@Test(retryAnalyzer = ReRunFailedTestCase.class)
 	public void BankSetupClick() throws InterruptedException {
 		PropertyFileReader.propertyRead();
 		String EmailId=PropertyFileReader.propertymap.get("EmailId");
@@ -66,7 +66,7 @@ public class BankSetup extends Locators {
 		
 	}
 
-	@Test
+	@Test(retryAnalyzer = ReRunFailedTestCase.class)
 	public void AuthorizedNetClick() throws InterruptedException {
 		PropertyFileReader.propertyRead();
 		String EmailId=PropertyFileReader.propertymap.get("EmailId");
@@ -81,7 +81,7 @@ public class BankSetup extends Locators {
 		
 	}
 
-	@Test
+	@Test(retryAnalyzer = ReRunFailedTestCase.class)
 	public void IPWhitelist() throws InterruptedException {
 		PropertyFileReader.propertyRead();
 		String EmailId=PropertyFileReader.propertymap.get("EmailId");
@@ -95,7 +95,7 @@ public class BankSetup extends Locators {
 		driver.findElement(By.xpath(IPWhitelistBtn)).click();		
 	}
 
-	@Test
+	@Test(retryAnalyzer = ReRunFailedTestCase.class)
 	public void UserLog() throws InterruptedException {
 		PropertyFileReader.propertyRead();
 		String EmailId=PropertyFileReader.propertymap.get("EmailId");
@@ -109,7 +109,7 @@ public class BankSetup extends Locators {
 		driver.findElement(By.xpath(UsrLog)).click();		
 	}
 
-	@Test
+	@Test(retryAnalyzer = ReRunFailedTestCase.class)
 	public void EventLog() throws InterruptedException {
 		PropertyFileReader.propertyRead();
 		String EmailId=PropertyFileReader.propertymap.get("EmailId");
@@ -123,7 +123,7 @@ public class BankSetup extends Locators {
 		driver.findElement(By.xpath(EventLogBtn)).click();		
 	}
 
-	@Test
+	@Test(retryAnalyzer = ReRunFailedTestCase.class)
 	public void ExceptionLog() throws InterruptedException {
 		PropertyFileReader.propertyRead();
 		String EmailId=PropertyFileReader.propertymap.get("EmailId");
@@ -137,7 +137,7 @@ public class BankSetup extends Locators {
 		driver.findElement(By.xpath(ExceptionLogBtn)).click();		
 	}
 
-	@Test(priority = 1)
+	@Test(priority = 1,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC01() throws InterruptedException {
 		BankSetupClick();
 		Thread.sleep(2000);
@@ -154,7 +154,7 @@ public class BankSetup extends Locators {
 			System.out.println("Warning message is not displayed");
 		}
 	}
-	@Test(priority = 2)
+	@Test(priority = 2,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC02() throws InterruptedException, AWTException {
 		BankSetupClick();
 		String Bankname=PropertyFileReader.propertymap.get("Bankname");
@@ -181,7 +181,7 @@ public class BankSetup extends Locators {
 		}
 	}
 
-	@Test(priority = 3)
+	@Test(priority = 3,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC03() throws InterruptedException, AWTException {
 		BankSetupClick();
 		String Bankname=PropertyFileReader.propertymap.get("Bankname");
@@ -205,7 +205,7 @@ public class BankSetup extends Locators {
 		driver.findElement(By.xpath(BnkStpStsDsblSveBtn)).click();
 	}
 
-	@Test(priority = 4)
+	@Test(priority = 4,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC04() throws InterruptedException, AWTException {
 		BankSetupClick();
 		String Bankname=PropertyFileReader.propertymap.get("Bankname");
@@ -232,7 +232,7 @@ public class BankSetup extends Locators {
 		}
 	}
 
-	@Test(priority = 5)
+	@Test(priority = 5,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC05() throws InterruptedException, AWTException {
 		BankSetupClick();
 		String Bankname=PropertyFileReader.propertymap.get("Bankname");
@@ -258,14 +258,14 @@ public class BankSetup extends Locators {
 		select.selectByVisibleText(Accntgrpname);	
 	}
 
-	@Test(priority = 6)
+	@Test(priority = 6,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC06() throws InterruptedException, AWTException {
 		TC05();
 		Thread.sleep(5000);
 		driver.findElement(By.xpath(AccntGrpEditBtn)).click();
 	}
 
-	@Test(priority = 7)
+	@Test(priority = 7,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC07() throws InterruptedException, Exception {
 		BankSetupClick();
 		String Bankname1=PropertyFileReader.propertymap.get("Bankname1");
@@ -274,7 +274,7 @@ public class BankSetup extends Locators {
 		Thread.sleep(2000);
 		driver.findElement(By.xpath(BankAddBtn)).click();
 		ele1=driver.findElement(By.id(BankName));
-		ele1.sendKeys(Bankname1);
+		ele1.sendKeys(Bankname1+"A");
 		ele2=driver.findElement(By.name(AccNum));
 		ele2.sendKeys(Accnum);
 		Thread.sleep(1000);
@@ -292,7 +292,7 @@ public class BankSetup extends Locators {
 		ele4.click();	
 	}
 
-	@Test(priority =8 )
+	@Test(priority =8,retryAnalyzer = ReRunFailedTestCase.class )
 	public void TC08() throws InterruptedException, Exception {
 		BankSetupClick();
 		String Bankname2=PropertyFileReader.propertymap.get("Bankname2");
@@ -302,7 +302,7 @@ public class BankSetup extends Locators {
 		Thread.sleep(2000);
 		driver.findElement(By.xpath(BankAddBtn)).click();
 		ele1=driver.findElement(By.id(BankName));
-		ele1.sendKeys(Bankname2);
+		ele1.sendKeys(Bankname2+"B");
 		ele2=driver.findElement(By.name(AccNum));
 		ele2.sendKeys(Accnum);
 		Thread.sleep(1000);
@@ -325,7 +325,7 @@ public class BankSetup extends Locators {
 		ele4.click();		
 	}
 
-	@Test(priority = 9)
+	@Test(priority = 9,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC09() throws InterruptedException, Exception {
 		BankSetupClick();
 		Thread.sleep(2000);
@@ -335,7 +335,7 @@ public class BankSetup extends Locators {
 	}
 
 
-	@Test(priority = 10)
+	@Test(priority = 10,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC10() throws InterruptedException, Exception {
 		BankSetupClick();
 		Thread.sleep(2000);
@@ -344,7 +344,7 @@ public class BankSetup extends Locators {
 		driver.findElement(By.xpath(AccntGrpEditBtn)).click();
 	}
 
-	@Test(priority = 11)
+	@Test(priority = 11,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC11() throws InterruptedException, Exception {
 		BankSetupClick();
 		Thread.sleep(2000);
@@ -362,7 +362,7 @@ public class BankSetup extends Locators {
 		driver.findElement(By.xpath(UpdateBtn)).click();
 	}
 
-	@Test(priority = 12)
+	@Test(priority = 12,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC12() throws InterruptedException, Exception {
 		BankSetupClick();
 		Thread.sleep(2000);
@@ -374,16 +374,16 @@ public class BankSetup extends Locators {
 		Thread.sleep(2000);
 		ele1 = driver.findElement(By.name(ModifiedBankname));
 		ele1.sendKeys(Keys.CONTROL + "a");
+		
 		Thread.sleep(2000);
 		ele1.sendKeys(Keys.BACK_SPACE);
 		ele1.sendKeys(ModifiedBankName);
 		driver.findElement(By.id("reset")).click();
-
 		boolean emptyCheck = ele1.getAttribute("value").isEmpty();
 		System.out.println("Text box is cleared :" + emptyCheck);		
 	}
 
-	@Test(priority = 13)
+	@Test(priority = 13,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC13() throws InterruptedException, Exception {
 		BankSetupClick();
 		String Bankname=PropertyFileReader.propertymap.get("Bankname");
@@ -395,7 +395,7 @@ public class BankSetup extends Locators {
 		driver.findElement(By.className("ant-modal-close")).click();
 	}
 
-	@Test(priority = 14)
+	@Test(priority = 14,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC14() throws InterruptedException, Exception {
 		AuthorizedNetClick();
 		Thread.sleep(2000);
@@ -413,7 +413,7 @@ public class BankSetup extends Locators {
 		}	
 	}
 
-	@Test(priority =15 )
+	@Test(priority =15,retryAnalyzer = ReRunFailedTestCase.class )
 	public void TC15() throws InterruptedException, Exception {
 		AuthorizedNetClick();
 		String AuthoName=PropertyFileReader.propertymap.get("AuthoName");
@@ -430,7 +430,7 @@ public class BankSetup extends Locators {
 		driver.findElement(By.xpath(AuthoSave)).click();		
 	}
 
-	@Test(priority = 16)
+	@Test(priority = 16,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC16() throws InterruptedException, Exception {
 		AuthorizedNetClick();
 		String AuthoName=PropertyFileReader.propertymap.get("AuthoName");
@@ -443,11 +443,12 @@ public class BankSetup extends Locators {
 		driver.findElement(By.name(AuthorizeTKey)).sendKeys(AuthoTKey);
 		driver.findElement(By.name(AuthorizeLoginID)).sendKeys(AuthoLoginId);
 		driver.findElement(By.name(AuthorizeNotes)).sendKeys(AuthoNotes);
+		Thread.sleep(3000);
 		driver.findElement(By.name(AuthoStatusStop)).click();
 		driver.findElement(By.xpath(AuthoSave)).click();		
 	}
 
-	@Test(priority = 17)
+	@Test(priority = 17,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC17() throws InterruptedException, Exception {
 		AuthorizedNetClick();
 		String AuthoName=PropertyFileReader.propertymap.get("AuthoName");
@@ -465,7 +466,7 @@ public class BankSetup extends Locators {
 	}
 
 
-	@Test(priority = 18)
+	@Test(priority = 18,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC18() throws InterruptedException, Exception {
 		AuthorizedNetClick();
 		Thread.sleep(2000);		
@@ -474,7 +475,7 @@ public class BankSetup extends Locators {
 		driver.findElement(By.xpath(AuthoBackBtn)).click();
 	}		
 
-	@Test(priority = 19)
+	@Test(priority = 19,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC19() throws InterruptedException, Exception {
 		AuthorizedNetClick();
 		String AuthoName=PropertyFileReader.propertymap.get("AuthoName");
@@ -485,7 +486,7 @@ public class BankSetup extends Locators {
 		driver.findElement(By.xpath(AutExistBackBtn)).click();	
 	}
 
-	@Test(priority = 20)
+	@Test(priority = 20,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC20() throws InterruptedException, Exception {
 		AuthorizedNetClick();
 		String AuthoName=PropertyFileReader.propertymap.get("AuthoName");
@@ -496,7 +497,7 @@ public class BankSetup extends Locators {
 		driver.findElement(By.xpath(AutExistClrBtn)).click();	
 	}
 
-	@Test(priority = 21)
+	@Test(priority = 21,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC21() throws InterruptedException, Exception {
 		AuthorizedNetClick();
 		String AuthoName=PropertyFileReader.propertymap.get("AuthoName");
@@ -511,7 +512,7 @@ public class BankSetup extends Locators {
 		driver.findElement(By.xpath(AutExistUpdBtn)).click();		
 	}
 
-	@Test(priority = 22)
+	@Test(priority = 22,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC22() throws InterruptedException, Exception {
 		IPWhitelist();
 		Thread.sleep(2000);
@@ -520,11 +521,12 @@ public class BankSetup extends Locators {
 		ele1 = driver.findElement(By.name("status"));
 		Select sel=new Select(ele1);
 		sel.selectByVisibleText(IpAllDropDown);
+		Thread.sleep(2000);
 		driver.findElement(By.id(IpSearchBtn)).sendKeys(IpAddress);
 
 	}
 
-	@Test(priority = 23)
+	@Test(priority = 23,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC23() throws InterruptedException, Exception {
 		IPWhitelist();
 		Thread.sleep(2000);
@@ -544,7 +546,7 @@ public class BankSetup extends Locators {
 		driver.findElement(By.xpath(IpAdressSave)).click();
 	}
 
-	@Test(priority = 24)
+	@Test(priority = 24,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC24() throws InterruptedException, Exception {
 		IPWhitelist();
 		Thread.sleep(2000);
@@ -565,7 +567,7 @@ public class BankSetup extends Locators {
 	}
 
 
-	@Test(priority = 25)
+	@Test(priority = 25,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC25() throws InterruptedException, Exception {
 		IPWhitelist();
 		Thread.sleep(2000);
@@ -574,7 +576,7 @@ public class BankSetup extends Locators {
 		driver.findElement(By.xpath(IpAddBtn)).click();
 	}
 
-	@Test(priority = 26)
+	@Test(priority = 26,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC26() throws InterruptedException, Exception {
 		IPWhitelist();
 		Thread.sleep(2000);
@@ -594,28 +596,28 @@ public class BankSetup extends Locators {
 		driver.findElement(By.xpath(IpAdressClr)).click();
 	}
 
-	@Test(priority = 27)
+	@Test(priority = 27,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC27() throws InterruptedException, Exception {
 		UserLog();
 		Thread.sleep(2000);
 		driver.findElement(By.xpath(UsrLogSrch)).click();	
 	}
 
-	@Test(priority =28 )
+	@Test(priority =28,retryAnalyzer = ReRunFailedTestCase.class )
 	public void TC28() throws InterruptedException, Exception {
 		UserLog();
 		Thread.sleep(2000);
 		driver.findElement(By.xpath(UsrLogView)).click();
 	}
 
-	@Test(priority =29 )
+	@Test(priority =29,retryAnalyzer = ReRunFailedTestCase.class )
 	public void TC29() throws InterruptedException, Exception {
 		TC28();
 		driver.findElement(By.xpath(UsrLogBackBtn)).click();
 		driver.findElement(By.xpath(UsrLogView)).click();		
 	}
 
-	@Test(priority = 30)
+	@Test(priority = 30,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC30() throws InterruptedException, Exception {
 		EventLog();
 		ele1=driver.findElement(By.xpath(EventLogSearchBtn));
@@ -624,7 +626,7 @@ public class BankSetup extends Locators {
 		System.out.println("Search box is clickable:" + enabled);		
 	}
 
-	@Test(priority = 31)
+	@Test(priority = 31,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC31() throws InterruptedException, Exception {
 		EventLog();
 		Thread.sleep(6000);
@@ -638,7 +640,7 @@ public class BankSetup extends Locators {
 	}
 	}
 
-	@Test(priority = 32)
+	@Test(priority = 32,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC32() throws InterruptedException, Exception {
 		TC31();
 		Thread.sleep(6000);
@@ -654,7 +656,7 @@ public class BankSetup extends Locators {
 				
 	}
 
-	@Test(priority = 33)
+	@Test(priority = 33,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC33() throws InterruptedException, Exception {
 		ExceptionLog();	
 		ele1=driver.findElement(By.xpath(ExceSearchBtn));

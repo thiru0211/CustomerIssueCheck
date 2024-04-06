@@ -31,7 +31,7 @@ public class Tickets extends Locators{
 		driver.manage().window().maximize(); 
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
 		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
-		driver.get("http://192.168.1.36:81/#/auth");
+		driver.get("http://192.168.1.36:90/#/auth");
 		File file=new File("C:\\Users\\thirumaran\\eclipse-workspace\\PowerFundOnee\\Data.properties");
 		FileInputStream FIS=new FileInputStream(file);
 		Properties prop=new Properties();
@@ -44,7 +44,7 @@ public class Tickets extends Locators{
 		driver.quit();
 	}
 
-	@Test
+	@Test(retryAnalyzer = ReRunFailedTestCase.class)
 	public void TicketsClick() throws InterruptedException {
 		PropertyFileReader.propertyRead();
 		String EmailId=PropertyFileReader.propertymap.get("EmailId");
@@ -56,7 +56,7 @@ public class Tickets extends Locators{
 		driver.findElement(By.xpath(TicketsBtn)).click();
 	}
 
-	@Test
+	@Test(priority = 1, retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC01() throws InterruptedException {
 		TicketsClick();
 		String TktInstName=PropertyFileReader.propertymap.get("TktInstName");
@@ -74,13 +74,13 @@ public class Tickets extends Locators{
 		driver.findElement(By.xpath(TktCusName)).sendKeys(TktCustName);
 	}
 
-	@Test
+	@Test(priority =2 ,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC02() throws InterruptedException {
 		TC01();
 		driver.findElement(By.xpath(TktExpBtn)).click();
 	}
 
-	@Test
+	@Test(priority =3,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC03() throws InterruptedException {
 		TC01();
 		driver.findElement(By.xpath(TktViewBtn)).click();
@@ -103,13 +103,13 @@ public class Tickets extends Locators{
 	}
 
 
-	@Test
+	@Test(priority =4,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC04() throws InterruptedException {
 		TC03();
 		driver.findElement(By.xpath(TktViewBtnAddCmtCls)).click();
 	}
 
-	@Test
+	@Test(priority =5,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC05() throws InterruptedException {
 		TC03();
 		String TktViewBtnAddCmts=PropertyFileReader.propertymap.get("TktViewBtnAddCmts");
@@ -118,7 +118,7 @@ public class Tickets extends Locators{
 		ele1.clear();
 	}
 
-	@Test
+	@Test(priority =6,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC06() throws InterruptedException {
 		TC03();
 		String TktViewBtnAddCmts=PropertyFileReader.propertymap.get("TktViewBtnAddCmts");
@@ -127,7 +127,7 @@ public class Tickets extends Locators{
 		driver.findElement(By.xpath(TktViewBtnAddCmtSave)).click();
 	}
 
-	@Test
+	@Test(priority =7,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC07() throws InterruptedException {
 		TC01();
 		driver.findElement(By.xpath(TktViewBtn)).click();
@@ -149,7 +149,7 @@ public class Tickets extends Locators{
 		ele1.click();
 	}
 
-	@Test
+	@Test(priority =8,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC08() throws InterruptedException {
 		TC07();
 		String TktSndMailSubj=PropertyFileReader.propertymap.get("TktSndMailSubj");
@@ -161,7 +161,7 @@ public class Tickets extends Locators{
 		driver.findElement(By.xpath(TktViewBtnSndMailSav)).click();
 	}
 
-	@Test
+	@Test(priority =9,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC09() throws InterruptedException {
 		TC01();
 		driver.findElement(By.xpath(TktViewBtn)).click();
@@ -174,7 +174,7 @@ public class Tickets extends Locators{
 		driver.findElement(By.xpath(TktViewBtnSndMailCls)).click();
 	}
 
-	@Test
+	@Test(priority =10,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC10() throws InterruptedException {
 		TC01();
 		driver.findElement(By.xpath(TktViewBtn)).click();
@@ -196,14 +196,14 @@ public class Tickets extends Locators{
 		ele1.click();
 	}
 
-	@Test
+	@Test(priority =11,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC11() throws InterruptedException {
 		TC10();
 		Thread.sleep(2000);
 		driver.findElement(By.xpath(TktViewBtnClsTktCls)).click();
 	}
 
-	@Test
+	@Test(priority =12,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC12() throws InterruptedException {
 		TC01();
 		String TktClsTktDes=PropertyFileReader.propertymap.get("TktClsTktDes");
@@ -219,7 +219,7 @@ public class Tickets extends Locators{
 		driver.findElement(By.xpath(TktViewBtnClsTktClr)).click();
 	}
 
-	@Test
+	@Test(priority =13,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC13() throws InterruptedException {
 		TC12();
 		String TktClsTktDes=PropertyFileReader.propertymap.get("TktClsTktDes");
@@ -227,7 +227,7 @@ public class Tickets extends Locators{
 		driver.findElement(By.xpath(TktViewBtnClsTktSav)).click();
 	}
 
-	@Test
+	@Test(priority =14,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC14() throws InterruptedException {
 		TC01();
 		driver.findElement(By.xpath(TktViewBtn)).click();

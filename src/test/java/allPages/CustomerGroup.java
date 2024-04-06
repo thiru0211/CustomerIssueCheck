@@ -30,9 +30,9 @@ public class CustomerGroup extends Locators {
 		WebDriverManager.chromedriver().setup();
 		driver=new ChromeDriver();
 		driver.manage().window().maximize(); 
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
-		driver.get("http://192.168.1.36:81/#/auth");
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
+		driver.get("http://192.168.1.36:90/#/auth");
 		File file=new File("C:\\Users\\thirumaran\\eclipse-workspace\\PowerFundOnee\\Data.properties");
 		FileInputStream FIS=new FileInputStream(file);
 		Properties prop=new Properties();
@@ -45,7 +45,7 @@ public class CustomerGroup extends Locators {
 			driver.quit();
 }
 	
-	@Test(priority = 1)
+	@Test(priority = 1,retryAnalyzer = ReRunFailedTestCase.class)
 	public void CustomerGroupBtnClick() throws InterruptedException {
 		PropertyFileReader.propertyRead();
 		String EmailId=PropertyFileReader.propertymap.get("EmailId");
@@ -59,7 +59,7 @@ public class CustomerGroup extends Locators {
 		driver.findElement(By.xpath(CusGrpBtn)).click();
 	}
 
-	@Test(priority = 2)
+	@Test(priority = 2,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC01() throws InterruptedException, AWTException {
 		CustomerGroupBtnClick();
 		String CusSrchName=PropertyFileReader.propertymap.get("CusSrchName");
@@ -76,7 +76,7 @@ public class CustomerGroup extends Locators {
 	}
 	
 	
-	@Test(priority = 3)
+	@Test(priority = 3,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC02() throws InterruptedException, AWTException {
 		CustomerGroupBtnClick();
 		String CusSelInstlrName=PropertyFileReader.propertymap.get("CusSelInstlrName");
@@ -95,7 +95,7 @@ public class CustomerGroup extends Locators {
 		
 	}
 
-	@Test(priority = 4)
+	@Test(priority = 4,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC03() throws InterruptedException, AWTException {
 		CustomerGroupBtnClick();
 		String CusSelInstlrName=PropertyFileReader.propertymap.get("CusSelInstlrName");
@@ -114,7 +114,7 @@ public class CustomerGroup extends Locators {
 		
 	}
 	
-	@Test(priority = 5)
+	@Test(priority = 5,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC04() throws InterruptedException, AWTException {
 		CustomerGroupBtnClick();
 		driver.findElement(By.xpath(CusAddBtn)).click();
@@ -124,7 +124,7 @@ public class CustomerGroup extends Locators {
 	}
 	
 	
-	@Test(priority = 6)
+	@Test(priority = 6,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC05() throws InterruptedException, AWTException {
 		CustomerGroupBtnClick();
 		Thread.sleep(2000);
@@ -137,7 +137,7 @@ public class CustomerGroup extends Locators {
 	}
 	
 	
-	@Test(priority = 7)
+	@Test(priority = 7,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC06() throws InterruptedException, AWTException {
 		CustomerGroupBtnClick();
 		Thread.sleep(2000);

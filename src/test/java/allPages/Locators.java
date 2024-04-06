@@ -19,7 +19,8 @@ public String DisabledEmailID="disabledmail@yopmail.com";
 public String Disabledpass="123123123123";
 public String EmailReq="//*[@id=\"kt_login_signin_form\"]/div[3]/div[1]/div/span";
 public String EmailLockMsg="//*[@id=\"kt_login_signin_form\"]/div[3]/div/span";
-public String PassReq="//*[@id=\"kt_login_signin_form\"]/div[4]/div[2]/div/span";
+//public String PassReq="//*[@id=\"kt_login_signin_form\"]/div[4]/div[2]/div/span";
+public String PassReq="//*[@id=\"kt_login_signin_form\"]/div[4]/div[3]/div/span";
 public String ForgetPassword="//div[@class='link-primary fs-6 fw-bolder']";
 public String TwoFAEmail="thirumaran@yopmail.com";
 public String TwoFAPass="123123123123";
@@ -41,14 +42,14 @@ public String ViewUserSrchEditBtn="//*[@id=\"kt_table_users\"]/tbody/tr/td[8]/di
 public String VUEmailEditBtn="//*[@id=\"kt_content_container\"]/div[2]/div/div[2]/div[3]/img";
 public String VUPassEditBtn="//*[@id=\"kt_content_container\"]/div[2]/div/div[3]/div[3]/img";
 public String VUNewPassBtn="(//input[@class='form-control form-control-lg form-control-solid' and @type='password' and @style='background-color: rgb(238, 243, 247);'])[1]";
-public String VUCnfrmPassBtn="(//input[@class='form-control form-control-lg form-control-solid' and @type='password' and @style='background-color: rgb(238, 243, 247);'])[3]";
+public String VUCnfrmPassBtn="/html/body/div[2]/div/div[2]/div/div[2]/div[1]/div/div[3]/div[2]/input";
 public String VUNewEmailID="//input[@class='form-control form-control-lg form-control-solid' and @type='email']";
 public String VUNewEmailVerCode="//div[@class='btn btn-success' and text()='Get Verification Code']";
 public String VUNewEmailEtrOTP="//input[@class='form-control form-control-lg form-control-solid' and @type='text']";
 public String VUNewEmailUpdBtn="//button[text()='Update']";
 public String VUNewPassUpdBtn="//button[text()='Reset']";
-public String VUNewEmailClsBtn="//*[@id=\"kt_body\"]/div[2]/div/div[2]/div/div[2]/button/span/span";
-public String VUNewPassClsBtn="//*[@id=\"kt_body\"]/div[3]/div/div[2]/div/div[2]/button/span/span";
+public String VUNewEmailClsBtn="//button[@class='ant-modal-close']";
+public String VUNewPassClsBtn="//*[@id=\"kt_body\"]/div[2]/div/div[2]/div/div[2]/button/span";
 public String VUStsClsBtn="//*[@id=\"kt_body\"]/div[2]/div/div[2]/div/div[2]/button/span/span";
 public String VUStusEditBtn="//*[@id=\"kt_content_container\"]/div[2]/div/div[4]/div[3]/img";
 public String VUStusEditRdoYes="//input[@name='yes']";
@@ -168,7 +169,7 @@ public String InstSearchBtn="//*[@id=\"kt_content_container\"]/div/div[1]/div[1]
 public String InstAddBtn="//*[@id=\"kt_content_container\"]/div/div[1]/div[2]/a/div/button";
 public String InstEditBtn="//*[@id=\"kt_table_users\"]/tbody/tr/td[8]/div/div/a/span";
 public String InstBackBtn="//*[@id=\"kt_content_container\"]/form/div/div[1]/div[1]/div[2]/a/a";
-public String InstSaveBtn="/html/body/div/div[2]/div[2]/div[2]/div/div/form/div/div[3]/button[2]";
+public String InstSaveBtn="//*[@id=\"kt_content_container\"]/form/div/div[3]/button[2]";
 public String InstClrBtn="reset1"; //ID
 public String InstAlrtMsg="//*[@id=\"kt_body\"]/div[2]/div/div[2]/div/div[2]/div/div";
 public String InstName="Installer";  
@@ -315,7 +316,8 @@ public String CusListBtn="//*[@id=\"#kt_aside_menu\"]/div[5]/div/div[1]/a/span[2
 public String CusBankDD="installer";//name
 public String CusListNameBox="searchtxt";//id
 public String CusLisActBtn="//*[@id=\"kt_content_container\"]/div/div[1]/div[2]/a";
-public String CusAddActBtn="//*[@id=\"kt_content_container\"]/div/div[1]/div[2]/div/div[1]/a/div/div";
+public String CusAddActBtn="//*[@id=\"kt_content_container\"]/form/div/div[1]/div[2]/a";
+
 public String CusListAddBtn="//*[@id=\"kt_content_container\"]/div/div[1]/div[2]/div/div[1]/a/div/div";
 public String CusListActSavBtn="//*[@id=\"kt_content_container\"]/form/div/div[1]/div[2]/div/div[2]/div/div";
 public String CustID="CustomerId";//name
@@ -358,13 +360,13 @@ public String CusInvBrnd="Inventor";
 public String CusPayoffAmtYes="payYes";
 public String CusPayoffAmtNo="payNo";
 public String CusAddClrBtn="//*[@id=\"kt_content_container\"]/form/div/div[2]/div[37]/button[1]";
-public String CusAddSavBtn="//*[@id=\"kt_content_container\"]/form/div/div[2]/div[37]/button[2]";
+public String CusAddSavBtn="(//button[text()='Save'])";
 public String CussAddActBackBtn="//*[@id=\"kt_content_container\"]/form/div/div[1]/div[2]/div/a/div/div/div";
 public String CusPortAddBtn="//*[@id=\"kt_content_container\"]/form/div/div[2]/div[4]/div[3]";
 public String CusAddPortName="addPortfolio";//name
 public String CusAddPortEditBtn="//*[@id=\"kt_content_container\"]/form/div/div[2]/div[4]/div[4]";
 public String CusAddPortClrBtn="//button[@class='btn btn-light me-3 btn-md']";
-public String CusAddPortSavBtn="//*[@id=\"kt_body\"]/div[3]/div/div[2]/div/div[2]/div[2]/form/div/div[2]/button[2]";
+public String CusAddPortSavBtn="(//button[text()='Save'])[2]";
 public String CusAddPortClsBtn="//*[@id=\"kt_body\"]/div[2]/div/div[2]/div/div[2]/button/span";
 public String CusActBckbtn="//*[@id=\"kt_content_container\"]/form/div/div[1]/div[2]/div/a/div/div/div";
 public String CusNameEditBtn="//*[@id=\"kt_table_users\"]/tbody/tr/td[10]/div/div/a/span";
@@ -375,8 +377,8 @@ public String CusNotesClsBtn="//*[@id=\"kt_body\"]/div[2]/div/div[2]/div/div[2]/
 public String CusEditActBtn="//*[@id=\"kt_content_container\"]/div/div[1]/div/div/div[3]/a";
 public String CusEditActBtn1="//*[@id=\"kt_content_container\"]/div/form/div/div[1]/div[2]/a";
 public String CusEditCusBtn="//*[@id=\"kt_content_container\"]/div/div[1]/div/div/div[3]/div/div[1]/a/div/div";
-public String CusEditClrBtn="//*[@id=\"kt_content_container\"]/div/form/div/div[2]/div[38]/div/div[2]/button[1]";
-public String CusEditUpdBtn="//*[@id=\"kt_content_container\"]/div/form/div/div[2]/div[38]/div/div[2]/button[2]";
+public String CusEditClrBtn="(//button[text()='Clear'])";
+public String CusEditUpdBtn="(//button[text()='Update'])";
 public String CusEditUpdBtn1="//*[@id=\"kt_content_container\"]/div/form/div/div[1]/div[2]/div/div[2]/div/div";
 public String CusEditBckBtn="//*[@id=\"kt_content_container\"]/div/form/div/div[1]/div[2]/div/a/div/div/div";
 public String CusEditActBtn2="//*[@id=\"kt_content_container\"]/div/form/div/div[1]/div[2]/a";
@@ -428,7 +430,7 @@ public String CusEditEscAgreBtn="//*[@id=\"kt_content_container\"]/div/div[2]/di
 public String CusEditEscRobtBtn="//*[@id=\"kt_content_container\"]/div/div[2]/div[2]/div/div[3]/div[2]/div/div/div[1]/div/div/div/input";
 public String CusEditEscUpdBtn="//*[@id=\"kt_content_container\"]/div/div[2]/div[2]/div/div[3]/div[2]/div/div/div[3]/div/button";
 public String CusEditBackBtn="//*[@id=\"kt_content_container\"]/div/div[1]/div/div/div[3]/div/a[7]/div/div/span";
-public String CusEditViewBtn="//*[@id=\"kt_table_users\"]/tbody/tr[1]/td[6]/span/a";
+public String CusEditViewBtn="(//a[@class=' fs-6 btn  btn-sm'])[1]";
 public String CusEditViewClseBtn="//*[@id=\"kt_body\"]/div[2]/div/div[2]/div/div[2]/button/span";
 
 
@@ -441,12 +443,12 @@ public String ACHType="type";//name
 public String ACHStatus="status";//name
 public String ACHEditManEtry="//*[@id=\"kt_body\"]/div[2]/div/div[2]/div/div[2]/div[2]/div[1]/div/div/input";
 public String ACHEditUpdBtn="//*[@id=\"kt_body\"]/div[2]/div/div[2]/div/div[2]/div[2]/div[2]/button";
-public String ACHEditRobChckBox="//*[@id=\"kt_content_container\"]/div/div[2]/form/div/div[5]/div[11]/div[3]/div/div/div[1]/div/div/div/input";
-public String ACHCheckBox1="//*[@id=\"kt_content_container\"]/div/div[2]/form/div/div[5]/div[11]/div[3]/div/div/div[2]/div/div/div/input";
-public String ACHCheckBox2="//*[@id=\"kt_content_container\"]/div/div[2]/form/div/div[5]/div[11]/div[3]/div/div/div[3]/div/div/div/input";
-public String ACHEditUpdBtn1="//*[@id=\"kt_content_container\"]/div/div[2]/form/div/div[5]/div[11]/div[3]/div/div/div[4]/div/button";
+public String ACHEditRobChckBox="//*[@id=\"kt_content_container\"]/div/div[2]/form/div/div[5]/div[12]/div[3]/div/div/div[1]/div/div/div/input";
+public String ACHCheckBox1="//*[@id=\"kt_content_container\"]/div/div[2]/form/div/div[5]/div[12]/div[3]/div/div/div[2]/div/div/div/input";
+public String ACHCheckBox2="//*[@id=\"kt_content_container\"]/div/div[2]/form/div/div[5]/div[12]/div[3]/div/div/div[3]/div/div/div/input";
+public String ACHEditUpdBtn1="//*[@id=\"kt_content_container\"]/div/div[2]/form/div/div[5]/div[12]/div[3]/div/div/div[4]/div/button";
 public String ACHEditMandChck="//*[@id=\"kt_body\"]/div[3]/div/div[2]/div/div[2]/div";
-public String ACHEditBckBtn="//*[@id=\"kt_content_container\"]/div/div[2]/form/div/div[5]/div[11]/div[3]/div/div/div[4]/div/a/button";
+public String ACHEditBckBtn="//*[@id=\"kt_content_container\"]/div/div[2]/form/div/div[5]/div[12]/div[3]/div/div/div[4]/div/a/button";
 public String ACHNamOnAcc="nameonaccount";//name
 public String ACHBnkNam="bankname";//name
 public String ACHAccNum="bankaccountnumber";//name
@@ -501,7 +503,7 @@ public String CusListExclUpldDateBtn="//*[@id=\"kt_content_container\"]/div[2]/d
 public String ReportsBtn="//*[@id=\"#kt_aside_menu\"]/div[2]/span/span[2]";
 public String OSReportBtn="//*[@id=\"#kt_aside_menu\"]/div[2]/div/div[1]/a/span[2]";
 public String OSReportExpBtn="//*[@id=\"kt_content_container\"]/div[1]/div[1]/div[7]/button";
-public String OSBankName="status";//name
+public String OSBankName="//*[@id=\"kt_content_container\"]/div[1]/div[1]/div[3]/select";
 public String OSPyType="status";//name
 public String OSPySts="status";//name
 public String OSCusName="//*[@id=\"kt_content_container\"]/div[1]/div[1]/div[6]/input";
@@ -535,7 +537,7 @@ public String OSAddRcdPyCLrBtn="//*[@id=\"kt_body\"]/div[2]/div/div[2]/div/div[2
 public String OSACtBckBtn="//*[@id=\"kt_content_container\"]/div/div[2]/div[1]/div[1]/div[2]/div/a/div/div/div";
 
 public String TapeReprtBtn="//*[@id=\"#kt_aside_menu\"]/div[2]/div/div[2]/a/span[2]";
-public String TapeRepInstlrDD="status";//name
+public String TapeRepInstlrDD="//*[@id=\"kt_content_container\"]/div[1]/div/div[3]/div[2]/select";
 public String TapeRepRunRep="btnRunReport";//id
 public String TapeRepDwldBtn="//*[@id=\"dvdownload\"]/div/div/div/div/div/button";
 
@@ -566,7 +568,7 @@ public String InvLogCusEdtActBtn="invback";//id
 public String InvLogCusEdtActBckBtn="//*[@id=\"invback\"]/div/a/div/div/div";
 public String InvLogRsndInv="//*[@id=\"btnResendInvoice\"]/div/div";
 public String InvLogRsndYes="btnCnfmResendInvYes";//id
-public String InvLogRsndNo="//*[@id=\"kt_body\"]/div[3]/div/div[2]/div/div[2]/div/div[3]/div/div[2]/div/div[1]/button";
+public String InvLogRsndNo="//*[@id=\"kt_body\"]/div[2]/div/div[2]/div/div[2]/div/div[3]/div/div[2]/div/div[1]/button";
 public String InvLogDwldInv="//*[@id=\"btndownloadInvoice\"]/div/div";
 public String InvLogDwldRecp="//*[@id=\"btndownloadreceipt\"]/div/div";
 public String InvLogDwldAll="//*[@id=\"btndownloadall\"]/div/div";

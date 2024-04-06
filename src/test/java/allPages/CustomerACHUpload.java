@@ -34,27 +34,26 @@ public class CustomerACHUpload extends Locators {
 		WebDriverManager.chromedriver().setup();
 		driver=new ChromeDriver();
 		driver.manage().window().maximize(); 
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
-		driver.get("http://192.168.1.36:81/#/auth");
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
+		driver.get("http://192.168.1.36:90/#/auth");
 		File file=new File("C:\\Users\\thirumaran\\eclipse-workspace\\PowerFundOnee\\Data.properties");
 		FileInputStream FIS=new FileInputStream(file);
 		Properties prop=new Properties();
 		prop.load(FIS);	
 	}
 
-			@AfterMethod
-			public void tearDown() throws IOException, InterruptedException{
-				Thread.sleep(3000);
-				driver.quit();
-			}
+	@AfterMethod
+	public void tearDown() throws IOException, InterruptedException{
+		Thread.sleep(3000);
+		driver.quit();
+	}
 
-	@Test
+	@Test(retryAnalyzer = ReRunFailedTestCase.class)
 	public void ACHUploadClick() throws InterruptedException {
 		PropertyFileReader.propertyRead();
 		String EmailId=PropertyFileReader.propertymap.get("EmailId");
 		String Passwrd=PropertyFileReader.propertymap.get("Passwrd");
-
 		driver.findElement(By.name(Email)).sendKeys(EmailId);
 		driver.findElement(By.name(Password)).sendKeys(Passwrd);
 		driver.findElement(By.id(LoginBtn)).click();
@@ -64,9 +63,10 @@ public class CustomerACHUpload extends Locators {
 	}
 
 
-	@Test
+	@Test(priority = 1,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC01() throws InterruptedException {
 		ACHUploadClick();
+		Thread.sleep(2000);
 		driver.findElement(By.xpath(ACHUploadBtn)).click();
 		driver.findElement(By.xpath(ACHSubBtn)).click();
 		ele1=driver.findElement(By.xpath(ACHManMsgChk));
@@ -77,8 +77,8 @@ public class CustomerACHUpload extends Locators {
 			System.out.println("Mandatory message is not shown");
 		}
 	}
-	
-	@Test
+
+	@Test(priority = 2,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC02() throws InterruptedException, AWTException {
 		ACHUploadClick();
 		driver.findElement(By.xpath(ACHUploadFileBtn)).click();
@@ -96,26 +96,26 @@ public class CustomerACHUpload extends Locators {
 		Thread.sleep(2000);
 		driver.findElement(By.xpath(ACHSubBtn)).click();
 	}
-	
-	@Test
+
+	@Test(priority = 3,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC03() throws InterruptedException, AWTException {
 		ACHUploadClick();
 		driver.findElement(By.xpath(ACHUploadDateBtn)).click();
 	}
-	
-	@Test
+
+	@Test(priority = 4,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC04() throws InterruptedException, AWTException {
 		ACHUploadClick();
 		driver.findElement(By.xpath(ACHUpldSampFilBtn)).click();
 	}
-	
-	@Test
+
+	@Test(priority = 5,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC05() throws InterruptedException, AWTException {
 		ACHUploadClick();
 		driver.findElement(By.xpath(ACHFrmStupBtn)).click();
 	}
-	
-	@Test
+
+	@Test(priority = 6,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC06() throws InterruptedException, AWTException {
 		ACHUploadClick();
 		String ACHInstlrDD=PropertyFileReader.propertymap.get("ACHInstlrDD");
@@ -137,8 +137,8 @@ public class CustomerACHUpload extends Locators {
 		Thread.sleep(2000);
 		driver.findElement(By.xpath(ACHSubBtn)).click();
 	}
-	
-	@Test
+
+	@Test(priority = 7,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC07() throws InterruptedException, AWTException {
 		ACHUploadClick();
 		driver.findElement(By.xpath(CusListBtn)).click();
@@ -157,8 +157,8 @@ public class CustomerACHUpload extends Locators {
 			System.out.println("Mandatory message is not shown");
 		}
 	}
-	
-	@Test
+
+	@Test(priority = 8,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC08() throws InterruptedException, AWTException {
 		TC07();
 		driver.findElement(By.xpath(CusListExclUpldFilUpld)).click();
@@ -176,15 +176,17 @@ public class CustomerACHUpload extends Locators {
 		Thread.sleep(2000);
 		driver.findElement(By.xpath(ACHSubBtn)).click();
 	}
-	
 
-	@Test
+
+	@Test(priority = 9,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC09() throws InterruptedException, AWTException {
 		TC07();
 		driver.findElement(By.xpath(CusListExclUpldDateBtn)).click();
 	}
-	
-	@Test
+
+	// TC10=Need to click sample button but There is no sample button.
+
+	@Test(priority = 10,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC11() throws InterruptedException, AWTException {
 		TC07();
 		String ACHInstlrDD=PropertyFileReader.propertymap.get("ACHInstlrDD");
@@ -206,8 +208,8 @@ public class CustomerACHUpload extends Locators {
 		Thread.sleep(2000);
 		driver.findElement(By.xpath(ACHSubBtn)).click();
 	}
-	}
-	
-	
-	
+}
+
+
+
 

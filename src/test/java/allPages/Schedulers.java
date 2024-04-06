@@ -29,22 +29,22 @@ public class Schedulers extends Locators{
 		WebDriverManager.chromedriver().setup();
 		driver=new ChromeDriver();
 		driver.manage().window().maximize(); 
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
-		driver.get("http://192.168.1.36:81/#/auth");
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
+		driver.get("http://192.168.1.36:90/#/auth");
 		File file=new File("C:\\Users\\thirumaran\\eclipse-workspace\\PowerFundOnee\\Data.properties");
 		FileInputStream FIS=new FileInputStream(file);
 		Properties prop=new Properties();
 		prop.load(FIS);	
 	}
 
-			@AfterMethod
-			public void tearDown() throws IOException, InterruptedException{
-				Thread.sleep(3000);
-				driver.quit();
-			}
+	@AfterMethod
+	public void tearDown() throws IOException, InterruptedException{
+		Thread.sleep(3000);
+		driver.quit();
+	}
 
-	@Test
+	@Test(retryAnalyzer = ReRunFailedTestCase.class)
 	public void ACHSchedulerBtn() throws InterruptedException {
 		PropertyFileReader.propertyRead();
 		String EmailId=PropertyFileReader.propertymap.get("EmailId");
@@ -55,10 +55,11 @@ public class Schedulers extends Locators{
 		driver.findElement(By.id(LoginBtn)).click();
 		Thread.sleep(3000);
 		driver.findElement(By.xpath(SchedBtn)).click();
+		Thread.sleep(3000);
 		driver.findElement(By.xpath(ACHSchBtn)).click();
 	}
-	
-	@Test
+
+	@Test(retryAnalyzer = ReRunFailedTestCase.class)
 	public void NoPaymentBtn() throws InterruptedException {
 		PropertyFileReader.propertyRead();
 		String EmailId=PropertyFileReader.propertymap.get("EmailId");
@@ -71,8 +72,8 @@ public class Schedulers extends Locators{
 		driver.findElement(By.xpath(SchedBtn)).click();
 		driver.findElement(By.xpath(SCHNoPayBtn)).click();
 	}
-	
-	@Test
+
+	@Test(priority = 1,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC01() throws InterruptedException {
 		ACHSchedulerBtn();
 		String ScheBankDD=PropertyFileReader.propertymap.get("ScheBankDD");
@@ -91,8 +92,8 @@ public class Schedulers extends Locators{
 			ele2.sendKeys(SchFromDate);
 		}
 	}
-	
-	@Test
+
+	@Test(priority = 2,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC02() throws InterruptedException {
 		TC01();
 		driver.findElement(By.xpath(SchCusViewBtn)).click();
@@ -103,8 +104,8 @@ public class Schedulers extends Locators{
 		element.click();
 		driver.findElement(By.xpath(SchCusFileLogBtn)).click();
 	}
-	
-	@Test
+
+	@Test(priority = 3,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC03() throws InterruptedException {
 		TC01();
 		driver.findElement(By.xpath(SchCusViewBtn)).click();
@@ -115,8 +116,8 @@ public class Schedulers extends Locators{
 		element.click();
 		driver.findElement(By.xpath(SchCusFileExcelExpBtn)).click();
 	}
-	
-	@Test
+
+	@Test(priority = 4,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC04() throws InterruptedException {
 		TC01();
 		driver.findElement(By.xpath(SchCusViewBtn)).click();
@@ -127,8 +128,8 @@ public class Schedulers extends Locators{
 		element.click();
 		driver.findElement(By.xpath(SchCusFileBckBtn)).click();
 	}
-	
-	@Test
+
+	@Test(priority = 5,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC05() throws InterruptedException {
 		TC01();
 		Thread.sleep(2000);
@@ -138,8 +139,8 @@ public class Schedulers extends Locators{
 		element.click();
 		driver.findElement(By.xpath(SchExcelExpBtn)).click();
 	}
-	
-	@Test
+
+	@Test(priority =6,retryAnalyzer = ReRunFailedTestCase.class )
 	public void TC06() throws InterruptedException {
 		TC01();
 		Thread.sleep(2000);
@@ -149,8 +150,8 @@ public class Schedulers extends Locators{
 		element.click();
 		driver.findElement(By.xpath(SCHAchSchBtn)).click();
 	}
-	
-	@Test
+
+	@Test(priority = 7,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC07() throws InterruptedException {
 		NoPaymentBtn();
 		Thread.sleep(2000);
@@ -160,8 +161,8 @@ public class Schedulers extends Locators{
 		element.click();
 		driver.findElement(By.xpath(NoPayStopBtn)).click();
 	}
-	
-	@Test
+
+	@Test(priority = 8,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC08() throws InterruptedException {
 		NoPaymentBtn();
 		Thread.sleep(2000);
@@ -171,8 +172,8 @@ public class Schedulers extends Locators{
 		element.click();
 		driver.findElement(By.xpath(NoPayRunBtn)).click();
 	}
-	
-	@Test
+
+	@Test(priority = 9,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC09() throws InterruptedException {
 		NoPaymentBtn();
 		driver.findElement(By.name(NoPaySunBtn)).click();
@@ -183,43 +184,44 @@ public class Schedulers extends Locators{
 		driver.findElement(By.name(NoPayFriBtn)).click();
 		driver.findElement(By.name(NoPaySatBtn)).click();
 	}
-	
-	@Test
+
+	@Test(priority = 10,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC10() throws InterruptedException {
 		NoPaymentBtn();
 		driver.findElement(By.xpath(NoPayAddUsr)).click();
 		driver.findElement(By.xpath(NoPayAddUsrSavBtn)).click();
 	}
-	
-	@Test
+
+	@Test(priority = 11,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC11() throws InterruptedException {
 		NoPaymentBtn();
 		driver.findElement(By.xpath(NoPayAddUsr)).click();
 		driver.findElement(By.xpath(NoPayAddUSrNameBtn)).click();
 		driver.findElement(By.xpath(NoPayAddUsrSavBtn)).click();
 	}
-	
-	@Test
+
+	@Test(priority =12,retryAnalyzer = ReRunFailedTestCase.class )
 	public void TC12() throws InterruptedException {
 		NoPaymentBtn();
 		driver.findElement(By.xpath(NoPayAddUsr)).click();
 		driver.findElement(By.xpath(NoPayAddUsrClsBtn)).click();
 	}
-	
-	@Test
+
+	@Test(priority = 13,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC13() throws InterruptedException {
 		NoPaymentBtn();
 		driver.findElement(By.xpath(NoPayExtAddUsrBtn)).click();
 		Thread.sleep(2000);
 		driver.findElement(By.xpath(NoPayExtAddUsrSavBtn)).click();
 	}
-	
-	@Test
+
+	@Test(priority = 14,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC14() throws InterruptedException {
 		NoPaymentBtn();
 		String NPUsrName=PropertyFileReader.propertymap.get("NPUsrName");
 		String NPMailId=PropertyFileReader.propertymap.get("NPMailId");
 		String NPUsrTyp=PropertyFileReader.propertymap.get("NPUsrTyp");
+		Thread.sleep(2000);
 		driver.findElement(By.xpath(NoPayExtAddUsrBtn)).click();
 		Thread.sleep(2000);
 		driver.findElement(By.name(NoPayExtAddUsrName)).sendKeys(NPUsrName);
@@ -228,21 +230,22 @@ public class Schedulers extends Locators{
 		Thread.sleep(2000);
 		driver.findElement(By.xpath(NoPayExtAddUsrClrBtn)).click();
 	}
-	
-	@Test
+
+	@Test(priority = 15,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC15() throws InterruptedException {
 		NoPaymentBtn();
 		Thread.sleep(2000);
 		driver.findElement(By.xpath(NoPayExtAddUsrBtn)).click();
 		driver.findElement(By.xpath(NoPayExtClsBtn)).click();
 	}
-	
-	@Test
+
+	@Test(priority = 16,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC16() throws InterruptedException {
 		NoPaymentBtn();
 		String NPUsrName=PropertyFileReader.propertymap.get("NPUsrName");
 		String NPMailId=PropertyFileReader.propertymap.get("NPMailId");
 		String NPUsrTyp=PropertyFileReader.propertymap.get("NPUsrTyp");
+		Thread.sleep(2000);
 		driver.findElement(By.xpath(NoPayExtAddUsrBtn)).click();
 		Thread.sleep(2000);
 		driver.findElement(By.name(NoPayExtAddUsrName)).sendKeys(NPUsrName);
@@ -251,14 +254,14 @@ public class Schedulers extends Locators{
 		Thread.sleep(2000);
 		driver.findElement(By.xpath(NoPayExtAddUsrSavBtn)).click();
 	}
-	
-	@Test
+
+	@Test(priority = 17,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC17() throws InterruptedException {
 		NoPaymentBtn();
 		driver.findElement(By.xpath(NoPaySavBtn)).click();
 	}
-	
-	@Test
+
+	@Test(priority = 18,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC18() throws InterruptedException {
 		NoPaymentBtn();
 		String NPSignUsrID=PropertyFileReader.propertymap.get("NPSignUsrID");
@@ -268,6 +271,6 @@ public class Schedulers extends Locators{
 		Thread.sleep(2000);
 		driver.findElement(By.xpath(NoPaySavBtn)).click();
 	}
-	}
-	
+}
+
 

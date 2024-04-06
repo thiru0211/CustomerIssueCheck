@@ -8,6 +8,7 @@ import java.io.PrintStream;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Iterator;
 import java.util.Properties;
 import java.util.Scanner;
 
@@ -19,6 +20,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.io.FileHandler;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -39,7 +41,9 @@ public class Login extends Locators{
 		WebDriverManager.chromedriver().setup();
 		driver=new ChromeDriver();
 		driver.manage().window().maximize();
-		driver.get("http://192.168.1.36:81/#/auth");
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
+		driver.get("http://192.168.1.36:90/#/auth");
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofMinutes(1));
 		File file=new File("C:\\Users\\thirumaran\\eclipse-workspace\\PowerFundOnee\\Data.properties");
 		FileInputStream FIS=new FileInputStream(file);
@@ -51,7 +55,7 @@ public class Login extends Locators{
 		Thread.sleep(3000);
 		driver.quit();
 	}
-	@Test(priority = 1)
+	@Test(priority = 1,retryAnalyzer = ReRunFailedTestCase.class)
 	public void Login_TC1(){
 		PropertyFileReader.propertyRead();
 		String LoginID=PropertyFileReader.propertymap.get("EmailId");
@@ -61,8 +65,8 @@ public class Login extends Locators{
 		driver.findElement(By.id(LoginBtn)).click();	
 	}
 
-	@Test(priority = 2)
-	public void Login_TC2() {
+	@Test(priority = 2,retryAnalyzer = ReRunFailedTestCase.class)
+	public void Login_TC2() throws InterruptedException {
 		driver.findElement(By.name(Email)).sendKeys("");
 		driver.findElement(By.name(Password)).sendKeys("");
 		driver.findElement(By.id(LoginBtn)).click();	
@@ -74,7 +78,7 @@ public class Login extends Locators{
 		System.out.println(text2);
 	}
 
-	@Test(priority = 3)
+	@Test(priority = 3,retryAnalyzer = ReRunFailedTestCase.class)
 	public void Login_TC3() {
 		PropertyFileReader.propertyRead();
 		String LoginID=PropertyFileReader.propertymap.get("EmailId");
@@ -87,7 +91,7 @@ public class Login extends Locators{
 
 	}
 
-	@Test(priority = 4)
+	@Test(priority = 4,retryAnalyzer = ReRunFailedTestCase.class)
 	public void Login_TC4() {
 		PropertyFileReader.propertyRead();
 		String InvalidID=PropertyFileReader.propertymap.get("Invloginid");
@@ -97,7 +101,7 @@ public class Login extends Locators{
 		driver.findElement(By.id(LoginBtn)).click();	
 	}
 
-	@Test(priority = 5)
+	@Test(priority = 5,retryAnalyzer = ReRunFailedTestCase.class)
 	public void Login_TC5() {
 		PropertyFileReader.propertyRead();
 		String LoginID=PropertyFileReader.propertymap.get("EmailId");
@@ -107,7 +111,7 @@ public class Login extends Locators{
 		driver.findElement(By.id(LoginBtn)).click();	
 	}
 
-	@Test(priority = 6)
+	@Test(priority = 6,retryAnalyzer = ReRunFailedTestCase.class)
 	public void Login_TC6() throws InterruptedException {
 		PropertyFileReader.propertyRead();
 		String ValidEmailID=PropertyFileReader.propertymap.get("ValidEmailID");
@@ -124,7 +128,7 @@ public class Login extends Locators{
 		}
 	}
 
-	@Test(priority = 7)
+	@Test(priority = 7,retryAnalyzer = ReRunFailedTestCase.class)
 	public void Login_TC7() throws InterruptedException {
 		PropertyFileReader.propertyRead();
 		String DsblMailId=PropertyFileReader.propertymap.get("DsblMailId");
@@ -141,7 +145,7 @@ public class Login extends Locators{
 		}
 	}
 
-	@Test(priority = 10,enabled=false,description = "When enter 1 time 2fa usermail & password it will navigate to next page, so we cannot enter 6 times")
+	@Test(priority = 10,retryAnalyzer = ReRunFailedTestCase.class,enabled=false,description = "When enter 1 time 2fa usermail & password it will navigate to next page, so we cannot enter 6 times")
 	public void Login_TC8() throws InterruptedException {
 		PropertyFileReader.propertyRead();
 		String TwoFAEmail=PropertyFileReader.propertymap.get("TwoFAEmail");
@@ -164,7 +168,7 @@ public class Login extends Locators{
 		}
 	}
 
-	@Test(priority = 8)
+	@Test(priority = 8,retryAnalyzer = ReRunFailedTestCase.class)
 	public void Login_TC9() {
 		PropertyFileReader.propertyRead();
 		String DsblMailId=PropertyFileReader.propertymap.get("DsblMailId");
@@ -174,16 +178,41 @@ public class Login extends Locators{
 		driver.findElement(By.id(LoginBtn)).click();	
 	}
 
-	@Test(priority = 9)
+	@Test(priority = 9,retryAnalyzer = ReRunFailedTestCase.class)
 	public void Login_TC10() throws InterruptedException {
 		PropertyFileReader.propertyRead();
 		String ValidEmailID=PropertyFileReader.propertymap.get("ValidEmailID");
 		driver.findElement(By.name(Email)).sendKeys(ValidEmailID);
 		driver.findElement(By.xpath(ForgetPassword)).click();	
-		Thread.sleep(1000);;
+		Thread.sleep(1000);
 		driver.findElement(By.id("btnyes")).click();
 	}
 
+	@Test(priority = 11,retryAnalyzer = ReRunFailedTestCase.class, description = "Unlock the locked email ID in TC06")
+	public void Login_T11() throws InterruptedException {
+		Login_TC1();
+		Thread.sleep(4000);
+		driver.findElement(By.xpath(AdminBtn)).click();
+		driver.findElement(By.xpath(ViewUserBtn)).click();
+		Thread.sleep(2000);
+		ele1=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[1]/div[1]/span[2]/div/select"));
+		Select sel=new Select(ele1);
+		sel.selectByVisibleText("LOCKED");
+		Thread.sleep(2000);
+		driver.findElement(By.xpath("/html/body/div/div[2]/div[2]/div[2]/div/div/div/div[2]/table/tbody/tr[2]/td[8]/div/div/a")).click();
+		Thread.sleep(2000);
+		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div[2]/div/div[4]/div[3]/img")).click();
+		Thread.sleep(2000);
+		driver.findElement(By.xpath("//button[@class='btn btn-primary mt-5']")).click();
+		Thread.sleep(2000);
+		ele2=driver.findElement(By.xpath("//button[@class='btn btn-primary btn-md mt-2']"));
+		if(ele2.isDisplayed()) {
+			System.out.println("Unlocked message shown");
+		}
+		else {
+			System.out.println("Message is not shown");
+		}
+	}
 
 	@AfterMethod
 	public void teardown() {
