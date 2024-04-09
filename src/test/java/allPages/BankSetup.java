@@ -15,6 +15,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
@@ -32,6 +33,7 @@ public class BankSetup extends Locators {
 	@BeforeMethod
 	public void setUp() throws IOException{
 		WebDriverManager.chromedriver().setup();
+		ChromeOptions option=new ChromeOptions();
 		driver=new ChromeDriver();
 		driver.manage().window().maximize(); 
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
@@ -199,7 +201,7 @@ public class BankSetup extends Locators {
 		Thread.sleep(1000);
 		WebElement ele3 = driver.findElement(By.id(DropDown));
 		Select sel=new Select(ele3);
-		sel.selectByVisibleText("Testing Account");
+		sel.selectByIndex(1);
 		driver.findElement(By.name(Location)).sendKeys(location);
 		driver.findElement(By.xpath(BnkStpStsDsbl)).click();
 		driver.findElement(By.xpath(BnkStpStsDsblSveBtn)).click();
@@ -280,7 +282,7 @@ public class BankSetup extends Locators {
 		Thread.sleep(1000);
 		WebElement ele3 = driver.findElement(By.id(DropDown));
 		Select sel=new Select(ele3);
-		sel.selectByVisibleText("Testing Account");
+		sel.selectByIndex(1);
 		driver.findElement(By.name(Location)).sendKeys(location);
 		Thread.sleep(2000);
 		driver.findElement(By.xpath(StatusDisable)).click();
@@ -308,7 +310,7 @@ public class BankSetup extends Locators {
 		Thread.sleep(1000);
 		ele3 = driver.findElement(By.id(DropDown));
 		Select sel=new Select(ele3);
-		sel.selectByVisibleText("Testing Account");
+		sel.selectByIndex(1);
 		driver.findElement(By.name(Location)).sendKeys(location);
 		Thread.sleep(2000);
 		driver.findElement(By.xpath(StatusDisable)).click();
@@ -320,7 +322,7 @@ public class BankSetup extends Locators {
 		ele5=driver.findElement(By.xpath("//select[@name='dropdownValuenew']"));
 		ele5.click();
 		Select selet=new Select(ele5);
-		selet.selectByVisibleText(AuthorizeName);
+		selet.selectByIndex(1);
 		Thread.sleep(2000);
 		ele4.click();		
 	}
@@ -374,7 +376,6 @@ public class BankSetup extends Locators {
 		Thread.sleep(2000);
 		ele1 = driver.findElement(By.name(ModifiedBankname));
 		ele1.sendKeys(Keys.CONTROL + "a");
-		
 		Thread.sleep(2000);
 		ele1.sendKeys(Keys.BACK_SPACE);
 		ele1.sendKeys(ModifiedBankName);

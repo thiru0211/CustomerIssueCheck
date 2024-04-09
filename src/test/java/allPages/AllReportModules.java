@@ -12,6 +12,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -30,6 +31,7 @@ public class AllReportModules extends Locators{
 	@BeforeMethod
 	public void setUp() throws IOException{
 		WebDriverManager.chromedriver().setup();
+		ChromeOptions option=new ChromeOptions();
 		driver=new ChromeDriver();
 		driver.manage().window().maximize(); 
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
@@ -455,7 +457,7 @@ public class AllReportModules extends Locators{
 		Select sel=new Select(ele1);
 		sel.selectByVisibleText(ACHTransDD);
 		ele2=driver.findElement(By.xpath(ACHTransFrmDte));
-		ele2.sendKeys(ACHTransFrmDate);
+		ele2.sendKeys("01-03-2022");
 		Thread.sleep(2000);
 		WebElement element = driver.findElement(By.xpath(ACHTransActBtn));
 		Actions act=new Actions(driver);
@@ -473,7 +475,7 @@ public class AllReportModules extends Locators{
 		Select sel=new Select(ele1);
 		sel.selectByVisibleText(ACHTransDD);
 		ele2=driver.findElement(By.xpath(ACHTransFrmDte));
-		ele2.sendKeys(ACHTransFrmDate);
+		ele2.sendKeys("01-03-2022");
 		Thread.sleep(2000);
 		WebElement element = driver.findElement(By.xpath(ACHTransActBtn));
 		Actions act=new Actions(driver);
@@ -491,7 +493,7 @@ public class AllReportModules extends Locators{
 		Select sel=new Select(ele1);
 		sel.selectByVisibleText(ACHTransDD);
 		ele2=driver.findElement(By.xpath(ACHTransFrmDte));
-		ele2.sendKeys(ACHTransFrmDate);
+		ele2.sendKeys("01-03-2022");
 		Thread.sleep(2000);
 		WebElement element = driver.findElement(By.xpath(ACHTransActBtn));
 		Actions act=new Actions(driver);
@@ -510,7 +512,7 @@ public class AllReportModules extends Locators{
 		Select sel=new Select(ele1);
 		sel.selectByVisibleText(ACHTransDD);
 		ele2=driver.findElement(By.xpath(ACHTransFrmDte));
-		ele2.sendKeys(ACHTransFrmDate);
+		ele2.sendKeys("01-03-2022");
 		Thread.sleep(2000);
 		WebElement element = driver.findElement(By.xpath(ACHTransActBtn));
 		Actions act=new Actions(driver);
@@ -722,7 +724,7 @@ public class AllReportModules extends Locators{
 		InvoiceLog();//13
 		String InvLogBnkDD=PropertyFileReader.propertymap.get("InvLogBnkDD");
 		String InvLogPendCusName1=PropertyFileReader.propertymap.get("InvLogPendCusName1");
-		String InvPayTyp=PropertyFileReader.propertymap.get("InvPayTyp");
+		String InvPayTyp1=PropertyFileReader.propertymap.get("InvPayTyp1");
 
 		ele1=driver.findElement(By.xpath(InvLogBankDD));
 		Select sel1=new Select(ele1);
@@ -730,15 +732,16 @@ public class AllReportModules extends Locators{
 
 		ele2=driver.findElement(By.xpath(InvLogPyType));
 		Select sel2=new Select(ele2);
-		sel2.selectByVisibleText(InvPayTyp);
+		sel2.selectByVisibleText(InvPayTyp1);
 		Thread.sleep(2000);
-		driver.findElement(By.xpath(InvLogCusNam)).sendKeys(InvLogPendCusName1);
+		//driver.findElement(By.xpath(InvLogCusNam)).sendKeys(InvLogPendCusName1);
 		driver.findElement(By.xpath(InvLogCusEdtBtn)).click();
 		Thread.sleep(2000);
 		WebElement element = driver.findElement(By.id(InvLogCusEdtActBtn));
 		Actions act=new Actions(driver);
 		act.click().build().perform();
 		element.click();
+		Thread.sleep(2000);
 		driver.findElement(By.xpath(InvLogVoidInv)).click();
 		Thread.sleep(2000);
 		driver.findElement(By.xpath(InvLogVoidNo)).click();

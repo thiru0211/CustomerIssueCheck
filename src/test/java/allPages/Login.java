@@ -19,6 +19,7 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.io.FileHandler;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -39,6 +40,7 @@ public class Login extends Locators{
 	public void setUp() throws IOException{
 		// TODO Auto-generated method stub
 		WebDriverManager.chromedriver().setup();
+		ChromeOptions option=new ChromeOptions();
 		driver=new ChromeDriver();
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
@@ -50,11 +52,13 @@ public class Login extends Locators{
 		Properties prop=new Properties();
 		prop.load(FIS);	
 	}
-	@AfterMethod
-	public void tearDown() throws IOException, InterruptedException{
-		Thread.sleep(3000);
-		driver.quit();
-	}
+	
+//	@AfterMethod
+//	public void tearDown() throws IOException, InterruptedException{
+//		Thread.sleep(3000);
+//		driver.quit();
+//	}
+	
 	@Test(priority = 1,retryAnalyzer = ReRunFailedTestCase.class)
 	public void Login_TC1(){
 		PropertyFileReader.propertyRead();
@@ -188,7 +192,7 @@ public class Login extends Locators{
 		driver.findElement(By.id("btnyes")).click();
 	}
 
-	@Test(priority = 11,retryAnalyzer = ReRunFailedTestCase.class, description = "Unlock the locked email ID in TC06")
+	@Test(priority = 11, description = "Unlock the locked email ID in TC06")
 	public void Login_T11() throws InterruptedException {
 		Login_TC1();
 		Thread.sleep(4000);
@@ -199,7 +203,7 @@ public class Login extends Locators{
 		Select sel=new Select(ele1);
 		sel.selectByVisibleText("LOCKED");
 		Thread.sleep(2000);
-		driver.findElement(By.xpath("/html/body/div/div[2]/div[2]/div[2]/div/div/div/div[2]/table/tbody/tr[2]/td[8]/div/div/a")).click();
+		driver.findElement(By.xpath("/html/body/div/div[2]/div[2]/div[2]/div/div/div/div[2]/table/tbody/tr/td[8]/div/div/a")).click();
 		Thread.sleep(2000);
 		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div[2]/div/div[4]/div[3]/img")).click();
 		Thread.sleep(2000);
@@ -212,6 +216,7 @@ public class Login extends Locators{
 		else {
 			System.out.println("Message is not shown");
 		}
+		ele2.click();
 	}
 
 	@AfterMethod

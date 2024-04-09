@@ -19,6 +19,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -37,6 +38,7 @@ public class InvestorSetup extends Locators {
 	@BeforeMethod
 	public void setUp() throws IOException{
 		WebDriverManager.chromedriver().setup();
+		ChromeOptions option=new ChromeOptions();
 		driver=new ChromeDriver();
 		driver.manage().window().maximize(); 
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
@@ -452,7 +454,6 @@ public class InvestorSetup extends Locators {
 		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[1]/div[2]/div/div/button")).click();
 	}
 
-
 	@Test(priority = 19,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC19() throws InterruptedException, AWTException {
 		InvestorBtnClick();
@@ -491,7 +492,7 @@ public class InvestorSetup extends Locators {
 		driver.findElement(By.xpath(InvstrTranUpdBtn)).click();		
 	}
 
-
+	
 	@Test(priority = 21,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC21() throws InterruptedException, AWTException {
 		InvestorBtnClick();

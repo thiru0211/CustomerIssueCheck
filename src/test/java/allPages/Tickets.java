@@ -10,6 +10,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -27,6 +28,7 @@ public class Tickets extends Locators{
 	@BeforeMethod
 	public void setUp() throws IOException{
 		WebDriverManager.chromedriver().setup();
+		ChromeOptions option=new ChromeOptions();
 		driver=new ChromeDriver();
 		driver.manage().window().maximize(); 
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
@@ -62,12 +64,10 @@ public class Tickets extends Locators{
 		String TktInstName=PropertyFileReader.propertymap.get("TktInstName");
 		String TktCustName=PropertyFileReader.propertymap.get("TktCustName");
 
-		//		Scanner scanner = new Scanner(System.in);
-		//		System.out.println("------------------------------------------------------------------------------------------------------------------------");
-		//		System.out.println("Please enter in the format like March, 2023 (or) April, 2023");
-		//		String DueDate= scanner.nextLine();
-		driver.findElement(By.xpath(TktDueMntCal)).sendKeys("March, 2023");
-
+//				Scanner scanner = new Scanner(System.in);
+//				System.out.println("------------------------------------------------------------------------------------------------------------------------");
+//				System.out.println("Please enter in the format like March, 2023 (or) April, 2023");
+//				String DueDate= scanner.nextLine();		
 		ele1=driver.findElement(By.xpath(TktInstDD));
 		Select sel1=new Select(ele1);
 		sel1.selectByVisibleText(TktInstName);

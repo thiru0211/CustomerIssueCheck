@@ -17,6 +17,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -34,7 +35,8 @@ public class InvoicePayAndCreate extends Locators {
 	@BeforeMethod
 	public void setUp() throws IOException{
 		WebDriverManager.chromedriver().setup();
-		driver=new ChromeDriver();
+		ChromeOptions option=new ChromeOptions();
+		driver=new ChromeDriver(option);
 		driver.manage().window().maximize(); 
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
 		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
@@ -45,11 +47,11 @@ public class InvoicePayAndCreate extends Locators {
 		prop.load(FIS);	
 	}
 
-	@AfterMethod
-	public void tearDown() throws IOException, InterruptedException{
-		Thread.sleep(3000);
-		driver.quit();
-	}
+//	@AfterMethod
+//	public void tearDown() throws IOException, InterruptedException{
+//		Thread.sleep(3000);
+//		driver.quit();
+//	}
 
 	@Test(retryAnalyzer = ReRunFailedTestCase.class)
 	public void InvoicePayClick() throws InterruptedException {
@@ -62,7 +64,7 @@ public class InvoicePayAndCreate extends Locators {
 		driver.findElement(By.id(LoginBtn)).click();
 		Thread.sleep(3000);
 		driver.findElement(By.xpath(CustomerBtn)).click();
-		Thread.sleep(2000);
+		Thread.sleep(3000);
 		driver.findElement(By.xpath(InvoicePayBtn)).click();
 	}
 
@@ -232,6 +234,7 @@ public class InvoicePayAndCreate extends Locators {
 		driver.findElement(By.xpath(IPCusEditBtn)).click();
 		driver.findElement(By.xpath(IPChMntPyBtn)).click();
 		driver.findElement(By.xpath(IPChMntPySavBtn)).click();
+		Thread.sleep(2000);
 		ele1=driver.findElement(By.xpath("//*[@id=\"kt_body\"]/div[2]/div/div[2]/div/div[2]/div/div/div/button"));
 		Thread.sleep(2000);
 		if(ele1.isDisplayed()) {
@@ -294,6 +297,15 @@ public class InvoicePayAndCreate extends Locators {
 		element1.click();
 		Thread.sleep(2000);
 		driver.findElement(By.xpath(IPChMntPyEditSavBtn)).click();
+		Thread.sleep(2000);
+		ele2=driver.findElement(By.xpath("//div[text()='Something Went Wrong!!!']"));
+		if(ele2.isDisplayed()) {
+			String text = ele2.getText();
+			System.out.println("Error popup is shown like: " + text);
+		}
+		else {
+			System.out.println();
+		}
 	}
 
 	@Test(priority = 13,retryAnalyzer = ReRunFailedTestCase.class)
@@ -525,7 +537,7 @@ public class InvoicePayAndCreate extends Locators {
 		Thread.sleep(2000);
 		driver.findElement(By.xpath(IPChMntPyMonCRM)).click();
 		driver.findElement(By.xpath(IPChMntPyMonCRMUpd)).click();
-		//	driver.switchTo().alert().accept();
+	//	driver.switchTo().alert().accept();
 		//Mandatory message check for multiple elements at a same time
 		List<WebElement> elements = driver.findElements(By.cssSelector("div[style='color: red;']"));
 		for (WebElement ele1 : elements) {

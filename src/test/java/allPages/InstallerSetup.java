@@ -16,6 +16,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -33,6 +34,7 @@ public class InstallerSetup extends Locators  {
 	@BeforeMethod
 	public void setUp() throws IOException{
 		WebDriverManager.chromedriver().setup();
+		ChromeOptions option=new ChromeOptions();
 		driver=new ChromeDriver();
 		driver.manage().window().maximize(); 
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
@@ -350,9 +352,24 @@ public class InstallerSetup extends Locators  {
 
 	@Test(priority = 12,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC11() throws InterruptedException, AWTException {
-		TC10();
+		InstallerBtnClick();
+		String InstSearchName=PropertyFileReader.propertymap.get("InstSearchName");
+		driver.findElement(By.xpath(InstSearchBtn)).sendKeys(InstSearchName);
+		driver.findElement(By.xpath(InstEditBtn)).click();
+		Thread.sleep(2000);
+		WebElement element = driver.findElement(By.xpath(InstActionsBtn));
+		Actions act=new Actions(driver);
+		act.click().build().perform();
+		element.click();
+		Thread.sleep(2000);
+		driver.findElement(By.xpath(EditInstaller)).click();
+		ele4=driver.findElement(By.xpath(InstStatusDSbl));
+		ele4.click();
+		driver.findElement(By.xpath(InstUpdateBtn)).click();
 	}
 
+	//TC-12------------> there is no full view button
+	//TC-13------------> there is no simple view button
 
 	@Test(priority = 13,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC14() throws InterruptedException, AWTException {
