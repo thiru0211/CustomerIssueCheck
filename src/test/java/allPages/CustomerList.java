@@ -65,7 +65,7 @@ public class CustomerList extends Locators {
 		driver.findElement(By.id(LoginBtn)).click();
 		Thread.sleep(3000);
 		driver.findElement(By.xpath(CustomerBtn)).click();
-		//driver.findElement(By.xpath(CusListBtn)).click();
+		driver.findElement(By.xpath(CusListBtn)).click();
 	}
 
 	@Test(retryAnalyzer = ReRunFailedTestCase.class)

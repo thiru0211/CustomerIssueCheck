@@ -5,9 +5,50 @@
     <classes>
       <class name="allPages.CustomerIssues">
         <methods>
+          <include name="InvstClrBtnChck"/>
+          <include name="SwapOutChck"/>
+          <include name="ACHMailTimeChckS2Sale"/>
+          <include name="CrtInvDueMonth"/>
+          <include name="TC17"/>
+          <include name="TC18"/>
+          <include name="ACHUpldPopUpChck"/>
+          <include name="TC19"/>
+          <include name="DisableChck2"/>
+          <include name="AddToLstChckPymtChck"/>
+          <include name="TC10"/>
+          <include name="QuckUpldChck"/>
+          <include name="EdtPyCusNameChck"/>
+          <include name="DisableChck1"/>
+          <include name="APIStupSavBtn"/>
+          <include name="tearDown"/>
+          <include name="EditInstlrIssue"/>
+          <include name="LastModifiedChck"/>
+          <include name="EmailNotifChck"/>
+          <include name="StopPyMnt"/>
+          <include name="UserIDCheck"/>
+          <include name="LoginBtn"/>
+          <include name="StartPyChck"/>
           <include name="setUp"/>
+          <include name="APIStupClrBtn"/>
           <include name="launch"/>
+          <include name="EscProgCaptchaChck"/>
+          <include name="TC06"/>
+          <include name="PayOffChck"/>
+          <include name="TC27"/>
+          <include name="TC02"/>
+          <include name="TC03"/>
+          <include name="DateCheck"/>
+          <include name="TC45"/>
+          <include name="TC23"/>
           <include name="TC01"/>
+          <include name="CGIDrpDwnChck"/>
+          <include name="TC04"/>
+          <include name="DsblUsrChck"/>
+          <include name="NewUsrTimIsue"/>
+          <include name="EscProgChck"/>
+          <include name="TC40"/>
+          <include name="CusPortEditChck"/>
+          <include name="CrtInvNoDataChck"/>
         </methods>
       </class> <!-- allPages.CustomerIssues -->
     </classes>

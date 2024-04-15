@@ -52,13 +52,13 @@ public class Login extends Locators{
 		Properties prop=new Properties();
 		prop.load(FIS);	
 	}
-	
-//	@AfterMethod
-//	public void tearDown() throws IOException, InterruptedException{
-//		Thread.sleep(3000);
-//		driver.quit();
-//	}
-	
+
+	@AfterMethod
+	public void tearDown() throws IOException, InterruptedException{
+		Thread.sleep(3000);
+		driver.quit();
+	}
+
 	@Test(priority = 1,retryAnalyzer = ReRunFailedTestCase.class)
 	public void Login_TC1(){
 		PropertyFileReader.propertyRead();

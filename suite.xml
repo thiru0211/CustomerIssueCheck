@@ -17,6 +17,7 @@
       <class name="allPages.Tickets"/>
       <class name="allPages.CustomerGroup"/>
       <class name="allPages.CheckPayments"/>
+      <class name="allPages.CustomerIssues"/>
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->
