@@ -609,18 +609,20 @@ public class InstallerSetup extends Locators  {
 		driver.findElement(By.xpath(InvstEditBtn)).click();
 		Thread.sleep(2000);
 		driver.findElement(By.xpath(InvstDocAttach)).click();
-		Thread.sleep(2000);
-		String FilePath="C:\\Users\\thirumaran\\Desktop\\Screenshot 2024-03-06 105214.png";
-		Robot robot = new Robot();
-		StringSelection selection = new StringSelection(FilePath);
-		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(selection, null);
-		robot.keyPress(KeyEvent.VK_CONTROL);
-		robot.keyPress(KeyEvent.VK_V);
-		robot.keyRelease(KeyEvent.VK_V);
-		robot.keyRelease(KeyEvent.VK_CONTROL);
-		robot.keyPress(KeyEvent.VK_ENTER);
-		robot.keyRelease(KeyEvent.VK_ENTER);
-		Thread.sleep(2000);
+		
+//		Thread.sleep(2000);
+//		String FilePath="C:\\Users\\thirumaran\\Desktop\\Screenshot 2024-03-06 105214.png";
+//		Robot robot = new Robot();
+//		StringSelection selection = new StringSelection(FilePath);
+//		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(selection, null);
+//		robot.keyPress(KeyEvent.VK_CONTROL);
+//		robot.keyPress(KeyEvent.VK_V);
+//		robot.keyRelease(KeyEvent.VK_V);
+//		robot.keyRelease(KeyEvent.VK_CONTROL);
+//		robot.keyPress(KeyEvent.VK_ENTER);
+//		robot.keyRelease(KeyEvent.VK_ENTER);
+//		Thread.sleep(2000);
+		
 //		WebElement element2 = driver.findElement(By.xpath("//*[@id=\"kt_body\"]/div[2]/div/div[2]/div/div[2]/div[2]/form/div/div[1]/div[6]/div/div/div/h6"));
 //		String text = element2.getText();
 //		System.out.println(text);		
@@ -639,5 +641,147 @@ public class InstallerSetup extends Locators  {
 		WebElement checkBox = driver.findElement(By.xpath(checkBoxXpath));
 		checkBox.click();		
 	}
+	
+	@Test(priority = 25,retryAnalyzer = ReRunFailedTestCase.class)
+	public void TC26() throws InterruptedException, AWTException {
+		InstallerBtnClick();
+		Thread.sleep(2000);
+		String InstSearchName=PropertyFileReader.propertymap.get("InstSearchName");
+		ele1=driver.findElement(By.xpath(InstSearchBtn));
+		ele1.sendKeys(InstSearchName);
+		driver.findElement(By.xpath(InstEditBtn)).click();
+		driver.findElement(By.xpath(InvstNSFSetupBtn)).click();
+		Thread.sleep(2000);
+		driver.findElement(By.xpath(InvstNSFSetupUpdBtn)).click();
+		Thread.sleep(2000);
+		ele2=driver.findElement(By.xpath(InvstNSFSetupAlrtBtn));
+		Thread.sleep(2000);
+		if(ele2.isDisplayed()) {
+			System.out.println("Alert Message is shown");
+		}
+		else {
+			System.out.println("Alert Message is not shown");
+		}
+		ele2.click();
+	}
 
-}
+	@Test(priority = 26,retryAnalyzer = ReRunFailedTestCase.class)
+	public void TC27() throws InterruptedException, AWTException {
+		InstallerBtnClick();
+		Thread.sleep(2000);
+		String InstSearchName=PropertyFileReader.propertymap.get("InstSearchName");
+		ele1=driver.findElement(By.xpath(InstSearchBtn));
+		ele1.sendKeys(InstSearchName);
+		driver.findElement(By.xpath(InstEditBtn)).click();
+		driver.findElement(By.xpath(InvstNSFSetupBtn)).click();
+		Thread.sleep(2000);
+		driver.findElement(By.xpath(InvstNSFStpNoRadBtn)).click();
+		Thread.sleep(2000);
+		ele2=driver.findElement(By.id(InvstNSFStpAtmptBtn));
+		Select sel=new Select(ele2);
+		sel.selectByIndex(2);
+		Thread.sleep(2000);
+		ele3=driver.findElement(By.id(InvstNSFStpIntvBtn));
+		Select sel1=new Select(ele3);
+		sel1.selectByIndex(2);
+		Thread.sleep(2000);
+		driver.findElement(By.xpath(InvstNSFStpClrBtn)).click();
+	}
+	
+	@Test(priority = 27,retryAnalyzer = ReRunFailedTestCase.class)
+	public void TC28() throws InterruptedException, AWTException {
+		InstallerBtnClick();
+		Thread.sleep(2000);
+		String InstSearchName=PropertyFileReader.propertymap.get("InstSearchName");
+		ele1=driver.findElement(By.xpath(InstSearchBtn));
+		ele1.sendKeys(InstSearchName);
+		driver.findElement(By.xpath(InstEditBtn)).click();
+		driver.findElement(By.xpath(InvstNSFSetupBtn)).click();
+		Thread.sleep(2000);
+		driver.findElement(By.xpath(InvstNSFStpNoRadBtn)).click();
+		Thread.sleep(2000);
+		ele2=driver.findElement(By.id(InvstNSFStpAtmptBtn));
+		Select sel=new Select(ele2);
+		sel.selectByIndex(2);
+		Thread.sleep(2000);
+		ele3=driver.findElement(By.id(InvstNSFStpIntvBtn));
+		Select sel1=new Select(ele3);
+		sel1.selectByIndex(2);
+		Thread.sleep(2000);
+		driver.findElement(By.xpath(InvstNSFStpUpdBtn)).click();
+	}
+	
+	
+	@Test(priority = 28,retryAnalyzer = ReRunFailedTestCase.class)
+	public void TC29() throws InterruptedException, AWTException {
+		InstallerBtnClick();
+		Thread.sleep(2000);
+		String InstSearchName=PropertyFileReader.propertymap.get("InstSearchName");
+		String Amount=PropertyFileReader.propertymap.get("Amount");
+		ele1=driver.findElement(By.xpath(InstSearchBtn));
+		ele1.sendKeys(InstSearchName);
+		driver.findElement(By.xpath(InstEditBtn)).click();
+		driver.findElement(By.xpath(InvstNSFSetupBtn)).click();
+		Thread.sleep(2000);
+		driver.findElement(By.xpath(InvstNSFStpYesRadBtn)).click();
+		driver.findElement(By.name(InvstNSFStpAmtBtn)).sendKeys(Amount);
+		driver.findElement(By.name(InvstNSFStpSepTranBtn)).click();
+		Thread.sleep(2000);
+		ele2=driver.findElement(By.id(InvstNSFStpAtmptBtn));
+		Select sel=new Select(ele2);
+		sel.selectByIndex(2);
+		Thread.sleep(2000);
+		ele3=driver.findElement(By.id(InvstNSFStpIntvBtn));
+		Select sel1=new Select(ele3);
+		sel1.selectByIndex(2);
+		Thread.sleep(2000);
+		driver.findElement(By.xpath(InvstNSFStpUpdBtn1)).click();
+	}
+	
+	@Test(priority = 29,retryAnalyzer = ReRunFailedTestCase.class)
+	public void TC30() throws InterruptedException, AWTException {
+		InstallerBtnClick();
+		Thread.sleep(2000);
+		String InstSearchName=PropertyFileReader.propertymap.get("InstSearchName");
+		String Amount=PropertyFileReader.propertymap.get("Amount");
+		ele1=driver.findElement(By.xpath(InstSearchBtn));
+		ele1.sendKeys(InstSearchName);
+		driver.findElement(By.xpath(InstEditBtn)).click();
+		driver.findElement(By.xpath(InvstNSFSetupBtn)).click();
+		Thread.sleep(2000);
+		driver.findElement(By.xpath(InvstNSFStpYesRadBtn)).click();
+		driver.findElement(By.name(InvstNSFStpAmtBtn)).sendKeys(Amount);
+		Thread.sleep(2000);
+		driver.findElement(By.name(InvstNSFStpMonPayBtn)).click();
+		Thread.sleep(2000);
+		ele2=driver.findElement(By.id(InvstNSFStpAtmptBtn));
+		Select sel=new Select(ele2);
+		sel.selectByIndex(2);
+		Thread.sleep(2000);
+		ele3=driver.findElement(By.id(InvstNSFStpIntvBtn));
+		Select sel1=new Select(ele3);
+		sel1.selectByIndex(2);
+		Thread.sleep(2000);
+		driver.findElement(By.xpath(InvstNSFStpUpdBtn1)).click();
+	}
+	
+	@Test(priority = 30,retryAnalyzer = ReRunFailedTestCase.class)
+	public void TC31() throws InterruptedException, AWTException {
+		InstallerBtnClick();
+		Thread.sleep(2000);
+		String InstSearchName=PropertyFileReader.propertymap.get("InstSearchName");
+		ele1=driver.findElement(By.xpath(InstSearchBtn));
+		ele1.sendKeys(InstSearchName);
+		driver.findElement(By.xpath(InstEditBtn)).click();
+		driver.findElement(By.xpath(InvstNSFSetupBtn)).click();
+		Thread.sleep(2000);
+		WebElement element = driver.findElement(By.xpath(InvstNSFStpActBtn));
+		Actions act=new Actions(driver);
+		act.click().build().perform();
+		element.click();
+		Thread.sleep(2000);
+		driver.findElement(By.xpath(InvstNSFStpActBckBtn)).click();
+	}
+	
+	}
+

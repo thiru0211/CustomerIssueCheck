@@ -73,6 +73,7 @@ public class InvestorSetup extends Locators {
 	@Test(priority = 2,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC01() throws InterruptedException, AWTException {
 		InvestorBtnClick();
+		Thread.sleep(2000);
 		String InvestName=PropertyFileReader.propertymap.get("InvestName");
 		String InvstrDD=PropertyFileReader.propertymap.get("InvstrDD");
 		driver.findElement(By.xpath(InvstrSrch)).sendKeys(InvestName);
@@ -85,6 +86,7 @@ public class InvestorSetup extends Locators {
 	@Test(priority = 3,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC02() throws InterruptedException, AWTException {
 		InvestorBtnClick();
+		Thread.sleep(2000);
 		driver.findElement(By.xpath(InvstrAddBtn)).click();
 		Thread.sleep(2000);
 		driver.findElement(By.xpath(InvstrSaveBtn)).click();
@@ -99,6 +101,7 @@ public class InvestorSetup extends Locators {
 	@Test(priority = 4,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC03() throws InterruptedException, AWTException {
 		InvestorBtnClick();
+		Thread.sleep(2000);
 		String InvestName=PropertyFileReader.propertymap.get("InvestName");
 		String InvestCntry=PropertyFileReader.propertymap.get("InvestCntry");
 		String InvestState=PropertyFileReader.propertymap.get("InvestState");
@@ -135,6 +138,7 @@ public class InvestorSetup extends Locators {
 	@Test(priority = 5,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC04() throws InterruptedException, AWTException {
 		InvestorBtnClick();
+		Thread.sleep(2000);
 		driver.findElement(By.xpath(InvstrAddBtn)).click();
 		driver.findElement(By.xpath(InvstrBackBtn)).click();
 		driver.findElement(By.xpath(InvstrAddBtn)).click();
@@ -145,6 +149,7 @@ public class InvestorSetup extends Locators {
 	@Test(priority = 6,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC05() throws InterruptedException, AWTException {
 		InvestorBtnClick();
+		Thread.sleep(2000);
 		String InvestName=PropertyFileReader.propertymap.get("InvestName");
 		String InvestCntry=PropertyFileReader.propertymap.get("InvestCntry");
 		String InvestState=PropertyFileReader.propertymap.get("InvestState");
@@ -180,6 +185,7 @@ public class InvestorSetup extends Locators {
 	@Test(priority = 7,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC06() throws InterruptedException, AWTException {
 		InvestorBtnClick();
+		Thread.sleep(2000);
 		String InvestName=PropertyFileReader.propertymap.get("InvestName");
 		String InvestCity=PropertyFileReader.propertymap.get("InvestCity");
 		driver.findElement(By.xpath(InvstrSrch)).sendKeys(InvestName);
@@ -204,6 +210,7 @@ public class InvestorSetup extends Locators {
 	@Test(priority = 8,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC07() throws InterruptedException, AWTException {
 		InvestorBtnClick();
+		Thread.sleep(2000);
 		String InvestName=PropertyFileReader.propertymap.get("InvestName");
 		driver.findElement(By.xpath(InvstrSrch)).sendKeys(InvestName);
 		driver.findElement(By.xpath(InvstrEditBtn)).click();
@@ -222,6 +229,7 @@ public class InvestorSetup extends Locators {
 	@Test(priority = 9,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC08() throws InterruptedException, AWTException {
 		InvestorBtnClick();
+		Thread.sleep(2000);
 		String InvestName=PropertyFileReader.propertymap.get("InvestName");
 		driver.findElement(By.xpath(InvstrSrch)).sendKeys(InvestName);
 		driver.findElement(By.xpath(InvstrEditBtn)).click();
@@ -239,6 +247,7 @@ public class InvestorSetup extends Locators {
 	@Test(priority = 10,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC09() throws InterruptedException, AWTException {
 		InvestorBtnClick();
+		Thread.sleep(2000);
 		String InvestName=PropertyFileReader.propertymap.get("InvestName");
 		String InvestTranDate=PropertyFileReader.propertymap.get("InvestTranDate");
 		String InvestAmt=PropertyFileReader.propertymap.get("InvestAmt");
@@ -289,6 +298,7 @@ public class InvestorSetup extends Locators {
 	@Test(priority = 11,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC10() throws InterruptedException, AWTException {
 		InvestorBtnClick();
+		Thread.sleep(2000);
 		String InvestName=PropertyFileReader.propertymap.get("InvestName");
 		String InvestTranDate=PropertyFileReader.propertymap.get("InvestTranDate");
 		String InvestAmt=PropertyFileReader.propertymap.get("InvestAmt");
@@ -329,6 +339,7 @@ public class InvestorSetup extends Locators {
 	@Test(priority = 12,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC11() throws InterruptedException, AWTException {
 		InvestorBtnClick();
+		Thread.sleep(2000);
 		String InvestName=PropertyFileReader.propertymap.get("InvestName");
 		driver.findElement(By.xpath(InvstrSrch)).sendKeys(InvestName);
 		driver.findElement(By.xpath(InvstrEditBtn)).click();
@@ -351,6 +362,7 @@ public class InvestorSetup extends Locators {
 	@Test(priority = 13,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC12() throws InterruptedException, AWTException {
 		InvestorBtnClick();
+		Thread.sleep(2000);
 		String InvestName=PropertyFileReader.propertymap.get("InvestName");
 		driver.findElement(By.xpath(InvstrSrch)).sendKeys(InvestName);
 		driver.findElement(By.xpath(InvstrEditBtn)).click();
@@ -373,6 +385,7 @@ public class InvestorSetup extends Locators {
 	@Test(priority = 14,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC13() throws InterruptedException, AWTException {
 		InvestorBtnClick();
+		Thread.sleep(2000);
 		String InvestName=PropertyFileReader.propertymap.get("InvestName");
 		driver.findElement(By.xpath(InvstrSrch)).sendKeys(InvestName);
 		driver.findElement(By.xpath(InvstrEditBtn)).click();
@@ -387,6 +400,7 @@ public class InvestorSetup extends Locators {
 	@Test(priority = 15,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC14() throws InterruptedException, AWTException {
 		InvestorBtnClick();
+		Thread.sleep(2000);
 		String InvestName=PropertyFileReader.propertymap.get("InvestName");
 		driver.findElement(By.xpath(InvstrSrch)).sendKeys(InvestName);
 		driver.findElement(By.xpath(InvstrEditBtn)).click();
@@ -399,9 +413,10 @@ public class InvestorSetup extends Locators {
 	}
 
 
-	@Test(priority = 16,retryAnalyzer = ReRunFailedTestCase.class)
+	@Test(priority = 16)
 	public void TC15() throws InterruptedException, AWTException {
 		InvestorBtnClick();
+		Thread.sleep(2000);
 		String InvestName=PropertyFileReader.propertymap.get("InvestName");
 		String InvestInslrDD=PropertyFileReader.propertymap.get("InvestInslrDD");
 		String InvestCusNam1=PropertyFileReader.propertymap.get("InvestCusNam1");
@@ -417,7 +432,7 @@ public class InvestorSetup extends Locators {
 		ele1=driver.findElement(By.xpath(InvstrSelInstlrDD));
 		Select sel=new Select(ele1);
 		sel.selectByVisibleText(InvestInslrDD);
-		driver.findElement(By.xpath(InvstrCusName)).sendKeys(InvestCusNam1);
+		//driver.findElement(By.xpath(InvstrCusName)).sendKeys(InvestCusNam1);
 		driver.findElement(By.xpath(InvstrCusChckBox)).click();
 		Thread.sleep(2000);
 		WebElement element2 = driver.findElement(By.xpath(InvstrActBtn));
@@ -431,6 +446,7 @@ public class InvestorSetup extends Locators {
 	@Test(priority = 17,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC16() throws InterruptedException, AWTException {
 		InvestorBtnClick();
+		Thread.sleep(2000);
 		String InvestName=PropertyFileReader.propertymap.get("InvestName");
 		driver.findElement(By.xpath(InvstrSrch)).sendKeys(InvestName);
 		driver.findElement(By.xpath(InvstrEditBtn)).click();
@@ -472,6 +488,7 @@ public class InvestorSetup extends Locators {
 	@Test(priority = 20,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC20() throws InterruptedException, AWTException {
 		InvestorBtnClick();
+		Thread.sleep(2000);
 		String InvestName1=PropertyFileReader.propertymap.get("InvestName1");
 		String InvestTranDate=PropertyFileReader.propertymap.get("InvestTranDate");
 		String InvestAmt=PropertyFileReader.propertymap.get("InvestAmt");
@@ -496,6 +513,7 @@ public class InvestorSetup extends Locators {
 	@Test(priority = 21,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC21() throws InterruptedException, AWTException {
 		InvestorBtnClick();
+		Thread.sleep(2000);
 		String InvestName1=PropertyFileReader.propertymap.get("InvestName1");
 		driver.findElement(By.xpath(InvstrSrch)).sendKeys(InvestName1);
 		driver.findElement(By.xpath(InvstrEditBtn)).click();
@@ -509,6 +527,7 @@ public class InvestorSetup extends Locators {
 	@Test(priority = 22,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC22() throws InterruptedException, AWTException {
 		InvestorBtnClick();
+		Thread.sleep(2000);
 		String InvestName1=PropertyFileReader.propertymap.get("InvestName1");
 		driver.findElement(By.xpath(InvstrSrch)).sendKeys(InvestName1);
 		driver.findElement(By.xpath(InvstrEditBtn)).click();
@@ -520,6 +539,7 @@ public class InvestorSetup extends Locators {
 	@Test(enabled = true,retryAnalyzer = ReRunFailedTestCase.class, description = "update button is not working",priority = 23)
 	public void TC23() throws InterruptedException, AWTException {
 		InvestorBtnClick();
+		Thread.sleep(2000);
 		String InvestName1=PropertyFileReader.propertymap.get("InvestName1");
 		String InvestCusName=PropertyFileReader.propertymap.get("InvestCusName");
 		driver.findElement(By.xpath(InvstrSrch)).sendKeys(InvestName1);
@@ -542,7 +562,6 @@ public class InvestorSetup extends Locators {
 		    fail("Button click failed with exception: " + e.getMessage());
 		  }
 	}
-
 
 	@Test(priority = 24,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC24() throws InterruptedException, AWTException {
@@ -591,8 +610,6 @@ public class InvestorSetup extends Locators {
 		if(ele1.isDisplayed()) {
 			System.out.println("Need to enter File name and it is mandatory");
 		}
-
-
 	}
 	
 	@Test(priority = 26,retryAnalyzer = ReRunFailedTestCase.class)
@@ -611,6 +628,7 @@ public class InvestorSetup extends Locators {
 	@Test(priority = 27,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC27() throws InterruptedException, AWTException {
 		InvestorBtnClick();
+		Thread.sleep(2000);
 		String InvestName1=PropertyFileReader.propertymap.get("InvestName1");
 		driver.findElement(By.xpath(InvstrSrch)).sendKeys(InvestName1);
 		driver.findElement(By.xpath(InvstrEditBtn)).click();
@@ -623,6 +641,7 @@ public class InvestorSetup extends Locators {
 	@Test(priority = 28,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC28() throws InterruptedException, AWTException {
 		InvestorBtnClick();
+		Thread.sleep(2000);
 		String InvestName1=PropertyFileReader.propertymap.get("InvestName1");
 		driver.findElement(By.xpath(InvstrSrch)).sendKeys(InvestName1);
 		driver.findElement(By.xpath(InvstrEditBtn)).click();
@@ -679,6 +698,7 @@ public class InvestorSetup extends Locators {
 	@Test(priority = 30,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC30() throws InterruptedException, AWTException {
 		InvestorBtnClick();
+		Thread.sleep(2000);
 		String InvestName1=PropertyFileReader.propertymap.get("InvestName1");
 		driver.findElement(By.xpath(InvstrSrch)).sendKeys(InvestName1);
 		driver.findElement(By.xpath(InvstrEditBtn)).click();
@@ -692,6 +712,7 @@ public class InvestorSetup extends Locators {
 	@Test(priority = 31,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC31() throws InterruptedException, AWTException {
 		InvestorBtnClick();
+		Thread.sleep(2000);
 		String InvestName1=PropertyFileReader.propertymap.get("InvestName1");
 		driver.findElement(By.xpath(InvstrSrch)).sendKeys(InvestName1);
 		driver.findElement(By.xpath(InvstrEditBtn)).click();
@@ -710,6 +731,7 @@ public class InvestorSetup extends Locators {
 	@Test(priority = 32,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC32() throws InterruptedException, AWTException {
 		InvestorBtnClick();
+		Thread.sleep(2000);
 		String InvestName1=PropertyFileReader.propertymap.get("InvestName1");
 		driver.findElement(By.xpath(InvstrSrch)).sendKeys(InvestName1);
 		driver.findElement(By.xpath(InvstrEditBtn)).click();
@@ -722,6 +744,7 @@ public class InvestorSetup extends Locators {
 	@Test(priority = 33,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC33() throws InterruptedException, AWTException {
 		InvestorBtnClick();
+		Thread.sleep(2000);
 		String InvestName1=PropertyFileReader.propertymap.get("InvestName1");
 		String InvestTitle=PropertyFileReader.propertymap.get("InvestTitle");
 		String InvestNewsFeed=PropertyFileReader.propertymap.get("InvestNewsFeed");
@@ -747,6 +770,7 @@ public class InvestorSetup extends Locators {
 	@Test(priority = 34,retryAnalyzer = ReRunFailedTestCase.class)
 	public void TC34() throws InterruptedException, AWTException {
 		InvestorBtnClick();
+		Thread.sleep(2000);
 		String InvestName1=PropertyFileReader.propertymap.get("InvestName1");
 		driver.findElement(By.xpath(InvstrSrch)).sendKeys(InvestName1);
 		driver.findElement(By.xpath(InvstrEditBtn)).click();

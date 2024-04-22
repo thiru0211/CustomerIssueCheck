@@ -47,11 +47,11 @@ public class InvoicePayAndCreate extends Locators {
 		prop.load(FIS);	
 	}
 
-//	@AfterMethod
-//	public void tearDown() throws IOException, InterruptedException{
-//		Thread.sleep(3000);
-//		driver.quit();
-//	}
+	@AfterMethod
+	public void tearDown() throws IOException, InterruptedException{
+		Thread.sleep(3000);
+		driver.quit();
+	}
 
 	@Test(retryAnalyzer = ReRunFailedTestCase.class)
 	public void InvoicePayClick() throws InterruptedException {

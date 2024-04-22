@@ -59,7 +59,6 @@ public class CustomerList extends Locators {
 		PropertyFileReader.propertyRead();
 		String EmailId=PropertyFileReader.propertymap.get("EmailId");
 		String Passwrd=PropertyFileReader.propertymap.get("Passwrd");
-
 		driver.findElement(By.name(Email)).sendKeys(EmailId);
 		driver.findElement(By.name(Password)).sendKeys(Passwrd);
 		driver.findElement(By.id(LoginBtn)).click();
@@ -93,7 +92,7 @@ public class CustomerList extends Locators {
 		driver.findElement(By.id(CusListNameBox)).sendKeys(CusListName);
 	}
 
-	@Test(priority = 2,retryAnalyzer = ReRunFailedTestCase.class)
+	@Test(priority = 2)
 	public void TC02() throws InterruptedException {
 		CustomerListClick();
 		Thread.sleep(2000);
@@ -101,10 +100,12 @@ public class CustomerList extends Locators {
 		Actions act=new Actions(driver);
 		act.click().build().perform();
 		element.click();
+		Thread.sleep(3000);
 		driver.findElement(By.xpath(CusListAddBtn)).click();
 		Thread.sleep(3000);
 		WebElement element1 = driver.findElement(By.xpath(CusAddActBtn));
-		act.click().build().perform();
+		Actions act1=new Actions(driver);
+		act1.click().build().perform();
 		element1.click();
 		driver.findElement(By.xpath(CusListActSavBtn)).click();		
 	}
@@ -211,6 +212,7 @@ public class CustomerList extends Locators {
 		CusAddDetailsFull();
 		Thread.sleep(2000);
 		driver.findElement(By.xpath(CusAddSavBtn)).click();
+		
 	}
 
 	@Test(priority=5,retryAnalyzer = ReRunFailedTestCase.class)

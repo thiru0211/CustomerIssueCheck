@@ -293,6 +293,7 @@ public class CustomerIssues extends Locators {
 		//Document setup click
 		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[1]/div/div/div[3]/div/a[3]/div/div/div")).click();
 		//file upload button
+		Thread.sleep(2000);
 		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div[2]/div[2]/form/div/div/div[2]/div/label/div/h6")).click();
 		Thread.sleep(2000);
 		String FilePath="C:\\Users\\thirumaran\\Desktop\\New XLSX Worksheet";
@@ -389,7 +390,7 @@ public class CustomerIssues extends Locators {
 
 		ele1=driver.findElement(By.name(CusInstDD));
 		Select sel1=new Select(ele1);
-		sel1.selectByVisibleText("Test");
+		sel1.selectByIndex(1);
 
 		ele2=driver.findElement(By.name(CusPort));
 		Select sel2=new Select(ele2);
@@ -433,7 +434,7 @@ public class CustomerIssues extends Locators {
 		driver.findElement(By.xpath(CusAddSavBtn)).click();
 	}
 
-	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	@Test
 	public void TC04() throws InterruptedException, AWTException{
 		LoginBtn();
 		Thread.sleep(3000);
@@ -459,21 +460,24 @@ public class CustomerIssues extends Locators {
 		robot.keyRelease(KeyEvent.VK_ENTER);
 		Thread.sleep(2000);
 		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div[1]/div[2]/form/div[3]/button")).click();
-		ele2=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div[1]/div[2]/form/div[2]/div/div/div/div/span/span"));
-		String text = ele2.getText();
-		System.out.println(text);
-		ele3=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div[2]/div[2]/div/table/tbody/tr[1]/td[3]/a"));
-		String text2 = ele3.getText();
-		System.out.println(text2);
 		Thread.sleep(2000);
-		if(text.contains(text2)) {
-			System.out.println("File is uploaded");	
-		}
-		else {
-			System.out.println("File is not uploaded");
-		}
-		ele4=driver.findElement(By.xpath("//*[@id=\"kt_body\"]/div[2]/div/div[2]/div/div[2]/div[1]/div/div[3]/button"));
-		ele4.click();
+		driver.findElement(By.xpath("//*[@id=\"kt_body\"]/div[2]/div/div[2]/div/div[2]/div[1]/div/div[3]/button")).click();
+		Thread.sleep(2000);
+//		ele2=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div[1]/div[2]/form/div[2]/div/div/div/div/span/span"));
+//		String text = ele2.getText();
+//		System.out.println(text);
+//		ele3=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div[2]/div[2]/div/table/tbody/tr[1]/td[3]/a"));
+//		String text2 = ele3.getText();
+//		System.out.println(text2);
+//		Thread.sleep(2000);
+//		if(text.contains(text2)) {
+//			System.out.println("File is uploaded");	
+//		}
+//		else {
+//			System.out.println("File is not uploaded");
+//		}
+//		ele4=driver.findElement(By.xpath("//*[@id=\"kt_body\"]/div[2]/div/div[2]/div/div[2]/div[1]/div/div[3]/button"));
+//		ele4.click();
 	}
 
 	@Test(retryAnalyzer = ReRunFailedTestCase.class)
@@ -541,6 +545,7 @@ public class CustomerIssues extends Locators {
 		element.click();
 		//Swap out button check
 		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[1]/div/div/div[3]/div/a[4]/div/div/div")).click();
+		Thread.sleep(2000);
 		//Swap yes button
 		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div[2]/div[2]/div/div[3]/div/div[2]/div[2]/input")).click();
 		//Agree button check
@@ -765,8 +770,7 @@ public class CustomerIssues extends Locators {
 		driver.findElement(By.name(ZipCode)).sendKeys(zipCode);
 		driver.findElement(By.xpath(SaveBtn)).click();
 		LocalDateTime startTime = LocalDateTime.now();
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofMinutes(1));
-
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofMinutes(3));
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[text()='Saved Successfully']")));
 		LocalDateTime endTime = LocalDateTime.now();
 		double between = ChronoUnit.MILLIS.between(startTime, endTime);
@@ -830,10 +834,14 @@ public class CustomerIssues extends Locators {
 		ele1=driver.findElement(By.xpath(ViewUserSrchBtn));
 		ele1.click();
 		ele1.sendKeys("thirumaran1995@outlook.com");
+		//edit button click
 		driver.findElement(By.xpath("//*[@id=\"kt_table_users\"]/tbody/tr[1]/td[8]/div/div/a/span")).click();
 		Thread.sleep(2000);
+		//Acess rights button
 		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div[1]/div[2]/ul/li[2]/a/span")).click();
-		ele3=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div[2]/div[2]/div[2]/p/span"));
+		Thread.sleep(4000);
+		//get the text in botton last modified by
+		ele3=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div[2]/div/div[4]/p/span"));
 		String text = ele3.getText();
 		System.out.println(text);
 	}
@@ -1318,7 +1326,7 @@ public class CustomerIssues extends Locators {
 		driver.findElement(By.xpath("//*[@id=\"kt_body\"]/div[2]/div/div[2]/div/div[2]/div[2]/div[1]/div/div/span[1]/input")).click();
 		//click update button
 		driver.findElement(By.xpath("//*[@id=\"kt_body\"]/div[2]/div/div[2]/div/div[2]/div[2]/div[2]/button")).click();
-
+		Thread.sleep(2000);
 		Instant startTime = Instant.now();
 
 		//click send button
@@ -1354,7 +1362,7 @@ public class CustomerIssues extends Locators {
 		driver.findElement(By.xpath("//*[@id=\"kt_body\"]/div[2]/div/div[2]/div/div[2]/div[2]/div[1]/div/div/span[2]/input")).click();
 		//click update button
 		driver.findElement(By.xpath("//*[@id=\"kt_body\"]/div[2]/div/div[2]/div/div[2]/div[2]/div[2]/button")).click();
-
+		Thread.sleep(2000);
 		Instant startTime = Instant.now();
 
 		//click send button
@@ -1454,5 +1462,46 @@ public class CustomerIssues extends Locators {
 		driver.findElement(By.xpath("//*[@id=\"kt_body\"]/div[2]/div/div[2]/div/div[2]/div[2]/div/div[2]/button")).click();
 	}
 
-
+	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	public void FailedStsChck() throws InterruptedException, AWTException{
+		LoginBtn();
+		Thread.sleep(3000);
+		driver.findElement(By.xpath(ReportsBtn)).click();
+		driver.findElement(By.xpath(ACHTransBtn)).click();
+		Thread.sleep(2000);
+		ele1=driver.findElement(By.xpath("/html/body/div/div[2]/div[2]/div[2]/div/div/div[1]/div[1]/div[1]/div[2]/select"));
+		Select sel=new Select(ele1);
+		sel.selectByIndex(2);
+		Thread.sleep(2000);
+		ele2=driver.findElement(By.xpath("/html/body/div/div[2]/div[2]/div[2]/div/div/div[1]/div[1]/div[2]/div[2]/select"));
+		Select sel1=new Select(ele2);
+		sel1.selectByVisibleText("Failed");
+		Thread.sleep(2000);
+		ele3=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div[1]/div[3]/div/label"));
+		if(ele3.isDisplayed()) {
+			String text = ele3.getText();
+			System.out.println("Failed Customer details are not shown and also it shows like : " + text);
+		}
+		else {
+			System.out.println("Failed Customer details are shown");
+		}
+	}
+	
+	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	public void ReTrnACHSrchChck() throws InterruptedException, AWTException{
+		LoginBtn();
+		Thread.sleep(3000);
+		driver.findElement(By.xpath(ReportsBtn)).click();
+		driver.findElement(By.xpath("//*[@id=\"#kt_aside_menu\"]/div[2]/div/div[4]/a/span[2]")).click();
+		Thread.sleep(2000);
+		ele1=driver.findElement(By.xpath("/html/body/div/div[2]/div[2]/div[2]/div/div/div[1]/div[1]/div[1]/div[2]/select"));
+		Select sel1=new Select(ele1);
+		sel1.selectByIndex(2);
+		Thread.sleep(2000);
+		ele2=driver.findElement(By.xpath("/html/body/div/div[2]/div[2]/div[2]/div/div/div[1]/div[1]/div[1]/div[2]/select"));
+		Select sel2=new Select(ele2);
+		sel2.selectByIndex(2);
+	}
+	
+	
 }

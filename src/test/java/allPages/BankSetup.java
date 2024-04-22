@@ -65,7 +65,7 @@ public class BankSetup extends Locators {
 		ele1=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div/div[1]/div[1]/span[2]/div/select"));
 		Select sel=new Select(ele1);
 		sel.selectByVisibleText("ALL");
-		
+
 	}
 
 	@Test(retryAnalyzer = ReRunFailedTestCase.class)
@@ -80,7 +80,7 @@ public class BankSetup extends Locators {
 		driver.findElement(By.xpath(AdminBtn)).click();
 		Thread.sleep(3000);
 		driver.findElement(By.xpath(AuthorizedNetClick)).click();
-		
+
 	}
 
 	@Test(retryAnalyzer = ReRunFailedTestCase.class)
@@ -631,14 +631,14 @@ public class BankSetup extends Locators {
 	public void TC31() throws InterruptedException, Exception {
 		EventLog();
 		Thread.sleep(6000);
-	ele1=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div[2]"));
-	if (ele1.isDisplayed()) {
-		System.out.println("No details to show");
-	}
-	else {
-		driver.findElement(By.xpath(EventLogViewBtn)).click();
-		System.out.println("Listed elements are shown");
-	}
+		ele1=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div[2]"));
+		if (ele1.isDisplayed()) {
+			System.out.println("No details to show");
+		}
+		else {
+			driver.findElement(By.xpath(EventLogViewBtn)).click();
+			System.out.println("Listed elements are shown");
+		}
 	}
 
 	@Test(priority = 32,retryAnalyzer = ReRunFailedTestCase.class)
@@ -654,7 +654,7 @@ public class BankSetup extends Locators {
 			driver.findElement(By.xpath(EventLogViewBtn)).click();
 			System.out.println("Listed elements are shown");
 		}
-				
+
 	}
 
 	@Test(priority = 33,retryAnalyzer = ReRunFailedTestCase.class)
