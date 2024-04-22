@@ -21,6 +21,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.net.UrlChecker.TimeoutException;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -44,6 +45,7 @@ public class CustomerIssues extends Locators {
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
 		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
 		driver.get("http://192.168.1.36:90/#/auth");
+		//driver.get("http://54.193.42.127:81/auth");
 		File file=new File("C:\\Users\\thirumaran\\eclipse-workspace\\PowerFundOnee\\Data.properties");
 		FileInputStream FIS=new FileInputStream(file);
 		Properties prop=new Properties();
@@ -463,21 +465,21 @@ public class CustomerIssues extends Locators {
 		Thread.sleep(2000);
 		driver.findElement(By.xpath("//*[@id=\"kt_body\"]/div[2]/div/div[2]/div/div[2]/div[1]/div/div[3]/button")).click();
 		Thread.sleep(2000);
-//		ele2=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div[1]/div[2]/form/div[2]/div/div/div/div/span/span"));
-//		String text = ele2.getText();
-//		System.out.println(text);
-//		ele3=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div[2]/div[2]/div/table/tbody/tr[1]/td[3]/a"));
-//		String text2 = ele3.getText();
-//		System.out.println(text2);
-//		Thread.sleep(2000);
-//		if(text.contains(text2)) {
-//			System.out.println("File is uploaded");	
-//		}
-//		else {
-//			System.out.println("File is not uploaded");
-//		}
-//		ele4=driver.findElement(By.xpath("//*[@id=\"kt_body\"]/div[2]/div/div[2]/div/div[2]/div[1]/div/div[3]/button"));
-//		ele4.click();
+		//		ele2=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div[1]/div[2]/form/div[2]/div/div/div/div/span/span"));
+		//		String text = ele2.getText();
+		//		System.out.println(text);
+		//		ele3=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div[2]/div[2]/div/table/tbody/tr[1]/td[3]/a"));
+		//		String text2 = ele3.getText();
+		//		System.out.println(text2);
+		//		Thread.sleep(2000);
+		//		if(text.contains(text2)) {
+		//			System.out.println("File is uploaded");	
+		//		}
+		//		else {
+		//			System.out.println("File is not uploaded");
+		//		}
+		//		ele4=driver.findElement(By.xpath("//*[@id=\"kt_body\"]/div[2]/div/div[2]/div/div[2]/div[1]/div/div[3]/button"));
+		//		ele4.click();
 	}
 
 	@Test(retryAnalyzer = ReRunFailedTestCase.class)
@@ -1486,7 +1488,7 @@ public class CustomerIssues extends Locators {
 			System.out.println("Failed Customer details are shown");
 		}
 	}
-	
+
 	@Test(retryAnalyzer = ReRunFailedTestCase.class)
 	public void ReTrnACHSrchChck() throws InterruptedException, AWTException{
 		LoginBtn();
@@ -1502,6 +1504,238 @@ public class CustomerIssues extends Locators {
 		Select sel2=new Select(ele2);
 		sel2.selectByIndex(2);
 	}
-	
-	
+
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,enabled=false,description = "scripts created with help of 54 server")
+	public void TotalValueChckInMonitoring() throws InterruptedException, AWTException{
+		LoginBtn();
+		Thread.sleep(3000);
+		//monitoring button click
+		driver.findElement(By.xpath("//*[@id=\"#kt_aside_menu\"]/div[3]/span/span[2]")).click();
+		//Overall stats button
+		driver.findElement(By.xpath("//*[@id=\"#kt_aside_menu\"]/div[3]/div/div[1]/a/span[2]")).click();
+		//total value element
+		ele1=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div[2]/div[1]/div/div[4]/div[3]/label"));
+		String text = ele1.getText();
+		if(ele1.isDisplayed()) {
+			System.out.println("Total value is : " + text);
+		}
+		else {
+			System.out.println("Total vlaue is not displayed");
+		}
+	}
+
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,enabled=false,description = "scripts created with help of 54 server")
+	public void ProdStsChckInMonitoring() throws InterruptedException, AWTException{
+		LoginBtn();
+		Thread.sleep(3000);
+		//monitoring button click
+		driver.findElement(By.xpath("//*[@id=\"#kt_aside_menu\"]/div[3]/span/span[2]")).click();
+		//Production stats check
+		driver.findElement(By.xpath("//*[@id=\"#kt_aside_menu\"]/div[3]/div/div[2]/a/span[2]")).click();
+		//Investor drop down.
+		ele1=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[1]/div/div[2]/select"));
+		Select sel=new Select(ele1);
+		sel.selectByVisibleText("LA SOLAR");
+		Thread.sleep(8000);
+		//production % dropdown
+		ele2=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[2]/div[1]/div/div[2]/select"));
+		Select sel1=new Select(ele2);
+		sel1.selectByVisibleText("=");
+		Thread.sleep(2000);
+		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[2]/div[1]/div/div[3]/input")).sendKeys("50000");
+		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[2]/div[1]/div/div[6]/button")).click();
+		ele3=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[2]/div[3]/div/label"));
+		Thread.sleep(2000);
+		boolean displayed = ele3.isDisplayed();
+		System.out.println(displayed);
+	}
+
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,enabled=false,description = "scripts created with help of 54 server")
+	public void ProdStsExportChckInMonitoring() throws InterruptedException, AWTException, TimeoutException{
+		LoginBtn();
+		Thread.sleep(3000);
+		//monitoring button click
+		driver.findElement(By.xpath("//*[@id=\"#kt_aside_menu\"]/div[3]/span/span[2]")).click();
+		//Production status check
+		driver.findElement(By.xpath("//*[@id=\"#kt_aside_menu\"]/div[3]/div/div[2]/a/span[2]")).click();
+		//Export button click
+		ele1=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[1]/div/div[6]/button"));
+		ele1.click();
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+		WebElement button = wait.until(ExpectedConditions.elementToBeClickable(ele1));
+		System.out.println("Button is clickable!");
+		button.click();
+	}
+
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,enabled=false,description = "scripts created with help of 54 server")
+	public void CustStsSysProfChckInMonitoring() throws InterruptedException, AWTException, TimeoutException{
+		LoginBtn();
+		Thread.sleep(3000);
+		//monitoring button click
+		driver.findElement(By.xpath("//*[@id=\"#kt_aside_menu\"]/div[3]/span/span[2]")).click();
+		//Customer status button click
+		driver.findElement(By.xpath("//*[@id=\"#kt_aside_menu\"]/div[3]/div/div[3]/a/span[2]")).click();
+		//Installer name 
+		ele1=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[2]/div/div[2]/div[1]/div/select"));
+		Select sel=new Select(ele1);
+		sel.selectByVisibleText("LA SOLAR");
+		//customer name enter
+		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[2]/div/div[2]/div[2]/div/div/input")).sendKeys("Aaron Kaplowitz(E2Y4JDBt2Pm)");
+		//search button click
+		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[2]/div/div[2]/div[3]/button")).click();
+		Thread.sleep(3000);
+		//Customer Profile arrow button click
+		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[1]/div/div[2]/div/span[2]/i")).click();
+		//Temp value check
+		ele2=driver.findElement(By.xpath("/html/body/div[2]/div[3]/div/div/div[2]/div[4]/div[2]/label"));
+		boolean displayed1 = ele2.isDisplayed();
+		ele3=driver.findElement(By.xpath("//*[@id=\"simple-popover\"]/div[3]/div/div/div[2]/div[5]/div[2]/label"));
+		boolean displayed2 = ele3.isDisplayed();
+		ele4=driver.findElement(By.xpath("/html/body/div[2]/div[3]/div/div/div[2]/div[4]/div[2]/label"));
+		boolean displayed3 = ele4.isDisplayed();
+		ele5=driver.findElement(By.xpath("/html/body/div[2]/div[3]/div/div/div[2]/div[4]/div[2]/label"));
+		boolean displayed4 = ele5.isDisplayed();
+		ele6=driver.findElement(By.xpath("/html/body/div[2]/div[3]/div/div/div[2]/div[4]/div[2]/label"));
+		boolean displayed5 = ele6.isDisplayed();
+		System.out.println(displayed1);
+		System.out.println(displayed2);
+		System.out.println(displayed3);
+		System.out.println(displayed4);
+		System.out.println(displayed5);
+	}
+
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,enabled=false,description = "scripts created with help of 54 server")
+	public void InvertorManChckInMonitoring() throws InterruptedException, AWTException, TimeoutException{
+		LoginBtn();
+		Thread.sleep(3000);
+		//monitoring button click
+		driver.findElement(By.xpath("//*[@id=\"#kt_aside_menu\"]/div[3]/span/span[2]")).click();
+		//Invertor button click
+		driver.findElement(By.xpath("//*[@id=\"#kt_aside_menu\"]/div[3]/div/div[5]/a/span[2]")).click();
+		//search Invertor Name
+		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div/div[1]/div/input")).sendKeys("Checking Invertor");
+		//Edit button
+		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div/div[3]/div/table/tbody/tr/td[7]/span")).click();
+		//Title name check
+		ele1=driver.findElement(By.name("Title"));
+		String textValue1 = ele1.getAttribute("value"); // Getting the current text
+		if (textValue1.isEmpty()) {
+			System.out.println("Text box is empty.");
+		} else {
+			System.out.println("Text box contains value: " + textValue1);
+		}
+
+		//Model name check
+		ele2=driver.findElement(By.name("Model"));
+		String textValue2 = ele2.getAttribute("value"); // Getting the current text
+		if (textValue2.isEmpty()) {
+			System.out.println("Text box is empty.");
+		} else {
+			System.out.println("Text box contains value: " + textValue2);
+		}
+
+		//Title name check
+		ele3=driver.findElement(By.name("Ratingac"));
+		String textValue3 = ele3.getAttribute("value"); // Getting the current text
+		if (textValue3.isEmpty()) {
+			System.out.println("Text box is empty.");
+		} else {
+			System.out.println("Text box contains value: " + textValue3);
+		}
+	}
+
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,enabled=false,description = "scripts created with help of 54 server")
+	public void InvertorUpdtChckInMonitoring() throws InterruptedException, AWTException, TimeoutException{
+		InvertorManChckInMonitoring();
+		Thread.sleep(3000);
+		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/form/div/div[2]/div[19]/button[2]")).click();
+		Thread.sleep(2000);
+		ele1=driver.findElement(By.xpath("//div[text()='Updated Successfully']"));
+		Thread.sleep(2000);
+		if(ele1.isDisplayed()) {
+			System.out.println("Update is Successfully done");
+		}
+		else {
+			System.out.println("Update is not Successful");
+		}
+	}
+
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,enabled=false,description = "scripts created with help of 54 server")
+	public void PanelAddChckInMonitoring() throws InterruptedException, AWTException, TimeoutException{
+		LoginBtn();
+		Thread.sleep(3000);
+		//monitoring button click
+		driver.findElement(By.xpath("//*[@id=\"#kt_aside_menu\"]/div[3]/span/span[2]")).click();
+		//Panel button click
+		driver.findElement(By.xpath("//*[@id=\"#kt_aside_menu\"]/div[3]/div/div[6]/a/span[2]")).click();
+		//Add button click
+		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div/div[1]/div/div/a/a")).click();
+		//Title name enter
+		driver.findElement(By.name("Title")).sendKeys("Test");
+		driver.findElement(By.name("Make")).sendKeys("Test");
+		driver.findElement(By.name("Model")).sendKeys("Test");
+		driver.findElement(By.name("Collector")).sendKeys("Test");
+		driver.findElement(By.name("Height")).sendKeys("Test");
+		driver.findElement(By.name("Width")).sendKeys("Test");
+		driver.findElement(By.name("WattSTC")).sendKeys("Test");
+		driver.findElement(By.name("ModuleEff")).sendKeys("Test");
+		driver.findElement(By.name("Noct")).sendKeys("Test");
+		driver.findElement(By.name("tempcoeff")).sendKeys("Test");
+		driver.findElement(By.name("Bo")).sendKeys("Test");
+		driver.findElement(By.name("Degradefirst")).sendKeys("Test");
+		driver.findElement(By.name("Degradeannual")).sendKeys("Test");
+		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/form/div/div[2]/div[27]/button[2]")).click();
+	}
+
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,enabled=false,description = "scripts created with help of 54 server")
+	public void PanelUpdChckInMonitoring() throws InterruptedException, AWTException, TimeoutException{
+		LoginBtn();
+		Thread.sleep(3000);
+		//monitoring button click
+		driver.findElement(By.xpath("//*[@id=\"#kt_aside_menu\"]/div[3]/span/span[2]")).click();
+		//Panel button click
+		driver.findElement(By.xpath("//*[@id=\"#kt_aside_menu\"]/div[3]/div/div[6]/a/span[2]")).click();
+		//Edit button click
+		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div/div[3]/div/table/tbody/tr[1]/td[7]/span")).click();
+		//Update button click
+		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/form/div/div[2]/div[27]/button[2]")).click();
+		//getting Successfully message
+		ele1=driver.findElement(By.xpath("//div[text()='Updated Successfully']"));
+		Thread.sleep(2000);
+		if(ele1.isDisplayed()) {
+			System.out.println("Updated Successfully message is shown");
+		}
+		else {
+			System.out.println("Updated Message is not shown");
+		}
+	}
+
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,enabled=false,description = "scripts created with help of 54 server")
+	public void TimShtChck() throws InterruptedException, AWTException, TimeoutException{
+		LoginBtn();
+		Thread.sleep(3000);
+		//Timesheet button click
+		driver.findElement(By.xpath("//*[@id=\"#kt_aside_menu\"]/div[8]/span/span[2]")).click();
+		//My Timesheet button click
+		driver.findElement(By.xpath("//*[@id=\"#kt_aside_menu\"]/div[8]/div/div[1]/a/span[2]")).click();
+		//Export Excel button click
+		ele1=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div/div[1]/div/div[1]/div[4]/button"));
+		ele1.click();
+		try {
+			Thread.sleep(5000); // Wait for 5 seconds (adjust this according to your download speed)
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+		String downloadPath = "C:\\Users\\thirumaran\\Downloads";
+		//Filename should change everyday
+		String fileName = "TimesheetApr2024_20240422";
+		File downloadedFile = new File(downloadPath + File.separator + fileName);
+		if (downloadedFile.exists()) {
+			System.out.println("File has been downloaded successfully.");
+		} else {
+			System.out.println("File download failed or hasn't completed yet.");
+		}
+	}
+
 }
