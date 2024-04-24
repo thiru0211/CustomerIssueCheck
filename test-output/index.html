@@ -25,7 +25,7 @@
       <span class="top-banner-title-font">Test results</span>
       <button id="button" class="button">Switch Retro Theme</button> <!-- button -->
       <br/>
-      <span class="top-banner-font-1">1 suite</span>
+      <span class="top-banner-font-1">1 suite, 1 failed test</span>
     </div> <!-- top-banner-root -->
     <div class="navigator-root">
       <div class="navigator-suite-header">
@@ -39,7 +39,7 @@
         <div class="rounded-window">
           <div class="suite-header light-rounded-window-top">
             <a href="#" panel-name="suite-Default_suite" class="navigator-link">
-              <span class="suite-name border-passed">Default suite</span>
+              <span class="suite-name border-failed">Default suite</span>
             </a> <!-- navigator-link -->
           </div> <!-- suite-header light-rounded-window-top -->
           <div class="navigator-suite-content">
@@ -50,7 +50,7 @@
               <ul>
                 <li>
                   <a href="#" panel-name="test-xml-Default_suite" class="navigator-link ">
-                    <span>C:\Users\thirumaran\AppData\Local\Temp\testng-eclipse-784847400\testng-customsuite.xml</span>
+                    <span>C:\Users\thirumaran\AppData\Local\Temp\testng-eclipse--908681704\testng-customsuite.xml</span>
                   </a> <!-- navigator-link  -->
                 </li>
                 <li>
@@ -92,7 +92,55 @@
               <div class="suite-section-content">
                 <ul>
                   <li>
-                    <span class="method-stats">0 methods,   </span>
+                    <span class="method-stats">6 methods, 1 failed,  5 skipped,  </span>
+                  </li>
+                  <li>
+                    <span class="method-list-title failed">Failed methods</span>
+                    <span class="show-or-hide-methods failed">
+                      <a href="#" panel-name="suite-Default_suite" class="hide-methods failed suite-Default_suite"> (hide)</a> <!-- hide-methods failed suite-Default_suite -->
+                      <a href="#" panel-name="suite-Default_suite" class="show-methods failed suite-Default_suite"> (show)</a> <!-- show-methods failed suite-Default_suite -->
+                    </span>
+                    <div class="method-list-content failed suite-Default_suite">
+                      <span>
+                        <img src="failed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="allPages.CustomerIssues" class="method navigator-link" hash-for-method="ChckPayAddBtnChk">ChckPayAddBtnChk</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                    </div> <!-- method-list-content failed suite-Default_suite -->
+                  </li>
+                  <li>
+                    <span class="method-list-title skipped">Retried methods</span>
+                    <span class="show-or-hide-methods skipped">
+                      <a href="#" panel-name="suite-Default_suite" class="hide-methods skipped suite-Default_suite"> (hide)</a> <!-- hide-methods skipped suite-Default_suite -->
+                      <a href="#" panel-name="suite-Default_suite" class="show-methods skipped suite-Default_suite"> (show)</a> <!-- show-methods skipped suite-Default_suite -->
+                    </span>
+                    <div class="method-list-content skipped suite-Default_suite">
+                      <span>
+                        <img src="skipped.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="allPages.CustomerIssues" class="method navigator-link" hash-for-method="ChckPayAddBtnChk">ChckPayAddBtnChk</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="skipped.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="allPages.CustomerIssues" class="method navigator-link" hash-for-method="ChckPayAddBtnChk">ChckPayAddBtnChk</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="skipped.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="allPages.CustomerIssues" class="method navigator-link" hash-for-method="ChckPayAddBtnChk">ChckPayAddBtnChk</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="skipped.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="allPages.CustomerIssues" class="method navigator-link" hash-for-method="ChckPayAddBtnChk">ChckPayAddBtnChk</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="skipped.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="allPages.CustomerIssues" class="method navigator-link" hash-for-method="ChckPayAddBtnChk">ChckPayAddBtnChk</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                    </div> <!-- method-list-content skipped suite-Default_suite -->
                   </li>
                 </ul>
               </div> <!-- suite-section-content -->
@@ -104,10 +152,278 @@
     <div class="wrapper">
       <div class="main-panel-root">
         <div panel-name="suite-Default_suite" class="panel Default_suite">
+          <div class="suite-Default_suite-class-failed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="failed.png"/>
+              <span class="class-name">allPages.CustomerIssues</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="ChckPayAddBtnChk">
+                  </a> <!-- ChckPayAddBtnChk -->
+                  <span class="method-name">ChckPayAddBtnChk</span>
+                  <div class="stack-trace">java.lang.NullPointerException: Cannot invoke &quot;org.openqa.selenium.WebDriver.findElement(org.openqa.selenium.By)&quot; because &quot;allPages.CheckPayments.driver&quot; is null
+	at allPages.CheckPayments.CheckPaymentsClick(CheckPayments.java:59)
+	at allPages.CheckPayments.TC01(CheckPayments.java:69)
+	at allPages.CheckPayments.TC02(CheckPayments.java:80)
+	at allPages.CheckPayments.TC03(CheckPayments.java:92)
+	at allPages.CheckPayments.TC05(CheckPayments.java:120)
+	at allPages.CustomerIssues.ChckPayAddBtnChk(CustomerIssues.java:2268)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+	at org.testng.internal.invokers.TestInvoker.retryFailed(TestInvoker.java:249)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:76)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:961)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:201)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.testng.TestRunner.privateRun(TestRunner.java:819)
+	at org.testng.TestRunner.run(TestRunner.java:619)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:336)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1301)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1228)
+	at org.testng.TestNG.runSuites(TestNG.java:1134)
+	at org.testng.TestNG.run(TestNG.java:1101)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+
+</div> <!-- stack-trace -->
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Default_suite-class-failed -->
+          <div class="suite-Default_suite-class-skipped">
+            <div class="main-panel-header rounded-window-top">
+              <img src="skipped.png"/>
+              <span class="class-name">allPages.CustomerIssues</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="ChckPayAddBtnChk">
+                  </a> <!-- ChckPayAddBtnChk -->
+                  <span class="method-name">ChckPayAddBtnChk</span>
+                  <div class="stack-trace">java.lang.NullPointerException: Cannot invoke &quot;org.openqa.selenium.WebDriver.findElement(org.openqa.selenium.By)&quot; because &quot;allPages.CheckPayments.driver&quot; is null
+	at allPages.CheckPayments.CheckPaymentsClick(CheckPayments.java:59)
+	at allPages.CheckPayments.TC01(CheckPayments.java:69)
+	at allPages.CheckPayments.TC02(CheckPayments.java:80)
+	at allPages.CheckPayments.TC03(CheckPayments.java:92)
+	at allPages.CheckPayments.TC05(CheckPayments.java:120)
+	at allPages.CustomerIssues.ChckPayAddBtnChk(CustomerIssues.java:2268)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+	at org.testng.internal.invokers.TestInvoker.retryFailed(TestInvoker.java:249)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:76)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:961)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:201)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.testng.TestRunner.privateRun(TestRunner.java:819)
+	at org.testng.TestRunner.run(TestRunner.java:619)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:336)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1301)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1228)
+	at org.testng.TestNG.runSuites(TestNG.java:1134)
+	at org.testng.TestNG.run(TestNG.java:1101)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+
+</div> <!-- stack-trace -->
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="ChckPayAddBtnChk">
+                  </a> <!-- ChckPayAddBtnChk -->
+                  <span class="method-name">ChckPayAddBtnChk</span>
+                  <div class="stack-trace">java.lang.NullPointerException: Cannot invoke &quot;org.openqa.selenium.WebDriver.findElement(org.openqa.selenium.By)&quot; because &quot;allPages.CheckPayments.driver&quot; is null
+	at allPages.CheckPayments.CheckPaymentsClick(CheckPayments.java:59)
+	at allPages.CheckPayments.TC01(CheckPayments.java:69)
+	at allPages.CheckPayments.TC02(CheckPayments.java:80)
+	at allPages.CheckPayments.TC03(CheckPayments.java:92)
+	at allPages.CheckPayments.TC05(CheckPayments.java:120)
+	at allPages.CustomerIssues.ChckPayAddBtnChk(CustomerIssues.java:2268)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+	at org.testng.internal.invokers.TestInvoker.retryFailed(TestInvoker.java:249)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:76)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:961)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:201)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.testng.TestRunner.privateRun(TestRunner.java:819)
+	at org.testng.TestRunner.run(TestRunner.java:619)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:336)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1301)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1228)
+	at org.testng.TestNG.runSuites(TestNG.java:1134)
+	at org.testng.TestNG.run(TestNG.java:1101)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+
+</div> <!-- stack-trace -->
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="ChckPayAddBtnChk">
+                  </a> <!-- ChckPayAddBtnChk -->
+                  <span class="method-name">ChckPayAddBtnChk</span>
+                  <div class="stack-trace">java.lang.NullPointerException: Cannot invoke &quot;org.openqa.selenium.WebDriver.findElement(org.openqa.selenium.By)&quot; because &quot;allPages.CheckPayments.driver&quot; is null
+	at allPages.CheckPayments.CheckPaymentsClick(CheckPayments.java:59)
+	at allPages.CheckPayments.TC01(CheckPayments.java:69)
+	at allPages.CheckPayments.TC02(CheckPayments.java:80)
+	at allPages.CheckPayments.TC03(CheckPayments.java:92)
+	at allPages.CheckPayments.TC05(CheckPayments.java:120)
+	at allPages.CustomerIssues.ChckPayAddBtnChk(CustomerIssues.java:2268)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+	at org.testng.internal.invokers.TestInvoker.retryFailed(TestInvoker.java:249)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:76)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:961)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:201)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.testng.TestRunner.privateRun(TestRunner.java:819)
+	at org.testng.TestRunner.run(TestRunner.java:619)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:336)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1301)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1228)
+	at org.testng.TestNG.runSuites(TestNG.java:1134)
+	at org.testng.TestNG.run(TestNG.java:1101)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+
+</div> <!-- stack-trace -->
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="ChckPayAddBtnChk">
+                  </a> <!-- ChckPayAddBtnChk -->
+                  <span class="method-name">ChckPayAddBtnChk</span>
+                  <div class="stack-trace">java.lang.NullPointerException: Cannot invoke &quot;org.openqa.selenium.WebDriver.findElement(org.openqa.selenium.By)&quot; because &quot;allPages.CheckPayments.driver&quot; is null
+	at allPages.CheckPayments.CheckPaymentsClick(CheckPayments.java:59)
+	at allPages.CheckPayments.TC01(CheckPayments.java:69)
+	at allPages.CheckPayments.TC02(CheckPayments.java:80)
+	at allPages.CheckPayments.TC03(CheckPayments.java:92)
+	at allPages.CheckPayments.TC05(CheckPayments.java:120)
+	at allPages.CustomerIssues.ChckPayAddBtnChk(CustomerIssues.java:2268)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+	at org.testng.internal.invokers.TestInvoker.retryFailed(TestInvoker.java:249)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:76)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:961)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:201)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.testng.TestRunner.privateRun(TestRunner.java:819)
+	at org.testng.TestRunner.run(TestRunner.java:619)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:336)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1301)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1228)
+	at org.testng.TestNG.runSuites(TestNG.java:1134)
+	at org.testng.TestNG.run(TestNG.java:1101)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+
+</div> <!-- stack-trace -->
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="ChckPayAddBtnChk">
+                  </a> <!-- ChckPayAddBtnChk -->
+                  <span class="method-name">ChckPayAddBtnChk</span>
+                  <div class="stack-trace">java.lang.NullPointerException: Cannot invoke &quot;org.openqa.selenium.WebDriver.findElement(org.openqa.selenium.By)&quot; because &quot;allPages.CheckPayments.driver&quot; is null
+	at allPages.CheckPayments.CheckPaymentsClick(CheckPayments.java:59)
+	at allPages.CheckPayments.TC01(CheckPayments.java:69)
+	at allPages.CheckPayments.TC02(CheckPayments.java:80)
+	at allPages.CheckPayments.TC03(CheckPayments.java:92)
+	at allPages.CheckPayments.TC05(CheckPayments.java:120)
+	at allPages.CustomerIssues.ChckPayAddBtnChk(CustomerIssues.java:2268)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:228)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:961)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:201)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.testng.TestRunner.privateRun(TestRunner.java:819)
+	at org.testng.TestRunner.run(TestRunner.java:619)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:336)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1301)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1228)
+	at org.testng.TestNG.runSuites(TestNG.java:1134)
+	at org.testng.TestNG.run(TestNG.java:1101)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+
+</div> <!-- stack-trace -->
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Default_suite-class-skipped -->
         </div> <!-- panel Default_suite -->
         <div panel-name="test-xml-Default_suite" class="panel">
           <div class="main-panel-header rounded-window-top">
-            <span class="header-content">C:\Users\thirumaran\AppData\Local\Temp\testng-eclipse-784847400\testng-customsuite.xml</span>
+            <span class="header-content">C:\Users\thirumaran\AppData\Local\Temp\testng-eclipse--908681704\testng-customsuite.xml</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <pre>
@@ -118,7 +434,7 @@
     &lt;classes&gt;
       &lt;class name=&quot;allPages.CustomerIssues&quot;&gt;
         &lt;methods&gt;
-          &lt;include name=&quot;TotalValueChckInMonitoring&quot;/&gt;
+          &lt;include name=&quot;ChckPayAddBtnChk&quot;/&gt;
         &lt;/methods&gt;
       &lt;/class&gt; &lt;!-- allPages.CustomerIssues --&gt;
     &lt;/classes&gt;
@@ -160,12 +476,36 @@ data.addColumn('number', 'Number');
 data.addColumn('string', 'Method');
 data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
-data.addRows(0);
+data.addRows(6);
+data.setCell(0, 0, 0)
+data.setCell(0, 1, 'ChckPayAddBtnChk')
+data.setCell(0, 2, 'allPages.CustomerIssues')
+data.setCell(0, 3, 34);
+data.setCell(1, 0, 1)
+data.setCell(1, 1, 'ChckPayAddBtnChk')
+data.setCell(1, 2, 'allPages.CustomerIssues')
+data.setCell(1, 3, 23);
+data.setCell(2, 0, 2)
+data.setCell(2, 1, 'ChckPayAddBtnChk')
+data.setCell(2, 2, 'allPages.CustomerIssues')
+data.setCell(2, 3, 19);
+data.setCell(3, 0, 3)
+data.setCell(3, 1, 'ChckPayAddBtnChk')
+data.setCell(3, 2, 'allPages.CustomerIssues')
+data.setCell(3, 3, 17);
+data.setCell(4, 0, 4)
+data.setCell(4, 1, 'ChckPayAddBtnChk')
+data.setCell(4, 2, 'allPages.CustomerIssues')
+data.setCell(4, 3, 15);
+data.setCell(5, 0, 5)
+data.setCell(5, 1, 'ChckPayAddBtnChk')
+data.setCell(5, 2, 'allPages.CustomerIssues')
+data.setCell(5, 3, 11);
 window.suiteTableData['Default_suite']= { tableData: data, tableDiv: 'times-div-Default_suite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 0 ms</span>
+              <span class="suite-total-time">Total running time: 119 ms</span>
               <div id="times-div-Default_suite">
               </div> <!-- times-div-Default_suite -->
             </div> <!-- times-div -->
@@ -180,101 +520,143 @@ return data;
         </div> <!-- panel -->
         <div panel-name="ignored-methods-Default_suite" class="panel">
           <div class="main-panel-header rounded-window-top">
-            <span class="header-content">45 ignored methods</span>
+            <span class="header-content">66 ignored methods</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <div class="ignored-class-div">
               <span class="ignored-class-name">allPages.CustomerIssues</span>
               <div class="ignored-methods-div">
+                <span class="ignored-method-name">EdtPyCusNameChck</span>
+                <br/>
+                <span class="ignored-method-name">ACHUpldSucsChck</span>
+                <br/>
+                <span class="ignored-method-name">ReTrnACHSrchChck</span>
+                <br/>
+                <span class="ignored-method-name">DisableChck2</span>
+                <br/>
+                <span class="ignored-method-name">ACH_CC_Clr_Chck</span>
+                <br/>
+                <span class="ignored-method-name">EscProgCaptchaChck</span>
+                <br/>
+                <span class="ignored-method-name">CrteInvLineItemChck</span>
+                <br/>
+                <span class="ignored-method-name">CrtInvDueMonth</span>
+                <br/>
+                <span class="ignored-method-name">TC02</span>
+                <br/>
+                <span class="ignored-method-name">TimShtChck</span>
+                <br/>
+                <span class="ignored-method-name">LoginBtn</span>
+                <br/>
+                <span class="ignored-method-name">CustStsSysProfChckInMonitoring</span>
+                <br/>
+                <span class="ignored-method-name">InvertorUpdtChckInMonitoring</span>
+                <br/>
+                <span class="ignored-method-name">CusAddPhNumChck</span>
+                <br/>
+                <span class="ignored-method-name">TC06</span>
+                <br/>
+                <span class="ignored-method-name">TotalValueChckInMonitoring</span>
+                <br/>
+                <span class="ignored-method-name">TC23</span>
+                <br/>
+                <span class="ignored-method-name">TC03</span>
+                <br/>
+                <span class="ignored-method-name">CrteInvPrvInvNotsChk</span>
+                <br/>
+                <span class="ignored-method-name">DateCheck</span>
+                <br/>
+                <span class="ignored-method-name">ACHUpldPopUpChck</span>
+                <br/>
+                <span class="ignored-method-name">LastModifiedChck</span>
+                <br/>
+                <span class="ignored-method-name">CGIDrpDwnChck</span>
+                <br/>
+                <span class="ignored-method-name">InvstClrBtnChck</span>
+                <br/>
+                <span class="ignored-method-name">AttachChck</span>
+                <br/>
+                <span class="ignored-method-name">LineItemChck</span>
+                <br/>
+                <span class="ignored-method-name">AddToLstChckPymtChck</span>
+                <br/>
+                <span class="ignored-method-name">ACHMailTimeChckS2Cus</span>
+                <br/>
+                <span class="ignored-method-name">PanelUpdChckInMonitoring</span>
+                <br/>
+                <span class="ignored-method-name">DsblUsrChck</span>
+                <br/>
                 <span class="ignored-method-name">APIStupClrBtn</span>
                 <br/>
                 <span class="ignored-method-name">StopPyMnt</span>
                 <br/>
-                <span class="ignored-method-name">LastModifiedChck</span>
-                <br/>
-                <span class="ignored-method-name">DisableChck2</span>
-                <br/>
-                <span class="ignored-method-name">CrtInvDueMonth</span>
-                <br/>
-                <span class="ignored-method-name">ReTrnACHSrchChck</span>
-                <br/>
-                <span class="ignored-method-name">InvstClrBtnChck</span>
-                <br/>
-                <span class="ignored-method-name">EdtPyCusNameChck</span>
-                <br/>
-                <span class="ignored-method-name">ACHMailTimeChckS2Cus</span>
-                <br/>
-                <span class="ignored-method-name">CrtInvNoDataChck</span>
-                <br/>
-                <span class="ignored-method-name">TC40</span>
-                <br/>
-                <span class="ignored-method-name">DsblUsrChck</span>
-                <br/>
-                <span class="ignored-method-name">FailedStsChck</span>
-                <br/>
                 <span class="ignored-method-name">ACHMailTimeChckS2Sale</span>
                 <br/>
-                <span class="ignored-method-name">TC03</span>
-                <br/>
-                <span class="ignored-method-name">TC45</span>
-                <br/>
-                <span class="ignored-method-name">TC01</span>
-                <br/>
-                <span class="ignored-method-name">TC23</span>
-                <br/>
-                <span class="ignored-method-name">TotalValueChckInMonitoring</span>
-                <br/>
-                <span class="ignored-method-name">TC19</span>
-                <br/>
-                <span class="ignored-method-name">APIStupSavBtn</span>
+                <span class="ignored-method-name">ProdStsChckInMonitoring</span>
                 <br/>
                 <span class="ignored-method-name">TC17</span>
                 <br/>
                 <span class="ignored-method-name">TC27</span>
                 <br/>
-                <span class="ignored-method-name">EscProgCaptchaChck</span>
-                <br/>
-                <span class="ignored-method-name">QuckUpldChck</span>
-                <br/>
-                <span class="ignored-method-name">SwapOutChck</span>
-                <br/>
-                <span class="ignored-method-name">CusPortEditChck</span>
-                <br/>
-                <span class="ignored-method-name">DisableChck1</span>
-                <br/>
-                <span class="ignored-method-name">PayOffChck</span>
-                <br/>
-                <span class="ignored-method-name">ACHUpldPopUpChck</span>
-                <br/>
-                <span class="ignored-method-name">EditInstlrIssue</span>
-                <br/>
-                <span class="ignored-method-name">TC10</span>
-                <br/>
-                <span class="ignored-method-name">NewUsrTimIsue</span>
-                <br/>
-                <span class="ignored-method-name">AddToLstChckPymtChck</span>
+                <span class="ignored-method-name">TC18</span>
                 <br/>
                 <span class="ignored-method-name">TC04</span>
                 <br/>
-                <span class="ignored-method-name">LoginBtn</span>
+                <span class="ignored-method-name">APIStupSavBtn</span>
                 <br/>
-                <span class="ignored-method-name">CGIDrpDwnChck</span>
+                <span class="ignored-method-name">QuckUpldChck</span>
                 <br/>
-                <span class="ignored-method-name">TC02</span>
+                <span class="ignored-method-name">TC10</span>
+                <br/>
+                <span class="ignored-method-name">TC40</span>
+                <br/>
+                <span class="ignored-method-name">FailedStsChck</span>
+                <br/>
+                <span class="ignored-method-name">CrtInvNoDataChck</span>
                 <br/>
                 <span class="ignored-method-name">EmailNotifChck</span>
                 <br/>
+                <span class="ignored-method-name">PayOffChck</span>
+                <br/>
+                <span class="ignored-method-name">InvertorManChckInMonitoring</span>
+                <br/>
                 <span class="ignored-method-name">EscProgChck</span>
                 <br/>
-                <span class="ignored-method-name">TC18</span>
+                <span class="ignored-method-name">CusAddPTOChck</span>
                 <br/>
-                <span class="ignored-method-name">TC06</span>
+                <span class="ignored-method-name">NewUsrTimIsue</span>
                 <br/>
-                <span class="ignored-method-name">DateCheck</span>
+                <span class="ignored-method-name">UserIDCheck</span>
+                <br/>
+                <span class="ignored-method-name">DisableChck1</span>
+                <br/>
+                <span class="ignored-method-name">EditInstlrIssue</span>
+                <br/>
+                <span class="ignored-method-name">SwapOutChck</span>
+                <br/>
+                <span class="ignored-method-name">PanelAddChckInMonitoring</span>
+                <br/>
+                <span class="ignored-method-name">CusPortEditChck</span>
+                <br/>
+                <span class="ignored-method-name">TC19</span>
+                <br/>
+                <span class="ignored-method-name">CrteInvPrvInvBckBtnChk</span>
+                <br/>
+                <span class="ignored-method-name">CrteInvPrvwInvChk</span>
+                <br/>
+                <span class="ignored-method-name">ACHSendMailPageChck</span>
+                <br/>
+                <span class="ignored-method-name">TC01</span>
+                <br/>
+                <span class="ignored-method-name">TC45</span>
+                <br/>
+                <span class="ignored-method-name">ProdStsExportChckInMonitoring</span>
                 <br/>
                 <span class="ignored-method-name">StartPyChck</span>
                 <br/>
-                <span class="ignored-method-name">UserIDCheck</span>
+                <span class="ignored-method-name">ACHUpldSndToSal_CC_Chck</span>
+                <br/>
+                <span class="ignored-method-name">ACHInvPayCaldrChck</span>
                 <br/>
               </div> <!-- ignored-methods-div -->
             </div> <!-- ignored-class-div -->
@@ -285,6 +667,106 @@ return data;
             <span class="header-content">Methods in chronological order</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
+            <div class="chronological-class">
+              <div class="chronological-class-name">allPages.CustomerIssues</div> <!-- chronological-class-name -->
+              <div class="configuration-method before">
+                <span class="method-name">launch</span>
+                <span class="method-start">0 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method before">
+                <span class="method-name">setUp</span>
+                <span class="method-start">10 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">ChckPayAddBtnChk</span>
+                <span class="method-start">4784 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">tearDown</span>
+                <span class="method-start">4823 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">launch</span>
+                <span class="method-start">7950 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method before">
+                <span class="method-name">setUp</span>
+                <span class="method-start">7951 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">ChckPayAddBtnChk</span>
+                <span class="method-start">9183 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">tearDown</span>
+                <span class="method-start">9208 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">setUp</span>
+                <span class="method-start">12376 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method before">
+                <span class="method-name">launch</span>
+                <span class="method-start">12376 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">ChckPayAddBtnChk</span>
+                <span class="method-start">13479 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">tearDown</span>
+                <span class="method-start">13499 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">launch</span>
+                <span class="method-start">16659 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method before">
+                <span class="method-name">setUp</span>
+                <span class="method-start">16659 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">ChckPayAddBtnChk</span>
+                <span class="method-start">17740 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">tearDown</span>
+                <span class="method-start">17753 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">launch</span>
+                <span class="method-start">20925 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method before">
+                <span class="method-name">setUp</span>
+                <span class="method-start">20925 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">ChckPayAddBtnChk</span>
+                <span class="method-start">22010 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">tearDown</span>
+                <span class="method-start">22028 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">setUp</span>
+                <span class="method-start">25196 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="configuration-method before">
+                <span class="method-name">launch</span>
+                <span class="method-start">25196 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <img src="failed.png">
+                </img>
+                <span class="method-name">ChckPayAddBtnChk</span>
+                <span class="method-start">26289 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">tearDown</span>
+                <span class="method-start">26306 ms</span>
+              </div> <!-- configuration-method after -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
       </div> <!-- main-panel-root -->

@@ -8,6 +8,7 @@ import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.sql.Date;
 import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -50,6 +51,7 @@ public class CustomerIssues extends Locators {
 		FileInputStream FIS=new FileInputStream(file);
 		Properties prop=new Properties();
 		prop.load(FIS);	
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofMinutes(3));
 	}
 
 	@AfterMethod
@@ -1714,9 +1716,9 @@ public class CustomerIssues extends Locators {
 	public void TimShtChck() throws InterruptedException, AWTException, TimeoutException{
 		LoginBtn();
 		Thread.sleep(3000);
-		//Timesheet button click
+		//Time sheet button click
 		driver.findElement(By.xpath("//*[@id=\"#kt_aside_menu\"]/div[8]/span/span[2]")).click();
-		//My Timesheet button click
+		//My Time sheet button click
 		driver.findElement(By.xpath("//*[@id=\"#kt_aside_menu\"]/div[8]/div/div[1]/a/span[2]")).click();
 		//Export Excel button click
 		ele1=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div/div[1]/div/div[1]/div[4]/button"));
@@ -1726,7 +1728,6 @@ public class CustomerIssues extends Locators {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-
 		String downloadPath = "C:\\Users\\thirumaran\\Downloads";
 		//Filename should change everyday
 		String fileName = "TimesheetApr2024_20240422";
@@ -1736,6 +1737,603 @@ public class CustomerIssues extends Locators {
 		} else {
 			System.out.println("File download failed or hasn't completed yet.");
 		}
+	}															
+
+	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	public void LineItemChck() throws InterruptedException, AWTException, TimeoutException{
+		LoginBtn();
+		Thread.sleep(3000);
+		//customer button click
+		driver.findElement(By.xpath("//*[@id=\"#kt_aside_menu\"]/div[5]/span/span[2]")).click();
+		//Create Invoice Click
+		driver.findElement(By.xpath("//*[@id=\"#kt_aside_menu\"]/div[5]/div/div[5]/a/span[2]")).click();
+		//installer select
+		ele1=driver.findElement(By.name("installer"));
+		Select sel=new Select(ele1);
+		sel.selectByIndex(2);
+		//Payment type select
+		ele2=driver.findElement(By.name("type"));
+		Select sel1=new Select(ele2);
+		sel1.selectByIndex(0);
+		//Choose customer 
+		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[1]/div/div[4]/input")).sendKeys("Tester");
+		//edit button click
+		driver.findElement(By.xpath("//*[@id=\"kt_table_users\"]/tbody/tr/td[9]/div/div/a/span")).click();
+		//click Add line items
+		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[2]/div[2]/div[1]/div/a")).click();
+		Thread.sleep(2000);
+		//click manual entry button
+		driver.findElement(By.name("no")).click();
+		//enter Due month 
+		driver.findElement(By.name("duemonth")).click();
+		Thread.sleep(3000);
+		driver.findElement(By.xpath("//*[@id=\"kt_body\"]/div[3]/div/div/div/div/div/div[2]/table/tbody/tr[2]/td[1]/div")).click();
+		Thread.sleep(2000);
+		//Enter desription
+		driver.findElement(By.xpath("//*[@id=\"kt_body\"]/div[2]/div/div[2]/div/div[2]/div[2]/form/div/div[2]/div/input")).sendKeys("NewTest");
+		//Enter amount
+		String amount="$3,000.00";
+		driver.findElement(By.name("amount")).sendKeys(amount);
+		Thread.sleep(2000);
+		driver.findElement(By.xpath("//*[@id=\"kt_body\"]/div[2]/div/div[2]/div/div[2]/div[2]/form/div/div[5]/button[2]/span")).click();
+		Thread.sleep(10000);
+		ele3=driver.findElement(By.xpath("//*[@id=\"kt_table_users\"]/tbody/tr[1]/td[4]/div"));
+		String text = ele3.getText();
+		System.out.println(text);
+		System.out.println(amount);
+		Thread.sleep(3000);
+		if(text.equals(amount)) {
+			System.out.println("Entered amount correctly shown");
+		}
+		else {
+			System.out.println("Diffrent value is shown");
+		}
 	}
 
+	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	public void AttachChck() throws InterruptedException, AWTException, TimeoutException{
+		LoginBtn();
+		Thread.sleep(3000);
+		//customer button click
+		driver.findElement(By.xpath("//*[@id=\"#kt_aside_menu\"]/div[5]/span/span[2]")).click();
+		//Check payments click
+		driver.findElement(By.xpath("//*[@id=\"#kt_aside_menu\"]/div[5]/div/div[6]/a/span[2]")).click();
+		//add button click
+		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[1]/div[2]/a/div/button")).click();
+		//installer select
+		ele1=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[2]/div/div[2]/div[1]/div/select"));
+		Select sel=new Select(ele1);
+		sel.selectByIndex(2);
+		//Customer name select
+		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[2]/div/div[2]/div[2]/div/div/input")).sendKeys("TEST(11)");
+		//search button click
+		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[2]/div/div[2]/div[3]/button")).click();
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollTo(0, 0);");
+		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[2]/form/div/div[2]/label/div/p")).click();
+		Thread.sleep(2000);
+		String FilePath="C:\\Users\\thirumaran\\Desktop\\New XLSX Worksheet.xlsx";
+		Robot robot = new Robot();
+		StringSelection selection = new StringSelection(FilePath);
+		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(selection, null);
+		robot.keyPress(KeyEvent.VK_CONTROL);
+		robot.keyPress(KeyEvent.VK_V);
+		robot.keyRelease(KeyEvent.VK_V);
+		robot.keyRelease(KeyEvent.VK_CONTROL);
+		robot.keyPress(KeyEvent.VK_ENTER);
+		robot.keyRelease(KeyEvent.VK_ENTER);
+		Thread.sleep(2000);
+		ele2=driver.findElement(By.name("check"));
+		ele2.click();
+		ele2.sendKeys("123654");
+		driver.findElement(By.name("checkdate")).sendKeys("23-04-2024");
+		driver.findElement(By.name("amount")).sendKeys("3500");
+		driver.findElement(By.name("nameaccount")).sendKeys("NewCustomer");
+		driver.findElement(By.name("bankaccountnumber")).sendKeys("0123456789");
+		driver.findElement(By.name("bankroutingnumber")).sendKeys("987654321");
+		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[2]/form/div/div[3]/div[3]/div/div/div[1]/div/div/div/input")).click();
+		driver.findElement(By.xpath(CPCusEditSavBtn)).click();
+		Thread.sleep(2000);
+		ele3=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[2]/form/div/div[2]/div[1]/div/div/span/div"));
+		boolean displayed = ele3.isDisplayed();
+		System.out.println("Attached file displayed is : " + displayed);
+	}
+
+	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	public void ACH_CC_Clr_Chck() throws InterruptedException, AWTException, TimeoutException{
+		LoginBtn();
+		Thread.sleep(3000);
+		//customer button click
+		driver.findElement(By.xpath("//*[@id=\"#kt_aside_menu\"]/div[5]/span/span[2]")).click();
+		//ACH form click
+		driver.findElement(By.xpath("//*[@id=\"#kt_aside_menu\"]/div[5]/div/div[2]/a/span[2]")).click();
+		//installer select
+		ele1=driver.findElement(By.name("installer"));
+		Select sel=new Select(ele1);
+		sel.selectByIndex(2);
+		//Status select
+		ele2=driver.findElement(By.name("type"));
+		Select sel1=new Select(ele2);
+		sel1.selectByVisibleText("ACH Pending");
+		driver.findElement(By.xpath("//*[@id=\"kt_table_users\"]/tbody/tr/td[10]/div/div/a/span")).click();
+		Thread.sleep(2000);
+		//Send to customer click
+		driver.findElement(By.xpath("//*[@id=\"kt_body\"]/div[2]/div/div[2]/div/div[2]/div[2]/div[1]/div/div/span[1]/input")).click();
+		//update button click
+		driver.findElement(By.xpath("/html/body/div[2]/div/div[2]/div/div[2]/div[2]/div[2]/button")).click();
+		Thread.sleep(2000);
+		//Clear the CC Tab
+		ele3=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[2]/div/div[2]/div[3]/div/input"));
+		ele3.clear();
+		//check tab is empty or not
+		Thread.sleep(2000);
+		String attribute = ele3.getAttribute("value");
+		if(attribute.isEmpty()) {
+			System.out.println("CC Text box is cleared");
+		}
+		else {
+			System.out.println("CC Text box is not cleared");
+		}
+	}
+
+	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	public void ACHSendMailPageChck() throws InterruptedException, AWTException, TimeoutException{
+		LoginBtn();
+		Thread.sleep(3000);
+		//customer button click
+		driver.findElement(By.xpath("//*[@id=\"#kt_aside_menu\"]/div[5]/span/span[2]")).click();
+		//ACH form click
+		driver.findElement(By.xpath("//*[@id=\"#kt_aside_menu\"]/div[5]/div/div[2]/a/span[2]")).click();
+		//installer select
+		ele1=driver.findElement(By.name("installer"));
+		Select sel=new Select(ele1);
+		sel.selectByIndex(2);
+		//Status select
+		ele2=driver.findElement(By.name("type"));
+		Select sel1=new Select(ele2);
+		sel1.selectByVisibleText("ACH Pending");
+		driver.findElement(By.xpath("//*[@id=\"kt_table_users\"]/tbody/tr/td[10]/div/div/a/span")).click();
+		Thread.sleep(2000);
+		//Send to customer click
+		driver.findElement(By.xpath("//*[@id=\"kt_body\"]/div[2]/div/div[2]/div/div[2]/div[2]/div[1]/div/div/span[1]/input")).click();
+		//update button click
+		driver.findElement(By.xpath("/html/body/div[2]/div/div[2]/div/div[2]/div[2]/div[2]/button")).click();
+		Thread.sleep(4000);
+		//click send button
+		ele4=driver.findElement(By.xpath("//button[text()='Resend']"));
+		ele4.click();
+		Thread.sleep(10000);
+		//Check next page is displayed or not
+		ele3=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div/div[2]/div/div[1]/div[1]/div/h2/span"));
+		Thread.sleep(2000);
+		if(ele3.isDisplayed()) {
+			System.out.println("Mail has been sent successfully");
+		}
+		else {
+			System.out.println("Mail is not sent to the customer");
+		}
+	}
+
+	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	public void ACHInvPayCaldrChck() throws InterruptedException, AWTException, TimeoutException{
+		LoginBtn();
+		Thread.sleep(3000);
+		//customer button click
+		driver.findElement(By.xpath("//*[@id=\"#kt_aside_menu\"]/div[5]/span/span[2]")).click();
+		//Invoice Pay click
+		driver.findElement(By.xpath("//*[@id=\"#kt_aside_menu\"]/div[5]/div/div[4]/a/span[2]")).click();
+		//installer select
+		ele1=driver.findElement(By.name("installer"));
+		Select sel=new Select(ele1);
+		sel.selectByIndex(2);
+		//Status select
+		ele2=driver.findElement(By.name("type"));
+		Select sel1=new Select(ele2);
+		sel1.selectByVisibleText("Stopped");
+		//edit button click
+		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[3]/div/table/tbody/tr/td[10]/a/span/span")).click();
+		Thread.sleep(3000);
+		//action button click
+		WebElement element = driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[2]/div[1]/div[1]/div/a"));
+		Actions act=new Actions(driver);
+		act.click().build().perform();
+		element.click();
+		//start invoice payment click
+		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[2]/div[1]/div[1]/div/div/div[3]/a/div/div")).click();
+		//check calendar tab is enabled or not
+		ele3=driver.findElement(By.name("effectivefrom"));
+		Thread.sleep(2000);
+		if(ele3.isEnabled()) {
+			System.out.println("Calendar tab is enabled");
+		}
+		else {
+			System.out.println("Calendar tab is not enabled");
+		}
+	}
+
+	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	public void ACHUpldSucsChck() throws InterruptedException, AWTException, TimeoutException{
+		LoginBtn();
+		Thread.sleep(3000);
+		//customer button click
+		driver.findElement(By.xpath("//*[@id=\"#kt_aside_menu\"]/div[5]/span/span[2]")).click();
+		//ACH Upload click
+		driver.findElement(By.xpath("//*[@id=\"#kt_aside_menu\"]/div[5]/div/div[3]/a/span[2]")).click();
+		//installer select
+		ele1=driver.findElement(By.id("installer"));
+		Select sel=new Select(ele1);
+		sel.selectByIndex(2);
+		//Upload file
+		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div[1]/div[2]/form/div[2]/div/label/div/h6")).click();
+		Thread.sleep(2000);
+		String FilePath="C:\\Users\\thirumaran\\Desktop\\New XLSX Worksheet.xlsx";
+		Robot robot = new Robot();
+		StringSelection selection = new StringSelection(FilePath);
+		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(selection, null);
+		robot.keyPress(KeyEvent.VK_CONTROL);
+		robot.keyPress(KeyEvent.VK_V);
+		robot.keyRelease(KeyEvent.VK_V);
+		robot.keyRelease(KeyEvent.VK_CONTROL);
+		robot.keyPress(KeyEvent.VK_ENTER);
+		robot.keyRelease(KeyEvent.VK_ENTER);
+		Thread.sleep(2000);
+		//submit button click
+		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div[1]/div[2]/form/div[3]/button")).click();
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofMinutes(3));
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"kt_body\"]/div[2]/div/div[2]/div/div[2]/div[1]/div/p")));
+		ele2=driver.findElement(By.xpath("//*[@id=\"kt_body\"]/div[2]/div/div[2]/div/div[2]/div[1]/div/div[1]/p[2]"));
+		String SuccessCount = ele2.getText();
+		ele3=driver.findElement(By.xpath("//*[@id=\"kt_body\"]/div[2]/div/div[2]/div/div[2]/div[1]/div/div[2]/p[2]"));
+		String ErrorCount = ele3.getText();
+		Thread.sleep(2000);
+		if(!(SuccessCount.equals("1"))) {
+			System.out.println("Success Count shows wrong value");
+			System.out.println("Success Count shows : " + SuccessCount);
+			System.out.println("Error Count shows : " + ErrorCount);
+		}
+		else {
+			System.out.println("Success count shows correct value");
+		}
+	}
+
+	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	public void ACHUpldSndToSal_CC_Chck() throws InterruptedException, AWTException, TimeoutException{
+		LoginBtn();
+		Thread.sleep(3000);
+		//customer button click
+		driver.findElement(By.xpath("//*[@id=\"#kt_aside_menu\"]/div[5]/span/span[2]")).click();
+		//ACH Form Click
+		driver.findElement(By.xpath("//*[@id=\"#kt_aside_menu\"]/div[5]/div/div[2]/a/span[2]")).click();
+		//installer select
+		ele1=driver.findElement(By.id("installer"));
+		Select sel=new Select(ele1);
+		sel.selectByIndex(2);
+		//Status select
+		ele2=driver.findElement(By.name("type"));
+		Select sel1=new Select(ele2);
+		sel1.selectByIndex(0);
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"kt_table_users\"]/tbody/tr/td[2]/div/div/a")));
+		//search button
+		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[1]/div[1]/div[4]/input")).sendKeys("Tester");
+		//edit button click
+		driver.findElement(By.xpath("//*[@id=\"kt_table_users\"]/tbody/tr/td[10]/div/div/a/span")).click();
+		Thread.sleep(2000);
+		//send to sales button click
+		driver.findElement(By.xpath("//*[@id=\"kt_body\"]/div[2]/div/div[2]/div/div[2]/div[2]/div[1]/div/div/span[2]/input")).click();
+		//update button click
+		driver.findElement(By.xpath("//*[@id=\"kt_body\"]/div[2]/div/div[2]/div/div[2]/div[2]/div[2]/button")).click();
+		//Clear TO Tab
+		ele3=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[2]/div/div[2]/div[1]/div/input"));
+		ele3.clear();
+		//check CC Tab
+		ele4=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[2]/div/div[2]/div[3]/div/input"));
+		String attribute = ele4.getAttribute("value");
+		System.out.println(attribute);
+		Thread.sleep(2000);
+		if(attribute.isEmpty()) {
+			System.out.println("CC Tab also cleared once clear TO Tab");
+		}
+		else {
+			System.out.println("CC Tab is not cleared");
+		}
+	}
+
+	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	public void CusAddPTOChck() throws InterruptedException {
+		LoginBtn();
+		Thread.sleep(3000);
+		//customer button click
+		driver.findElement(By.xpath("//*[@id=\"#kt_aside_menu\"]/div[5]/span/span[2]")).click();
+		//List button Click
+		driver.findElement(By.xpath("//*[@id=\"#kt_aside_menu\"]/div[5]/div/div[1]/a/span[2]")).click();
+		PropertyFileReader.propertyRead();
+		String CustmrId=PropertyFileReader.propertymap.get("CustmrId");
+		String CustmrName=PropertyFileReader.propertymap.get("CustmrName");
+		String CustInstDD=PropertyFileReader.propertymap.get("CustInstDD");
+		String CustPort=PropertyFileReader.propertymap.get("CustPort");
+		String CustPTODate=PropertyFileReader.propertymap.get("CustPTODate");
+		String CustCrdScre=PropertyFileReader.propertymap.get("CustCrdScre");
+		String CustPrjSts=PropertyFileReader.propertymap.get("CustPrjSts");
+		String CustMonPay=PropertyFileReader.propertymap.get("CustMonPay");
+		String CustTotYrs=PropertyFileReader.propertymap.get("CustTotYrs");
+		String CustEscal=PropertyFileReader.propertymap.get("CustEscal");
+		String CustTotConAmt=PropertyFileReader.propertymap.get("CustTotConAmt");
+		String CustPhone1=PropertyFileReader.propertymap.get("CustPhone1");
+		String CustEmail=PropertyFileReader.propertymap.get("CustEmail");
+		String CustCntryDD=PropertyFileReader.propertymap.get("CustCntryDD");
+		String CustStDD=PropertyFileReader.propertymap.get("CustStDD");
+		String CustAdd1=PropertyFileReader.propertymap.get("CustAdd1");
+		String CustAdd2=PropertyFileReader.propertymap.get("CustAdd2");
+		String CustCity=PropertyFileReader.propertymap.get("CustCity");
+		String CustZipCde=PropertyFileReader.propertymap.get("CustZipCde");
+		String CustFinancing=PropertyFileReader.propertymap.get("CustFinancing");
+		String CustProjCost=PropertyFileReader.propertymap.get("CustProjCost");
+		String CustSysCost=PropertyFileReader.propertymap.get("CustSysCost");
+		String CustSysSize=PropertyFileReader.propertymap.get("CustSysSize");
+		String CustProd=PropertyFileReader.propertymap.get("CustProd");
+		String CustPipLn=PropertyFileReader.propertymap.get("CustPipLn");
+		String CustLeadPipLn=PropertyFileReader.propertymap.get("CustLeadPipLn");
+		String CustPanels=PropertyFileReader.propertymap.get("CustPanels");
+		String CustBatt=PropertyFileReader.propertymap.get("CustBatt");
+		String CustWattPerPan=PropertyFileReader.propertymap.get("CustWattPerPan");
+		String CustInvBrnd=PropertyFileReader.propertymap.get("CustInvBrnd");
+		Thread.sleep(2000);
+		WebElement element = driver.findElement(By.xpath(CusLisActBtn));
+		Actions act=new Actions(driver);
+		act.click().build().perform();
+		element.click();
+		driver.findElement(By.xpath(CusListAddBtn)).click();
+		driver.findElement(By.name(CustID)).sendKeys(CustmrId);
+		driver.findElement(By.name(CustName)).sendKeys(CustmrName);
+
+		ele1=driver.findElement(By.name(CusInstDD));
+		Select sel1=new Select(ele1);
+		sel1.selectByVisibleText(CustInstDD);
+
+		ele2=driver.findElement(By.name(CusPort));
+		Select sel2=new Select(ele2);
+		sel2.selectByVisibleText(CustPort);
+
+		driver.findElement(By.name(CusCrdScre)).sendKeys(CustCrdScre);
+		driver.findElement(By.name(CusPrjSts)).sendKeys(CustPrjSts);
+		driver.findElement(By.name(CusStsYes)).click();
+		driver.findElement(By.xpath(CusEnblStsYes)).click();
+		driver.findElement(By.xpath(CusTypLTF)).click();
+		driver.findElement(By.name(CusMonPay)).sendKeys(CustMonPay);
+		driver.findElement(By.name(CusTotYrs)).sendKeys(CustTotYrs);
+		driver.findElement(By.name(CusEscal)).sendKeys(CustEscal);
+		driver.findElement(By.name(CusTotConAmt)).sendKeys(CustTotConAmt);
+		driver.findElement(By.name(CusPhone)).sendKeys(CustPhone1);
+		driver.findElement(By.name(CusEmail)).sendKeys(CustEmail);
+
+		ele3=driver.findElement(By.name(CusCntryDD));
+		Select sel3=new Select(ele3);
+		sel3.selectByVisibleText(CustCntryDD);
+
+		ele4=driver.findElement(By.id(CusStDD));
+		Select sel4=new Select(ele4);
+		sel4.selectByVisibleText(CustStDD);
+
+		driver.findElement(By.name(CusAdd1)).sendKeys(CustAdd1);
+		driver.findElement(By.name(CusAdd2)).sendKeys(CustAdd2);
+		driver.findElement(By.name(CusCity)).sendKeys(CustCity);
+		driver.findElement(By.name(CusZipCde)).sendKeys(CustZipCde);
+		driver.findElement(By.name(CusFinancing)).sendKeys(CustFinancing);
+		driver.findElement(By.name(CusProjCost)).sendKeys(CustProjCost);
+		driver.findElement(By.name(CusSysCost)).sendKeys(CustSysCost);
+		driver.findElement(By.name(CusSysSize)).sendKeys(CustSysSize);
+		driver.findElement(By.name(CusProd)).sendKeys(CustProd);
+		driver.findElement(By.name(CusPipLn)).sendKeys(CustPipLn);
+		driver.findElement(By.name(CusLeadPipLn)).sendKeys(CustLeadPipLn);
+		driver.findElement(By.name(CusPanels)).sendKeys(CustPanels);
+		driver.findElement(By.name(CusBatt)).sendKeys(CustBatt);
+		driver.findElement(By.name(CusWattPerPan)).sendKeys(CustWattPerPan);
+		driver.findElement(By.name(CusInvBrnd)).sendKeys(CustInvBrnd);
+		Thread.sleep(2000);
+		ele5=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[1]/div/div/div[1]/div[2]/span"));
+		String text = ele5.getText();
+		Thread.sleep(2000);
+		if(text.equals("-")) {
+			System.out.println("PTO Date is not shown and it is correct");
+		}
+		else {
+			System.out.println("PTO Date is shown");
+		}
+	}
+
+	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	public void CrteInvLineItemChck() throws InterruptedException, AWTException{
+		LoginBtn();
+		Thread.sleep(3000);
+		//customer button click
+		driver.findElement(By.xpath("//*[@id=\"#kt_aside_menu\"]/div[5]/span/span[2]")).click();
+		//Create Invoice
+		driver.findElement(By.xpath("//*[@id=\"#kt_aside_menu\"]/div[5]/div/div[5]/a/span[2]")).click();
+		Thread.sleep(2000);
+		//installer select
+		ele1=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[1]/div/div[1]/select"));
+		Select sel=new Select(ele1);
+		sel.selectByIndex(2);
+		//Status select
+		ele2=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[1]/div/div[2]/select"));
+		Select sel1=new Select(ele2);
+		sel1.selectByIndex(0);
+		//search name
+		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[1]/div/div[4]/input")).sendKeys("Tester");
+		//Edit button click
+		driver.findElement(By.xpath("//*[@id=\"kt_table_users\"]/tbody/tr/td[9]/div/div/a/span")).click();
+		//Add line items click
+		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[2]/div[2]/div[1]/div/a")).click();
+		//manual entry click
+		driver.findElement(By.name("no")).click();
+		//Due date enter
+		Thread.sleep(2000);
+		driver.findElement(By.xpath("//*[@id=\"kt_body\"]/div[2]/div/div[2]/div/div[2]/div[2]/form/div/div[1]/div/div/div/input")).click();
+		//April button click
+		driver.findElement(By.xpath("//*[@id=\"kt_body\"]/div[3]/div/div/div/div/div/div[2]/table/tbody/tr[2]/td[1]/div")).click();
+		Thread.sleep(2000);
+		//enter description
+		driver.findElement(By.xpath("//*[@id=\"kt_body\"]/div[2]/div/div[2]/div/div[2]/div[2]/form/div/div[2]/div/input")).sendKeys("Test");
+		Thread.sleep(2000);
+		//Enter amount
+		driver.findElement(By.name("amount")).sendKeys("12345");
+		//click save button
+		driver.findElement(By.xpath("//*[@id=\"kt_body\"]/div[2]/div/div[2]/div/div[2]/div[2]/form/div/div[5]/button[2]/span")).click();
+		Thread.sleep(10000);
+		ele4=driver.findElement(By.xpath("//*[@id=\"kt_table_users\"]/tbody/tr[2]/td[4]"));
+		boolean displayed = ele4.isDisplayed();
+		System.out.println("Total value displayed is : " + displayed);
+		String text = ele4.getText();
+		System.out.println("Total value displayed is : " + text);
+	}
+
+	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	public void CrteInvPrvwInvChk() throws InterruptedException, AWTException{
+		CrteInvLineItemChck();
+		Thread.sleep(2000);
+		//Preview Invoice click
+		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[2]/div[2]/div[3]/a/div/button")).click();
+		Thread.sleep(2000);
+		//Getting Due month text in Preview Invoice
+		ele1=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div/div[2]/div/div[2]/div/div[4]/div/table/tbody/tr[1]/td[2]/div"));
+		String text = ele1.getText();
+		Thread.sleep(2000);
+		String DueMonth="Apr/2024";
+		if(DueMonth.equals(text)) {
+			System.out.println("Same Due month is shown");
+		}
+		else {
+			System.out.println("Diffrent Due month is shown");
+		}
+	}
+
+	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	public void CrteInvPrvInvNotsChk() throws InterruptedException, AWTException{
+		CrteInvLineItemChck();
+		Thread.sleep(2000);
+		//Notes enter
+		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[2]/div[2]/div[3]/div[3]/textarea")).sendKeys("Test");
+		Thread.sleep(2000);
+		//Preview Invoice click
+		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[2]/div[2]/div[3]/a/div/button")).click();
+		//Notes check
+		ele1=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div/div[2]/div/div[2]/div/div[5]/div[2]"));
+		String text = ele1.getText();
+		Thread.sleep(2000);
+		if(ele1.isDisplayed()) {
+			System.out.println("Notes is displayed");
+			System.out.println("Notes is displayed like :" + text);
+		}
+		else {
+			System.out.println("Notes is not displayed");
+		}
+	}
+
+	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	public void CrteInvPrvInvBckBtnChk() throws InterruptedException, AWTException{
+		CrteInvLineItemChck();
+		Thread.sleep(2000);
+		//Preview Invoice click
+		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[2]/div[2]/div[3]/a/div/button")).click();
+		Thread.sleep(2000);
+		//action button click
+		WebElement element = driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div/div[2]/div/div[1]/div[2]/a"));
+		Actions act=new Actions(driver);
+		act.click().build().perform();
+		element.click();
+		Thread.sleep(2000);
+		//Back button click
+		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div/div[2]/div/div[1]/div[2]/div/a/div/div/div")).click();
+		//Back button check
+		ele1=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[2]/div[2]/div[3]/a/div/button"));
+		Thread.sleep(2000);
+		if(ele1.isDisplayed()) {
+			System.out.println("Back button is working perfectly");
+		}
+		else {
+			System.out.println("Back button is not working");
+		}
+	}
+
+	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	public void ChckPayAddBtnChk() throws InterruptedException, AWTException{
+		LoginBtn();
+		Thread.sleep(3000);
+		//customer button click
+		driver.findElement(By.xpath("//*[@id=\"#kt_aside_menu\"]/div[5]/span/span[2]")).click();
+		//Check payment button click
+		driver.findElement(By.xpath("//*[@id=\"#kt_aside_menu\"]/div[5]/div/div[6]/a/span[2]")).click();
+		//Add Button
+		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[1]/div[2]/a/div/button")).click();
+		Thread.sleep(2000);
+		//installer select
+		ele1=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[2]/div/div[2]/div[1]/div/select"));
+		Select sel=new Select(ele1);
+		sel.selectByIndex(2);
+		//Customer name 
+		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[2]/div/div[2]/div[2]/div/div/input")).sendKeys("TEST(11)");
+		//Search button click
+		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[2]/div/div[2]/div[3]/button")).click();
+		//Add file
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollTo(0, 0);");
+		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[2]/form/div/div[2]/label/div/p")).click();
+		Thread.sleep(2000);
+		String FilePath="C:\\Users\\thirumaran\\Desktop\\New XLSX Worksheet.xlsx";
+		Robot robot = new Robot();
+		StringSelection selection = new StringSelection(FilePath);
+		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(selection, null);
+		robot.keyPress(KeyEvent.VK_CONTROL);
+		robot.keyPress(KeyEvent.VK_V);
+		robot.keyRelease(KeyEvent.VK_V);
+		robot.keyRelease(KeyEvent.VK_CONTROL);
+		robot.keyPress(KeyEvent.VK_ENTER);
+		robot.keyRelease(KeyEvent.VK_ENTER);
+		Thread.sleep(2000);
+		ele1=driver.findElement(By.name(CPCusEdiChkNam));
+		ele1.click();
+		ele1.sendKeys("123abc");
+		driver.findElement(By.name(CPCusEdiChkDate)).sendKeys("24-04-2024");
+		driver.findElement(By.name(CPCusEdiChkAmt)).sendKeys("2000");
+		driver.findElement(By.name(CPCusEdiNamAcc)).sendKeys("NewTest");
+		driver.findElement(By.name(CPCusEdiBnkAcc)).sendKeys("01234567891");
+		driver.findElement(By.name(CPCusEdiBnkAccRout)).sendKeys("123456789");
+		Thread.sleep(2000);
+		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[2]/form/div/div[3]/div[3]/div/div/div[1]/div/div/div/input")).click();
+		Thread.sleep(2000);
+		JavascriptExecutor js1 = (JavascriptExecutor) driver;
+		js1.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+		Thread.sleep(2000);
+		ele3=driver.findElement(By.xpath("//button[@class='btn btn-primary' and text()='Save']"));
+		ele3.click();
+		boolean displayed = ele3.isDisplayed();
+		System.out.println(displayed);
+		//Check Add button status
+		ele2=driver.findElement(By.xpath("//div[text()='Saved Successfully']"));
+		Thread.sleep(2000);
+		if(ele2.isDisplayed())
+		{
+			System.out.println("Add button is working");
+		}
+		else {
+			System.out.println("Add button is not working");
+		}
+	}
+
+	
+	
+	
+	
+	
+	
+	//Need to change
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,enabled = false)
+	public void CusAddPhNumChck() throws InterruptedException {
+		driver.findElement(By.xpath(CusAddSavBtn)).click();
+	}
+
+
 }
+
+
+

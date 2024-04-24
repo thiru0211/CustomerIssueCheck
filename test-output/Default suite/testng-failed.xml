@@ -7,8 +7,8 @@
         <methods>
           <include name="setUp"/>
           <include name="tearDown"/>
-          <include name="TotalValueChckInMonitoring"/>
           <include name="launch"/>
+          <include name="ChckPayAddBtnChk"/>
         </methods>
       </class> <!-- allPages.CustomerIssues -->
     </classes>

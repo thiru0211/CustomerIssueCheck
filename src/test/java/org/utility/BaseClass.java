@@ -11,13 +11,9 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.BeforeMethod;
 
-import allPages.Login;
-import allPages.ViewUser;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class BaseClass {
-	public ViewUser ViewUseraction;
-	public Login LoginAction;
 	public static WebDriver driver;
 	public static WebElement ele1,ele2,ele3,ele4,ele5;
 	@BeforeMethod
