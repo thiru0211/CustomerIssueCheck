@@ -14,6 +14,7 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Properties;
+import java.util.Random;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -42,7 +43,7 @@ public class CustomerIssues extends Locators {
 	public void setUp() throws IOException{
 		WebDriverManager.chromedriver().setup();
 		ChromeOptions option=new ChromeOptions();
-		option.addArguments("--headless=new");
+		//		option.addArguments("--headless=new");
 		driver=new ChromeDriver(option);
 		driver.manage().window().maximize(); 
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
@@ -62,7 +63,24 @@ public class CustomerIssues extends Locators {
 		driver.quit();
 	}
 
-	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+
+	public static String generateRandomEmail() {
+		String characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+		StringBuilder email = new StringBuilder();
+		Random random = new Random();
+
+		// Generate random username (8 characters)
+		for (int i = 0; i < 8; i++) {
+			email.append(characters.charAt(random.nextInt(characters.length())));
+		}
+
+		// Add "@" symbol
+		email.append("@yopmail.com");
+		return email.toString();
+	}
+
+
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,priority = 1)
 	public void LoginBtn() throws InterruptedException {
 		PropertyFileReader.propertyRead();
 		String EmailId=PropertyFileReader.propertymap.get("EmailId");
@@ -72,7 +90,7 @@ public class CustomerIssues extends Locators {
 		driver.findElement(By.id(LoginBtn)).click();
 	}
 
-	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,priority = 2)
 	public void TC02() throws InterruptedException{
 		LoginBtn();
 		Thread.sleep(3000);
@@ -85,16 +103,17 @@ public class CustomerIssues extends Locators {
 		System.out.println("Status of the dropdown is :" + status);
 	}
 
-	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,priority =3 )
 	public void TC06() throws InterruptedException{
 		LoginBtn();
 		Thread.sleep(3000);
 		driver.findElement(By.xpath("//*[@id=\"#kt_aside_menu\"]/div[5]/span/span[2]")).click();
+		//ACH Form Click
 		driver.findElement(By.xpath("//*[@id=\"#kt_aside_menu\"]/div[5]/div/div[1]/a/span[2]")).click();
 		//Installer dropdown locator
 		ele1=	driver.findElement(By.name("installer"));
 		Select sel1=new Select(ele1);
-		sel1.selectByIndex(1);
+		sel1.selectByIndex(2);
 		Thread.sleep(2000);
 		//Customer edit button click
 		driver.findElement(By.xpath("//*[@id=\"kt_table_users\"]/tbody/tr/td[10]/div/div/a/span")).click();
@@ -120,13 +139,18 @@ public class CustomerIssues extends Locators {
 		System.out.println(displayed);
 	}
 
-	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,priority =4 )
 	public void TC10() throws InterruptedException{
 		LoginBtn();
 		Thread.sleep(3000);
 		driver.findElement(By.xpath("//*[@id=\"#kt_aside_menu\"]/div[5]/span/span[2]")).click();
 		//ACH Form button click
 		driver.findElement(By.xpath("//*[@id=\"#kt_aside_menu\"]/div[5]/div/div[2]/a/span[2]")).click();
+		//Installer dropdown locator
+		ele3=driver.findElement(By.name("installer"));
+		Select sel2=new Select(ele3);
+		sel2.selectByIndex(2);
+		Thread.sleep(2000);
 		//ACH status dropdown locator
 		ele1=	driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[1]/div[1]/div[2]/select"));
 		Select sel1=new Select(ele1);
@@ -157,7 +181,7 @@ public class CustomerIssues extends Locators {
 		}
 	}
 
-	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,priority = 5)
 	public void TC03() throws InterruptedException{
 		LoginBtn();
 		Thread.sleep(3000);
@@ -167,7 +191,7 @@ public class CustomerIssues extends Locators {
 		//Installer dropdown locator
 		ele1=	driver.findElement(By.name("installer"));
 		Select sel1=new Select(ele1);
-		sel1.selectByIndex(1);
+		sel1.selectByIndex(2);
 		Thread.sleep(2000);
 		//Customer edit button click
 		driver.findElement(By.xpath("//*[@id=\"kt_table_users\"]/tbody/tr/td[10]/div/div/a/span")).click();
@@ -178,7 +202,7 @@ public class CustomerIssues extends Locators {
 		System.out.println("Monthly payment value is shown as : " + mnthlyPymtAmt);
 	}
 
-	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,priority = 6)
 	public void TC17() throws InterruptedException{
 		LoginBtn();
 		Thread.sleep(3000);
@@ -213,7 +237,7 @@ public class CustomerIssues extends Locators {
 		}		
 	}
 
-	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,priority =7 )
 	public void TC18() throws InterruptedException{
 		LoginBtn();
 		Thread.sleep(3000);
@@ -225,7 +249,7 @@ public class CustomerIssues extends Locators {
 		driver.navigate().refresh();
 	}
 
-	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,priority =8 )
 	public void TC19() throws InterruptedException{
 		LoginBtn();
 		Thread.sleep(3000);
@@ -237,7 +261,7 @@ public class CustomerIssues extends Locators {
 	}
 
 
-	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,priority = 9)
 	public void TC23() throws InterruptedException{
 		LoginBtn();
 		Thread.sleep(3000);
@@ -257,7 +281,7 @@ public class CustomerIssues extends Locators {
 		}
 	}
 
-	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,priority = 10)
 	public void TC27() throws InterruptedException{
 		LoginBtn();
 		Thread.sleep(3000);
@@ -277,16 +301,16 @@ public class CustomerIssues extends Locators {
 		}
 	}
 
-	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,priority =11 )
 	public void TC40() throws InterruptedException, AWTException{
 		LoginBtn();
 		Thread.sleep(3000);
 		driver.findElement(By.xpath("//*[@id=\"#kt_aside_menu\"]/div[5]/span/span[2]")).click();
 		driver.findElement(By.xpath("//*[@id=\"#kt_aside_menu\"]/div[5]/div/div[1]/a/span[2]")).click();
 		//Installer dropdown locator
-		ele1=	driver.findElement(By.name("installer"));
+		ele1=driver.findElement(By.name("installer"));
 		Select sel1=new Select(ele1);
-		sel1.selectByIndex(1);
+		sel1.selectByIndex(2);
 		Thread.sleep(2000);
 		//Customer edit button click
 		driver.findElement(By.xpath("//*[@id=\"kt_table_users\"]/tbody/tr/td[10]/div/div/a/span")).click();
@@ -330,7 +354,7 @@ public class CustomerIssues extends Locators {
 		}
 	}
 
-	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,priority = 12)
 	public void TC45() throws InterruptedException{
 		LoginBtn();
 		Thread.sleep(3000);
@@ -350,7 +374,7 @@ public class CustomerIssues extends Locators {
 		System.out.println("\033[1m Monthly payment value is shown as : \033[0m" + mnthlyPymtAmt);
 	}
 
-	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,priority = 13)
 	public void TC01() throws InterruptedException {
 		PropertyFileReader.propertyRead();
 		String CustmrId=PropertyFileReader.propertymap.get("CustmrId");
@@ -440,7 +464,7 @@ public class CustomerIssues extends Locators {
 		driver.findElement(By.xpath(CusAddSavBtn)).click();
 	}
 
-	@Test
+	@Test(priority = 14)
 	public void TC04() throws InterruptedException, AWTException{
 		LoginBtn();
 		Thread.sleep(3000);
@@ -486,7 +510,7 @@ public class CustomerIssues extends Locators {
 		//		ele4.click();
 	}
 
-	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,priority =15 )
 	public void DateCheck() throws InterruptedException, AWTException{
 		LoginBtn();
 		Thread.sleep(3000);
@@ -497,7 +521,7 @@ public class CustomerIssues extends Locators {
 		//Installer dropdown locator
 		ele1=	driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[1]/div[1]/div[1]/select"));
 		Select sel1=new Select(ele1);
-		sel1.selectByIndex(1);
+		sel1.selectByIndex(2);
 		ele2=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[1]/div[1]/div[3]/select"));
 		Select sel2=new Select(ele2);
 		sel2.selectByIndex(0);
@@ -526,7 +550,7 @@ public class CustomerIssues extends Locators {
 	}
 
 
-	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,priority = 16)
 	public void SwapOutChck() throws InterruptedException, AWTException{
 		LoginBtn();
 		Thread.sleep(3000);
@@ -537,7 +561,7 @@ public class CustomerIssues extends Locators {
 		//Installer dropdown locator
 		ele1=	driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[1]/div[1]/div[1]/select"));
 		Select sel1=new Select(ele1);
-		sel1.selectByIndex(1);
+		sel1.selectByIndex(2);
 		ele2=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[1]/div[1]/div[3]/select"));
 		Select sel2=new Select(ele2);
 		sel2.selectByIndex(0);
@@ -572,7 +596,7 @@ public class CustomerIssues extends Locators {
 	}
 
 
-	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,priority =17 )
 	public void EscProgChck() throws InterruptedException, AWTException{
 		LoginBtn();
 		Thread.sleep(3000);
@@ -581,9 +605,9 @@ public class CustomerIssues extends Locators {
 		//customer list button click
 		driver.findElement(By.xpath("//*[@id=\"#kt_aside_menu\"]/div[5]/div/div[1]/a/span[2]")).click();
 		//Installer dropdown locator
-		ele1=	driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[1]/div[1]/div[1]/select"));
+		ele1=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[1]/div[1]/div[1]/select"));
 		Select sel1=new Select(ele1);
-		sel1.selectByIndex(1);
+		sel1.selectByIndex(0);
 		ele2=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[1]/div[1]/div[3]/select"));
 		Select sel2=new Select(ele2);
 		sel2.selectByIndex(0);
@@ -613,7 +637,7 @@ public class CustomerIssues extends Locators {
 	}
 
 
-	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,priority = 18)
 	public void CGIDrpDwnChck() throws InterruptedException{
 		LoginBtn();
 		Thread.sleep(3000);
@@ -636,7 +660,7 @@ public class CustomerIssues extends Locators {
 		System.out.println(text);
 	}
 
-	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,priority =19 )
 	public void StopPyMnt() throws InterruptedException{
 		LoginBtn();
 		Thread.sleep(3000);
@@ -646,7 +670,7 @@ public class CustomerIssues extends Locators {
 		//Installer Dropdown
 		ele1=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[1]/div[1]/div[1]/select"));
 		Select sel=new Select(ele1);
-		sel.selectByIndex(1);
+		sel.selectByIndex(2);
 		//Status dropdown
 		ele2=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[1]/div[1]/div[2]/select"));
 		Select sel2=new Select(ele2);
@@ -698,7 +722,7 @@ public class CustomerIssues extends Locators {
 		//		}
 	}
 
-	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,priority = 20)
 	public void EditInstlrIssue() throws InterruptedException{
 		LoginBtn();
 		String PortfolioName=PropertyFileReader.propertymap.get("PortfolioName");
@@ -707,9 +731,9 @@ public class CustomerIssues extends Locators {
 		//customer list button click
 		driver.findElement(By.xpath("//*[@id=\"#kt_aside_menu\"]/div[5]/div/div[1]/a/span[2]")).click();
 		//Installer dropdown locator
-		ele1=	driver.findElement(By.name("installer"));
+		ele1=driver.findElement(By.name("installer"));
 		Select sel1=new Select(ele1);
-		sel1.selectByIndex(1);
+		sel1.selectByIndex(2);
 		Thread.sleep(2000);
 		//Customer edit button click
 		driver.findElement(By.xpath("//*[@id=\"kt_table_users\"]/tbody/tr/td[10]/div/div/a/span")).click();
@@ -745,11 +769,12 @@ public class CustomerIssues extends Locators {
 		}
 	}
 
-	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,priority = 21)
 	public void NewUsrTimIsue() throws InterruptedException{
 		LoginBtn();
 		Thread.sleep(3000);
 		driver.findElement(By.xpath(AdminBtn)).click();
+		Thread.sleep(3000);
 		driver.findElement(By.xpath(ViewUserBtn)).click();
 		String Userrole=PropertyFileReader.propertymap.get("Userrole");
 		String VisibleTextIU=PropertyFileReader.propertymap.get("VisibleTextIU");		
@@ -763,7 +788,9 @@ public class CustomerIssues extends Locators {
 		Thread.sleep(2000);
 		driver.findElement(By.name(FirstName)).sendKeys("Test121");
 		driver.findElement(By.name(LastName)).sendKeys("T1");
-		driver.findElement(By.name(EmailField)).sendKeys("0211thiru@yopmail.com");
+		ele3=driver.findElement(By.name(EmailField));
+		String email =generateRandomEmail();
+		ele3.sendKeys(email);
 		driver.findElement(By.name(UserRole)).sendKeys(Userrole);
 		ele1= driver.findElement(By.name("status"));
 		Select select=new Select(ele1);
@@ -775,6 +802,7 @@ public class CustomerIssues extends Locators {
 		driver.findElement(By.name(City)).sendKeys(city);
 		driver.findElement(By.name(ZipCode)).sendKeys(zipCode);
 		driver.findElement(By.xpath(SaveBtn)).click();
+		Thread.sleep(2000);
 		LocalDateTime startTime = LocalDateTime.now();
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofMinutes(3));
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[text()='Saved Successfully']")));
@@ -783,7 +811,7 @@ public class CustomerIssues extends Locators {
 		System.out.println("Time takes to create a user is : " + between/1000 + "sec");
 	}
 
-	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,priority = 22)
 	public void EmailNotifChck() throws InterruptedException{
 		LoginBtn();
 		Thread.sleep(3000);
@@ -805,7 +833,7 @@ public class CustomerIssues extends Locators {
 		}
 	}
 
-	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,priority = 23)
 	public void UserIDCheck() throws InterruptedException{
 		LoginBtn();
 		Thread.sleep(3000);
@@ -828,7 +856,7 @@ public class CustomerIssues extends Locators {
 		}
 	}
 
-	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,priority = 24)
 	public void LastModifiedChck() throws InterruptedException{
 		LoginBtn();
 		Thread.sleep(3000);
@@ -836,15 +864,15 @@ public class CustomerIssues extends Locators {
 		driver.findElement(By.xpath(ViewUserBtn)).click();
 		ele2=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[1]/div[1]/span[2]/div/select"));
 		Select sel=new Select(ele2);
-		sel.selectByVisibleText("ENABLED");
+		sel.selectByVisibleText("ALL");
 		ele1=driver.findElement(By.xpath(ViewUserSrchBtn));
 		ele1.click();
 		ele1.sendKeys("thirumaran1995@outlook.com");
 		//edit button click
 		driver.findElement(By.xpath("//*[@id=\"kt_table_users\"]/tbody/tr[1]/td[8]/div/div/a/span")).click();
 		Thread.sleep(2000);
-		//Acess rights button
-		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div[1]/div[2]/ul/li[2]/a/span")).click();
+		//Access rights button
+		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div[1]/div[2]/ul/li[3]/a/span")).click();
 		Thread.sleep(4000);
 		//get the text in botton last modified by
 		ele3=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div[2]/div/div[4]/p/span"));
@@ -853,7 +881,7 @@ public class CustomerIssues extends Locators {
 	}
 
 
-	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,priority = 25)
 	public void DisableChck1() throws InterruptedException{
 		LoginBtn();
 		Thread.sleep(3000);
@@ -879,7 +907,7 @@ public class CustomerIssues extends Locators {
 		}
 	}
 
-	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,priority = 26)
 	public void DisableChck2() throws InterruptedException{
 		LoginBtn();
 		Thread.sleep(3000);
@@ -903,7 +931,7 @@ public class CustomerIssues extends Locators {
 		}
 	}
 
-	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,priority = 27)
 	public void InvstClrBtnChck() throws InterruptedException{
 		LoginBtn();
 		Thread.sleep(3000);
@@ -921,7 +949,7 @@ public class CustomerIssues extends Locators {
 		driver.findElement(By.xpath("//*[@id=\"kt_body\"]/div[2]/div/div[2]/div/div[2]/div[2]/form/div/div[1]/div[7]/button[1]")).click();
 	}
 
-	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,priority = 28)
 	public void APIStupClrBtn() throws InterruptedException, AWTException{
 		LoginBtn();
 		Thread.sleep(3000);
@@ -951,7 +979,7 @@ public class CustomerIssues extends Locators {
 		driver.findElement(By.xpath("//*[@id=\"kt_body\"]/div[2]/div/div[2]/div/div[2]/div[2]/form/div/div/div[5]/button[1]")).click();
 	}
 
-	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,priority = 29)
 	public void APIStupSavBtn() throws InterruptedException, AWTException{
 		LoginBtn();
 		Thread.sleep(3000);
@@ -991,7 +1019,7 @@ public class CustomerIssues extends Locators {
 	}
 
 
-	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,priority = 30)
 	public void ACHUpldPopUpChck() throws InterruptedException, AWTException{
 		LoginBtn();
 		Thread.sleep(4000);
@@ -1028,7 +1056,7 @@ public class CustomerIssues extends Locators {
 		ele2.click();
 	}
 
-	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,priority = 31)
 	public void CrtInvNoDataChck() throws InterruptedException, AWTException{
 		LoginBtn();
 		Thread.sleep(4000);
@@ -1047,7 +1075,7 @@ public class CustomerIssues extends Locators {
 		}
 	}
 
-	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,priority = 32)
 	public void CrtInvDueMonth() throws InterruptedException, AWTException{
 		LoginBtn();
 		Thread.sleep(4000);
@@ -1075,7 +1103,7 @@ public class CustomerIssues extends Locators {
 	}
 
 
-	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,priority = 33)
 	public void PayOffChck() throws InterruptedException, AWTException{
 		LoginBtn();
 		Thread.sleep(4000);
@@ -1113,7 +1141,7 @@ public class CustomerIssues extends Locators {
 		System.out.println("All text are : " + TransDate +", "+ Amount+", "+ Remarks);
 	}
 
-	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,priority = 34)
 	public void EscProgCaptchaChck() throws InterruptedException, AWTException{
 		LoginBtn();
 		Thread.sleep(4000);
@@ -1137,7 +1165,7 @@ public class CustomerIssues extends Locators {
 		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[1]/div/div/div[3]/div/a[5]/div/div/div")).click();
 	}
 
-	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,priority = 35)
 	public void StartPyChck() throws InterruptedException{
 		LoginBtn();
 		Thread.sleep(3000);
@@ -1165,6 +1193,7 @@ public class CustomerIssues extends Locators {
 		//Stop payment page check
 		ele3=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[2]/div/div[1]/div[1]/h3"));
 		String StopPyPage = ele3.getText();
+		System.out.println(StopPyPage);
 		//stops from date
 		driver.findElement(By.name("stopsfrom")).sendKeys("Apr/2024");
 		//Reson enter
@@ -1176,9 +1205,10 @@ public class CustomerIssues extends Locators {
 		//Start payment page check
 		ele4=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[2]/div/div[1]/div[1]/h3"));
 		String StartPyPage = ele4.getText();
+		System.out.println(StartPyPage);
 	}
 
-	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,priority = 36)
 	public void EdtPyCusNameChck() throws InterruptedException{
 		LoginBtn();
 		Thread.sleep(3000);
@@ -1221,7 +1251,7 @@ public class CustomerIssues extends Locators {
 		}
 	}
 
-	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,priority = 37)
 	public void DsblUsrChck() throws InterruptedException{
 		LoginBtn();
 		Thread.sleep(3000);
@@ -1276,7 +1306,7 @@ public class CustomerIssues extends Locators {
 		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/form/div/div[3]/button[2]")).click();
 	}
 
-	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,priority = 38)
 	public void CusPortEditChck() throws InterruptedException{
 		LoginBtn();
 		Thread.sleep(3000);
@@ -1310,7 +1340,7 @@ public class CustomerIssues extends Locators {
 		}
 	}
 
-	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,priority =39 )
 	public void ACHMailTimeChckS2Cus() throws InterruptedException{
 		LoginBtn();
 		Thread.sleep(3000);
@@ -1324,7 +1354,7 @@ public class CustomerIssues extends Locators {
 		ele2=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[1]/div[1]/div[2]/select"));
 		Select sel1=new Select(ele2);
 		sel1.selectByIndex(1);
-		//		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[1]/div[1]/div[4]/input")).sendKeys("Test");
+		//driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[1]/div[1]/div[4]/input")).sendKeys("Test");
 		//click edit icon
 		driver.findElement(By.xpath("//*[@id=\"kt_table_users\"]/tbody/tr[1]/td[10]/div/div/a/span")).click();
 		Thread.sleep(2000);
@@ -1336,7 +1366,7 @@ public class CustomerIssues extends Locators {
 		Instant startTime = Instant.now();
 
 		//click send button
-		ele3=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[2]/div[1]/div[2]/div[8]/div[2]/button"));
+		ele3=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[2]/div/div[2]/div[8]/div/button"));
 		ele3.click();
 		//Find the duration of confirmation message display on the screen
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofMinutes(1));
@@ -1346,7 +1376,7 @@ public class CustomerIssues extends Locators {
 		System.out.println("Time taken for confirmation message: " + duration.getSeconds() + " seconds");
 	}
 
-	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,priority = 40)
 	public void ACHMailTimeChckS2Sale() throws InterruptedException{
 		LoginBtn();
 		Thread.sleep(3000);
@@ -1382,7 +1412,7 @@ public class CustomerIssues extends Locators {
 		System.out.println("Time taken for confirmation message: " + duration.getSeconds() + " seconds");
 	}
 
-	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,priority = 41)
 	public void QuckUpldChck() throws InterruptedException, AWTException{
 		LoginBtn();
 		String EmailId=PropertyFileReader.propertymap.get("EmailId");
@@ -1441,7 +1471,7 @@ public class CustomerIssues extends Locators {
 		}
 	}
 
-	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,priority = 42)
 	public void AddToLstChckPymtChck() throws InterruptedException, AWTException{
 		LoginBtn();
 		Thread.sleep(4000);
@@ -1468,7 +1498,7 @@ public class CustomerIssues extends Locators {
 		driver.findElement(By.xpath("//*[@id=\"kt_body\"]/div[2]/div/div[2]/div/div[2]/div[2]/div/div[2]/button")).click();
 	}
 
-	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,priority = 43)
 	public void FailedStsChck() throws InterruptedException, AWTException{
 		LoginBtn();
 		Thread.sleep(3000);
@@ -1493,7 +1523,7 @@ public class CustomerIssues extends Locators {
 		}
 	}
 
-	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,priority =44)
 	public void ReTrnACHSrchChck() throws InterruptedException, AWTException{
 		LoginBtn();
 		Thread.sleep(3000);
@@ -1509,7 +1539,7 @@ public class CustomerIssues extends Locators {
 		sel2.selectByIndex(2);
 	}
 
-	@Test(retryAnalyzer = ReRunFailedTestCase.class,enabled=false,description = "scripts created with help of 54 server")
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,enabled=false,description = "scripts created with help of 54 server",priority =45)
 	public void TotalValueChckInMonitoring() throws InterruptedException, AWTException{
 		LoginBtn();
 		Thread.sleep(3000);
@@ -1528,7 +1558,7 @@ public class CustomerIssues extends Locators {
 		}
 	}
 
-	@Test(retryAnalyzer = ReRunFailedTestCase.class,enabled=false,description = "scripts created with help of 54 server")
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,enabled=false,description = "scripts created with help of 54 server",priority =46)
 	public void ProdStsChckInMonitoring() throws InterruptedException, AWTException{
 		LoginBtn();
 		Thread.sleep(3000);
@@ -1554,7 +1584,7 @@ public class CustomerIssues extends Locators {
 		System.out.println(displayed);
 	}
 
-	@Test(retryAnalyzer = ReRunFailedTestCase.class,enabled=false,description = "scripts created with help of 54 server")
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,enabled=false,description = "scripts created with help of 54 server",priority =47)
 	public void ProdStsExportChckInMonitoring() throws InterruptedException, AWTException, TimeoutException{
 		LoginBtn();
 		Thread.sleep(3000);
@@ -1571,7 +1601,7 @@ public class CustomerIssues extends Locators {
 		button.click();
 	}
 
-	@Test(retryAnalyzer = ReRunFailedTestCase.class,enabled=false,description = "scripts created with help of 54 server")
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,enabled=false,description = "scripts created with help of 54 server",priority =48)
 	public void CustStsSysProfChckInMonitoring() throws InterruptedException, AWTException, TimeoutException{
 		LoginBtn();
 		Thread.sleep(3000);
@@ -1608,7 +1638,7 @@ public class CustomerIssues extends Locators {
 		System.out.println(displayed5);
 	}
 
-	@Test(retryAnalyzer = ReRunFailedTestCase.class,enabled=false,description = "scripts created with help of 54 server")
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,enabled=false,description = "scripts created with help of 54 server",priority =49)
 	public void InvertorManChckInMonitoring() throws InterruptedException, AWTException, TimeoutException{
 		LoginBtn();
 		Thread.sleep(3000);
@@ -1648,7 +1678,7 @@ public class CustomerIssues extends Locators {
 		}
 	}
 
-	@Test(retryAnalyzer = ReRunFailedTestCase.class,enabled=false,description = "scripts created with help of 54 server")
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,enabled=false,description = "scripts created with help of 54 server",priority =50)
 	public void InvertorUpdtChckInMonitoring() throws InterruptedException, AWTException, TimeoutException{
 		InvertorManChckInMonitoring();
 		Thread.sleep(3000);
@@ -1664,7 +1694,7 @@ public class CustomerIssues extends Locators {
 		}
 	}
 
-	@Test(retryAnalyzer = ReRunFailedTestCase.class,enabled=false,description = "scripts created with help of 54 server")
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,enabled=false,description = "scripts created with help of 54 server",priority =51)
 	public void PanelAddChckInMonitoring() throws InterruptedException, AWTException, TimeoutException{
 		LoginBtn();
 		Thread.sleep(3000);
@@ -1691,7 +1721,7 @@ public class CustomerIssues extends Locators {
 		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/form/div/div[2]/div[27]/button[2]")).click();
 	}
 
-	@Test(retryAnalyzer = ReRunFailedTestCase.class,enabled=false,description = "scripts created with help of 54 server")
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,enabled=false,description = "scripts created with help of 54 server",priority =52)
 	public void PanelUpdChckInMonitoring() throws InterruptedException, AWTException, TimeoutException{
 		LoginBtn();
 		Thread.sleep(3000);
@@ -1714,7 +1744,7 @@ public class CustomerIssues extends Locators {
 		}
 	}
 
-	@Test(retryAnalyzer = ReRunFailedTestCase.class,enabled=false,description = "scripts created with help of 54 server")
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,enabled=false,description = "scripts created with help of 54 server",priority =53)
 	public void TimShtChck() throws InterruptedException, AWTException, TimeoutException{
 		LoginBtn();
 		Thread.sleep(3000);
@@ -1741,7 +1771,7 @@ public class CustomerIssues extends Locators {
 		}
 	}															
 
-	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,priority =54)
 	public void LineItemChck() throws InterruptedException, AWTException, TimeoutException{
 		LoginBtn();
 		Thread.sleep(3000);
@@ -1792,7 +1822,7 @@ public class CustomerIssues extends Locators {
 		}
 	}
 
-	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,priority =55)
 	public void AttachChck() throws InterruptedException, AWTException, TimeoutException{
 		LoginBtn();
 		Thread.sleep(3000);
@@ -1841,7 +1871,7 @@ public class CustomerIssues extends Locators {
 		System.out.println("Attached file displayed is : " + displayed);
 	}
 
-	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,priority =56)
 	public void ACH_CC_Clr_Chck() throws InterruptedException, AWTException, TimeoutException{
 		LoginBtn();
 		Thread.sleep(3000);
@@ -1878,7 +1908,7 @@ public class CustomerIssues extends Locators {
 		}
 	}
 
-	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,priority =57)
 	public void ACHSendMailPageChck() throws InterruptedException, AWTException, TimeoutException{
 		LoginBtn();
 		Thread.sleep(3000);
@@ -1916,7 +1946,7 @@ public class CustomerIssues extends Locators {
 		}
 	}
 
-	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,priority =58)
 	public void ACHInvPayCaldrChck() throws InterruptedException, AWTException, TimeoutException{
 		LoginBtn();
 		Thread.sleep(3000);
@@ -1973,7 +2003,7 @@ public class CustomerIssues extends Locators {
 		System.out.println("--------------------Payment started--------------------");
 	}
 
-	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,priority =59)
 	public void ACHUpldSucsChck() throws InterruptedException, AWTException, TimeoutException{
 		LoginBtn();
 		Thread.sleep(3000);
@@ -1981,10 +2011,11 @@ public class CustomerIssues extends Locators {
 		driver.findElement(By.xpath("//*[@id=\"#kt_aside_menu\"]/div[5]/span/span[2]")).click();
 		//ACH Upload click
 		driver.findElement(By.xpath("//*[@id=\"#kt_aside_menu\"]/div[5]/div/div[3]/a/span[2]")).click();
+		Thread.sleep(3000);
 		//installer select
-		ele1=driver.findElement(By.id("installer"));
+		ele1=driver.findElement(By.xpath("//*[@id=\"installer\"]"));
 		Select sel=new Select(ele1);
-		sel.selectByIndex(2);
+		sel.selectByIndex(3);
 		//Upload file
 		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div[1]/div[2]/form/div[2]/div/label/div/h6")).click();
 		Thread.sleep(2000);
@@ -2018,7 +2049,7 @@ public class CustomerIssues extends Locators {
 		}
 	}
 
-	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,priority =60)
 	public void ACHUpldSndToSal_CC_Chck() throws InterruptedException, AWTException, TimeoutException{
 		LoginBtn();
 		Thread.sleep(3000);
@@ -2027,14 +2058,13 @@ public class CustomerIssues extends Locators {
 		//ACH Form Click
 		driver.findElement(By.xpath("//*[@id=\"#kt_aside_menu\"]/div[5]/div/div[2]/a/span[2]")).click();
 		//installer select
-		ele1=driver.findElement(By.id("installer"));
+		ele1=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[1]/div[1]/div[1]/select"));
 		Select sel=new Select(ele1);
 		sel.selectByIndex(2);
 		//Status select
 		ele2=driver.findElement(By.name("type"));
 		Select sel1=new Select(ele2);
 		sel1.selectByIndex(0);
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"kt_table_users\"]/tbody/tr/td[2]/div/div/a")));
 		//search button
 		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[1]/div[1]/div[4]/input")).sendKeys("Tester");
 		//edit button click
@@ -2060,14 +2090,14 @@ public class CustomerIssues extends Locators {
 		}
 	}
 
-//	@Test(retryAnalyzer = ReRunFailedTestCase.class)
-//	public void CusAddPhNumChck() throws InterruptedException {
-//		CustomerList CL=new CustomerList();
-//		CL.CusAddDetailsFull();
-//		driver.findElement(By.xpath(CusAddSavBtn)).click();
-//	}
+	//	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	//	public void CusAddPhNumChck() throws InterruptedException {
+	//		CustomerList CL=new CustomerList();
+	//		CL.CusAddDetailsFull();
+	//		driver.findElement(By.xpath(CusAddSavBtn)).click();
+	//	}
 
-	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,priority =61)
 	public void CusAddPTOChck() throws InterruptedException {
 		LoginBtn();
 		Thread.sleep(3000);
@@ -2170,7 +2200,7 @@ public class CustomerIssues extends Locators {
 		}
 	}
 
-	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,priority =62)
 	public void CrteInvLineItemChck() throws InterruptedException, AWTException{
 		LoginBtn();
 		Thread.sleep(3000);
@@ -2216,7 +2246,7 @@ public class CustomerIssues extends Locators {
 		System.out.println("Total value displayed is : " + text);
 	}
 
-	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,priority =63)
 	public void CrteInvPrvwInvChk() throws InterruptedException, AWTException{
 		CrteInvLineItemChck();
 		Thread.sleep(2000);
@@ -2236,7 +2266,7 @@ public class CustomerIssues extends Locators {
 		}
 	}
 
-	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,priority =74)
 	public void CrteInvPrvInvNotsChk() throws InterruptedException, AWTException{
 		CrteInvLineItemChck();
 		Thread.sleep(2000);
@@ -2258,7 +2288,7 @@ public class CustomerIssues extends Locators {
 		}
 	}
 
-	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,priority =64)
 	public void CrteInvPrvInvBckBtnChk() throws InterruptedException, AWTException{
 		CrteInvLineItemChck();
 		Thread.sleep(2000);
@@ -2284,7 +2314,7 @@ public class CustomerIssues extends Locators {
 		}
 	}
 
-	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,priority =65)
 	public void ChckPayAddBtnChk() throws InterruptedException, AWTException{
 		LoginBtn();
 		Thread.sleep(3000);
@@ -2332,24 +2362,27 @@ public class CustomerIssues extends Locators {
 		Thread.sleep(2000);
 		JavascriptExecutor js1 = (JavascriptExecutor) driver;
 		js1.executeScript("window.scrollTo(0, document.body.scrollHeight)");
-		Thread.sleep(2000);
+		Thread.sleep(3000);
 		ele3=driver.findElement(By.xpath("//button[@class='btn btn-primary' and text()='Save']"));
-		ele3.click();
 		boolean displayed = ele3.isDisplayed();
 		System.out.println(displayed);
 		//Check Add button status
 		ele2=driver.findElement(By.xpath("//div[text()='Saved Successfully']"));
 		Thread.sleep(2000);
-		if(ele2.isDisplayed())
+		if(ele3.isEnabled())
 		{
-			System.out.println("Add button is working");
+			ele3.click();
+			if(ele2.isDisplayed()) {
+				System.out.println("Add button is working");
+			}
 		}
 		else {
-			System.out.println("Add button is not working");
+			System.out.println("Button is not working");
 		}
+
 	}
 
-	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,priority =66)
 	public void InvPyDateChk() throws InterruptedException, AWTException{
 		LoginBtn();
 		Thread.sleep(3000);
@@ -2386,7 +2419,7 @@ public class CustomerIssues extends Locators {
 		System.out.println("Displayed Invoice date is : " + attribute);
 	}
 
-	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,priority =67)
 	public void InvPyAddChrgChk() throws InterruptedException, AWTException{
 		InvPyDateChk();
 		Thread.sleep(2000);
@@ -2446,7 +2479,7 @@ public class CustomerIssues extends Locators {
 		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/form/div/div[2]/div/div[2]/div[10]/div[3]/div/div/div[3]/div/button")).click();
 	}
 
-	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,priority =68)
 	public void InvPyLatFeeChk() throws InterruptedException, AWTException{
 		InvPyDateChk();
 		Thread.sleep(2000);
@@ -2506,7 +2539,7 @@ public class CustomerIssues extends Locators {
 		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/form/div/div[2]/div/div[2]/div[10]/div[3]/div/div/div[3]/div/button")).click();
 	}
 
-	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,priority =69)
 	public void InvPyDepAccManChk() throws InterruptedException, AWTException{
 		InvPyDateChk();
 		Thread.sleep(2000);
@@ -2532,7 +2565,7 @@ public class CustomerIssues extends Locators {
 		System.out.println("Alert message shows like : " + text);
 	}
 
-	@Test(retryAnalyzer = ReRunFailedTestCase.class,enabled=false)
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,enabled=false,priority =70)
 	public void InvChngPayDateManChk() throws InterruptedException, AWTException{
 		LoginBtn();
 		Thread.sleep(3000);
@@ -2573,7 +2606,7 @@ public class CustomerIssues extends Locators {
 	}
 
 
-	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,priority =73)
 	public void InvChngSkpPayManChk() throws InterruptedException, AWTException{
 		LoginBtn();
 		Thread.sleep(3000);
@@ -2628,7 +2661,7 @@ public class CustomerIssues extends Locators {
 	}
 
 
-	@Test(retryAnalyzer = ReRunFailedTestCase.class)
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,priority =71)
 	public void InvChngStpPayManChk() throws InterruptedException, AWTException{
 		LoginBtn();
 		Thread.sleep(3000);
@@ -2672,7 +2705,7 @@ public class CustomerIssues extends Locators {
 		System.out.println(text);
 	}
 
-	@Test
+	@Test(priority =72)
 	public void InvChngStpPayHedgeChk() throws InterruptedException, AWTException{
 		LoginBtn();
 		Thread.sleep(3000);

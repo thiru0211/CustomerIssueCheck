@@ -8,7 +8,7 @@
           <include name="setUp"/>
           <include name="tearDown"/>
           <include name="launch"/>
-          <include name="ChckPayAddBtnChk"/>
+          <include name="AttachChck"/>
         </methods>
       </class> <!-- allPages.CustomerIssues -->
     </classes>
