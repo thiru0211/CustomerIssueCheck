@@ -55,11 +55,11 @@ public class CustomerIssues extends Locators {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofMinutes(3));
 	}
 
-	//	@AfterMethod
-	//	public void tearDown() throws IOException, InterruptedException{
-	//		Thread.sleep(3000);
-	//		driver.quit();
-	//	}
+	@AfterMethod
+	public void tearDown() throws IOException, InterruptedException{
+		Thread.sleep(3000);
+		driver.quit();
+	}
 
 	@Test(retryAnalyzer = ReRunFailedTestCase.class)
 	public void LoginBtn() throws InterruptedException {
@@ -1323,7 +1323,7 @@ public class CustomerIssues extends Locators {
 		ele2=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[1]/div[1]/div[2]/select"));
 		Select sel1=new Select(ele2);
 		sel1.selectByIndex(1);
-		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[1]/div[1]/div[4]/input")).sendKeys("Test");
+		//		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[1]/div[1]/div[4]/input")).sendKeys("Test");
 		//click edit icon
 		driver.findElement(By.xpath("//*[@id=\"kt_table_users\"]/tbody/tr[1]/td[10]/div/div/a/span")).click();
 		Thread.sleep(2000);
@@ -1359,7 +1359,7 @@ public class CustomerIssues extends Locators {
 		ele2=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[1]/div[1]/div[2]/select"));
 		Select sel1=new Select(ele2);
 		sel1.selectByIndex(1);
-		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[1]/div[1]/div[4]/input")).sendKeys("Test");
+		//driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[1]/div[1]/div[4]/input")).sendKeys("Test");
 		//click edit icon
 		driver.findElement(By.xpath("//*[@id=\"kt_table_users\"]/tbody/tr[1]/td[10]/div/div/a/span")).click();
 		Thread.sleep(2000);
@@ -1901,7 +1901,7 @@ public class CustomerIssues extends Locators {
 		driver.findElement(By.xpath("/html/body/div[2]/div/div[2]/div/div[2]/div[2]/div[2]/button")).click();
 		Thread.sleep(4000);
 		//click send button
-		ele4=driver.findElement(By.xpath("//button[text()='Resend']"));
+		ele4=driver.findElement(By.xpath("/html/body/div/div[2]/div[2]/div[2]/div/div/div/div[2]/div/div[2]/div[8]/div/button"));
 		ele4.click();
 		Thread.sleep(10000);
 		//Check next page is displayed or not
@@ -1930,7 +1930,9 @@ public class CustomerIssues extends Locators {
 		//Status select
 		ele2=driver.findElement(By.name("type"));
 		Select sel1=new Select(ele2);
-		sel1.selectByVisibleText("Stopped");
+		sel1.selectByVisibleText("Released");
+		//Search Name
+		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[1]/div[1]/div[3]/input")).sendKeys("Tester");
 		//edit button click
 		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[3]/div/table/tbody/tr/td[10]/a/span/span")).click();
 		Thread.sleep(3000);
@@ -1939,8 +1941,18 @@ public class CustomerIssues extends Locators {
 		Actions act=new Actions(driver);
 		act.click().build().perform();
 		element.click();
-		//start invoice payment click
+		//Click Stop invoice payment
+		//Because once stopped then only start the invoice payment is enabled
 		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[2]/div[1]/div[1]/div/div/div[3]/a/div/div")).click();
+		//Stop From
+		driver.findElement(By.name("stopsfrom")).sendKeys("May/2024");
+		//Reason
+		driver.findElement(By.name("Reason")).sendKeys("Test");
+		//Agree button click
+		driver.findElement(By.name("confirm")).click();
+		//Stop Payment
+		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[2]/div/div[3]/div/div[4]/button")).click();
+		System.out.println("--------------------Payment stopped------------------------");
 		//check calendar tab is enabled or not
 		ele3=driver.findElement(By.name("effectivefrom"));
 		Thread.sleep(2000);
@@ -1950,6 +1962,14 @@ public class CustomerIssues extends Locators {
 		else {
 			System.out.println("Calendar tab is not enabled");
 		}
+		ele3.sendKeys("Apr/2024");
+		//Reason
+		driver.findElement(By.name("Reason")).sendKeys("Test");
+		//Agree button click
+		driver.findElement(By.name("confirm")).click();
+		//Start Payment
+		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[2]/div/div[3]/div[4]/button")).click();
+		System.out.println("--------------------Payment started--------------------");
 	}
 
 	@Test(retryAnalyzer = ReRunFailedTestCase.class)
@@ -2702,7 +2722,7 @@ public class CustomerIssues extends Locators {
 		//Back button check
 		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[2]/div/div[1]/div[2]/div/a/div/div/div")).click();
 		Thread.sleep(10000);
-	
+
 		//Installer select
 		ele5=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[1]/div[1]/div[1]/select"));
 		Select sel3=new Select(ele5);
@@ -2747,6 +2767,6 @@ public class CustomerIssues extends Locators {
 		//click Start payment button
 		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[2]/div/div[3]/div[4]/button")).click();
 	}
-	
+
 }
 
