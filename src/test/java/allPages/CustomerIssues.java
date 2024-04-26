@@ -42,7 +42,8 @@ public class CustomerIssues extends Locators {
 	public void setUp() throws IOException{
 		WebDriverManager.chromedriver().setup();
 		ChromeOptions option=new ChromeOptions();
-		driver=new ChromeDriver();
+		option.addArguments("--headless=new");
+		driver=new ChromeDriver(option);
 		driver.manage().window().maximize(); 
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
 		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(60));
