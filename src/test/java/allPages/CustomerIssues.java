@@ -43,7 +43,7 @@ public class CustomerIssues extends Locators {
 	public void setUp() throws IOException{
 		WebDriverManager.chromedriver().setup();
 		ChromeOptions option=new ChromeOptions();
-		//		option.addArguments("--headless=new");
+		//option.addArguments("--headless=new");
 		driver=new ChromeDriver(option);
 		driver.manage().window().maximize(); 
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
@@ -305,7 +305,10 @@ public class CustomerIssues extends Locators {
 	public void TC40() throws InterruptedException, AWTException{
 		LoginBtn();
 		Thread.sleep(3000);
+		//Customers Button
 		driver.findElement(By.xpath("//*[@id=\"#kt_aside_menu\"]/div[5]/span/span[2]")).click();
+		Thread.sleep(3000);
+		//customer list button click
 		driver.findElement(By.xpath("//*[@id=\"#kt_aside_menu\"]/div[5]/div/div[1]/a/span[2]")).click();
 		//Installer dropdown locator
 		ele1=driver.findElement(By.name("installer"));
@@ -464,7 +467,7 @@ public class CustomerIssues extends Locators {
 		driver.findElement(By.xpath(CusAddSavBtn)).click();
 	}
 
-	@Test(priority = 14)
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,priority = 14)
 	public void TC04() throws InterruptedException, AWTException{
 		LoginBtn();
 		Thread.sleep(3000);
@@ -937,7 +940,7 @@ public class CustomerIssues extends Locators {
 		Thread.sleep(3000);
 		driver.findElement(By.xpath(SetupBtn)).click();
 		driver.findElement(By.xpath(InstallerBtn)).click();
-		driver.findElement(By.xpath(InstSearchBtn)).sendKeys("Test");
+		driver.findElement(By.xpath(InstSearchBtn)).sendKeys("Tester");
 		driver.findElement(By.xpath(InstEditBtn)).click();
 		//invs edit button
 		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div[2]/div/table/tbody/tr/td[9]/span/a/span")).click();
@@ -1086,7 +1089,7 @@ public class CustomerIssues extends Locators {
 		//select installer
 		ele1=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[1]/div/div[1]/select"));
 		Select sel=new Select(ele1);
-		sel.selectByIndex(1);
+		sel.selectByVisibleText("Testingg");
 		Thread.sleep(2000);
 		//edit button
 		driver.findElement(By.xpath("//*[@id=\"kt_table_users\"]/tbody/tr/td[9]/div/div/a/span")).click();
@@ -2560,9 +2563,9 @@ public class CustomerIssues extends Locators {
 		//Check alert messsage is displayed or not
 		ele3=driver.findElement(By.xpath("//*[@id=\"kt_body\"]/div[2]/div/div[2]/div/div[2]/div/div/div[1]/h4"));
 		boolean displayed = ele3.isDisplayed();
-		System.out.println("Alert Message is diplayed : "+ displayed);
+		System.out.println("\\033[1m Alert Message is diplayed : \\033[0m"+ displayed);
 		String text = ele3.getText();
-		System.out.println("Alert message shows like : " + text);
+		System.out.println("\\033[1m Alert message shows like : \\033[0m" + text);
 	}
 
 	@Test(retryAnalyzer = ReRunFailedTestCase.class,enabled=false,priority =70)
@@ -2598,10 +2601,10 @@ public class CustomerIssues extends Locators {
 		Thread.sleep(2000);
 		ele3=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[2]/div/div[2]/div/div[4]"));
 		if( ele3.isEnabled()) {
-			System.out.println("element is displayed");
+			System.out.println("\033[1m element is displayed \033[0m");
 		}
 		else {
-			System.out.println("element is not displayed"); 
+			System.out.println("\033[1m element is not displayed \033[0m");
 		}
 	}
 
@@ -2703,6 +2706,7 @@ public class CustomerIssues extends Locators {
 		ele3=driver.findElement(By.xpath("//div[text()='An error occurred while processing the request']"));
 		String text = ele3.getText();
 		System.out.println(text);
+
 	}
 
 	@Test(priority =72)

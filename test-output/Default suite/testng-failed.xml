@@ -8,7 +8,7 @@
           <include name="setUp"/>
           <include name="tearDown"/>
           <include name="launch"/>
-          <include name="AttachChck"/>
+          <include name="CrtInvDueMonth"/>
         </methods>
       </class> <!-- allPages.CustomerIssues -->
     </classes>
