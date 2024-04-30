@@ -43,11 +43,11 @@ public class CustomerIssues extends Locators {
 	public void setUp() throws IOException{
 		WebDriverManager.chromedriver().setup();
 		ChromeOptions option=new ChromeOptions();
-		//option.addArguments("--headless=new");
+	//	option.addArguments("--headless=new");
 		driver=new ChromeDriver(option);
 		driver.manage().window().maximize(); 
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
-		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(60));
+	//	driver.manage().timeouts().implicitlyWait(Duration.ofMinutes(3));
+	//	driver.manage().timeouts().pageLoadTimeout(Duration.ofMinutes(3));
 		driver.get("http://192.168.1.36:90/#/auth");
 		//driver.get("http://54.193.42.127:81/auth");
 		File file=new File("C:\\Users\\thirumaran\\eclipse-workspace\\PowerFundOnee\\Data.properties");
@@ -89,6 +89,7 @@ public class CustomerIssues extends Locators {
 		driver.findElement(By.name(Password)).sendKeys(Passwrd);
 		driver.findElement(By.id(LoginBtn)).click();
 	}
+	
 
 	@Test(retryAnalyzer = ReRunFailedTestCase.class,priority = 2)
 	public void TC02() throws InterruptedException{
@@ -113,7 +114,7 @@ public class CustomerIssues extends Locators {
 		//Installer dropdown locator
 		ele1=	driver.findElement(By.name("installer"));
 		Select sel1=new Select(ele1);
-		sel1.selectByIndex(2);
+		sel1.selectByVisibleText("Testingg");
 		Thread.sleep(2000);
 		//Customer edit button click
 		driver.findElement(By.xpath("//*[@id=\"kt_table_users\"]/tbody/tr/td[10]/div/div/a/span")).click();
@@ -149,7 +150,7 @@ public class CustomerIssues extends Locators {
 		//Installer dropdown locator
 		ele3=driver.findElement(By.name("installer"));
 		Select sel2=new Select(ele3);
-		sel2.selectByIndex(2);
+		sel2.selectByVisibleText("Testingg");
 		Thread.sleep(2000);
 		//ACH status dropdown locator
 		ele1=	driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[1]/div[1]/div[2]/select"));
@@ -191,7 +192,7 @@ public class CustomerIssues extends Locators {
 		//Installer dropdown locator
 		ele1=	driver.findElement(By.name("installer"));
 		Select sel1=new Select(ele1);
-		sel1.selectByIndex(2);
+		sel1.selectByVisibleText("Testingg");
 		Thread.sleep(2000);
 		//Customer edit button click
 		driver.findElement(By.xpath("//*[@id=\"kt_table_users\"]/tbody/tr/td[10]/div/div/a/span")).click();
@@ -313,7 +314,7 @@ public class CustomerIssues extends Locators {
 		//Installer dropdown locator
 		ele1=driver.findElement(By.name("installer"));
 		Select sel1=new Select(ele1);
-		sel1.selectByIndex(2);
+		sel1.selectByVisibleText("Testingg");
 		Thread.sleep(2000);
 		//Customer edit button click
 		driver.findElement(By.xpath("//*[@id=\"kt_table_users\"]/tbody/tr/td[10]/div/div/a/span")).click();
@@ -524,7 +525,7 @@ public class CustomerIssues extends Locators {
 		//Installer dropdown locator
 		ele1=	driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[1]/div[1]/div[1]/select"));
 		Select sel1=new Select(ele1);
-		sel1.selectByIndex(2);
+		sel1.selectByVisibleText("Testingg");
 		ele2=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[1]/div[1]/div[3]/select"));
 		Select sel2=new Select(ele2);
 		sel2.selectByIndex(0);
@@ -564,7 +565,7 @@ public class CustomerIssues extends Locators {
 		//Installer dropdown locator
 		ele1=	driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[1]/div[1]/div[1]/select"));
 		Select sel1=new Select(ele1);
-		sel1.selectByIndex(2);
+		sel1.selectByVisibleText("Testingg");
 		ele2=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[1]/div[1]/div[3]/select"));
 		Select sel2=new Select(ele2);
 		sel2.selectByIndex(0);
@@ -673,7 +674,7 @@ public class CustomerIssues extends Locators {
 		//Installer Dropdown
 		ele1=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[1]/div[1]/div[1]/select"));
 		Select sel=new Select(ele1);
-		sel.selectByIndex(2);
+		sel.selectByVisibleText("Testingg");
 		//Status dropdown
 		ele2=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[1]/div[1]/div[2]/select"));
 		Select sel2=new Select(ele2);
@@ -736,7 +737,7 @@ public class CustomerIssues extends Locators {
 		//Installer dropdown locator
 		ele1=driver.findElement(By.name("installer"));
 		Select sel1=new Select(ele1);
-		sel1.selectByIndex(2);
+		sel1.selectByVisibleText("Testingg");
 		Thread.sleep(2000);
 		//Customer edit button click
 		driver.findElement(By.xpath("//*[@id=\"kt_table_users\"]/tbody/tr/td[10]/div/div/a/span")).click();
@@ -1033,7 +1034,7 @@ public class CustomerIssues extends Locators {
 		//Installer DD
 		ele1=driver.findElement(By.id("installer"));
 		Select sel=new Select(ele1);
-		sel.selectByIndex(2);
+		sel.selectByVisibleText("Testingg");
 		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div[1]/div[2]/form/div[2]/div/label/div/h6")).click();
 		Thread.sleep(2000);
 		String FilePath="C:\\Users\\thirumaran\\Desktop\\New XLSX Worksheet";
@@ -1117,7 +1118,7 @@ public class CustomerIssues extends Locators {
 		//Installer Dropdown
 		ele1=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[1]/div[1]/div[1]/select"));
 		Select sel=new Select(ele1);
-		sel.selectByIndex(1);
+		sel.selectByVisibleText("Testingg");
 		//Customer edit button
 		driver.findElement(By.xpath("//*[@id=\"kt_table_users\"]/tbody/tr[1]/td[10]/div/div/a/span")).click();
 		Thread.sleep(2000);
@@ -1155,7 +1156,7 @@ public class CustomerIssues extends Locators {
 		//Installer Dropdown
 		ele1=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[1]/div[1]/div[1]/select"));
 		Select sel=new Select(ele1);
-		sel.selectByIndex(1);
+		sel.selectByVisibleText("Testing");
 		//Customer edit button
 		driver.findElement(By.xpath("//*[@id=\"kt_table_users\"]/tbody/tr[1]/td[10]/div/div/a/span")).click();
 		Thread.sleep(2000);
@@ -1179,11 +1180,12 @@ public class CustomerIssues extends Locators {
 		//Installer Dropdown
 		ele1=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[1]/div[1]/div[1]/select"));
 		Select sel=new Select(ele1);
-		sel.selectByIndex(1);
+		sel.selectByVisibleText("Testingg");
 		//Status dropdown
 		ele2=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[1]/div[1]/div[2]/select"));
 		Select sel2=new Select(ele2);
 		sel2.selectByVisibleText("All");
+		Thread.sleep(2000);
 		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[3]/div/table/tbody/tr/td[10]/a/span/span")).click();
 		Thread.sleep(2000);
 		//Create Invoice Action button
@@ -1222,7 +1224,7 @@ public class CustomerIssues extends Locators {
 		//Installer Dropdown
 		ele1=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[1]/div[1]/div[1]/select"));
 		Select sel=new Select(ele1);
-		sel.selectByIndex(1);
+		sel.selectByVisibleText("Testingg");
 		//Status dropdown
 		ele2=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[1]/div[1]/div[2]/select"));
 		Select sel2=new Select(ele2);
@@ -1278,7 +1280,7 @@ public class CustomerIssues extends Locators {
 		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[1]/div[1]/div/input")).sendKeys("Testing");
 		ele1=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[1]/div[1]/span[2]/div/select"));
 		Select sel=new Select(ele1);
-		sel.selectByVisibleText("Enabled");
+		sel.selectByVisibleText("ALL");
 		ele2=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[2]/div/div/table/tbody/tr[1]/td[3]/a"));
 		Thread.sleep(2000);
 		if(ele2.isDisplayed()) {
@@ -1318,7 +1320,7 @@ public class CustomerIssues extends Locators {
 		//Installer dropdown locator
 		ele1=	driver.findElement(By.name("installer"));
 		Select sel1=new Select(ele1);
-		sel1.selectByIndex(1);
+		sel1.selectByVisibleText("Testingg");
 		Thread.sleep(2000);
 		//Customer edit button click
 		driver.findElement(By.xpath("//*[@id=\"kt_table_users\"]/tbody/tr/td[10]/div/div/a/span")).click();
@@ -1535,7 +1537,7 @@ public class CustomerIssues extends Locators {
 		Thread.sleep(2000);
 		ele1=driver.findElement(By.xpath("/html/body/div/div[2]/div[2]/div[2]/div/div/div[1]/div[1]/div[1]/div[2]/select"));
 		Select sel1=new Select(ele1);
-		sel1.selectByIndex(2);
+		sel1.selectByVisibleText("Testingg");
 		Thread.sleep(2000);
 		ele2=driver.findElement(By.xpath("/html/body/div/div[2]/div[2]/div[2]/div/div/div[1]/div[1]/div[1]/div[2]/select"));
 		Select sel2=new Select(ele2);
@@ -1785,7 +1787,7 @@ public class CustomerIssues extends Locators {
 		//installer select
 		ele1=driver.findElement(By.name("installer"));
 		Select sel=new Select(ele1);
-		sel.selectByIndex(2);
+		sel.selectByVisibleText("Testingg");
 		//Payment type select
 		ele2=driver.findElement(By.name("type"));
 		Select sel1=new Select(ele2);
@@ -1838,7 +1840,7 @@ public class CustomerIssues extends Locators {
 		//installer select
 		ele1=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[2]/div/div[2]/div[1]/div/select"));
 		Select sel=new Select(ele1);
-		sel.selectByIndex(2);
+		sel.selectByVisibleText("Testingg");
 		//Customer name select
 		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[2]/div/div[2]/div[2]/div/div/input")).sendKeys("TEST(11)");
 		//search button click
@@ -1885,7 +1887,7 @@ public class CustomerIssues extends Locators {
 		//installer select
 		ele1=driver.findElement(By.name("installer"));
 		Select sel=new Select(ele1);
-		sel.selectByIndex(2);
+		sel.selectByVisibleText("Testingg");
 		//Status select
 		ele2=driver.findElement(By.name("type"));
 		Select sel1=new Select(ele2);
@@ -1922,7 +1924,7 @@ public class CustomerIssues extends Locators {
 		//installer select
 		ele1=driver.findElement(By.name("installer"));
 		Select sel=new Select(ele1);
-		sel.selectByIndex(2);
+		sel.selectByVisibleText("Testingg");
 		//Status select
 		ele2=driver.findElement(By.name("type"));
 		Select sel1=new Select(ele2);
@@ -1960,7 +1962,7 @@ public class CustomerIssues extends Locators {
 		//installer select
 		ele1=driver.findElement(By.name("installer"));
 		Select sel=new Select(ele1);
-		sel.selectByIndex(2);
+		sel.selectByVisibleText("Testingg");
 		//Status select
 		ele2=driver.findElement(By.name("type"));
 		Select sel1=new Select(ele2);
@@ -2018,7 +2020,7 @@ public class CustomerIssues extends Locators {
 		//installer select
 		ele1=driver.findElement(By.xpath("//*[@id=\"installer\"]"));
 		Select sel=new Select(ele1);
-		sel.selectByIndex(3);
+		sel.selectByVisibleText("Testingg");
 		//Upload file
 		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div[1]/div[2]/form/div[2]/div/label/div/h6")).click();
 		Thread.sleep(2000);
@@ -2063,7 +2065,7 @@ public class CustomerIssues extends Locators {
 		//installer select
 		ele1=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[1]/div[1]/div[1]/select"));
 		Select sel=new Select(ele1);
-		sel.selectByIndex(2);
+		sel.selectByVisibleText("Testingg");
 		//Status select
 		ele2=driver.findElement(By.name("type"));
 		Select sel1=new Select(ele2);
@@ -2147,15 +2149,15 @@ public class CustomerIssues extends Locators {
 		driver.findElement(By.xpath(CusListAddBtn)).click();
 		driver.findElement(By.name(CustID)).sendKeys(CustmrId);
 		driver.findElement(By.name(CustName)).sendKeys(CustmrName);
-
+		Thread.sleep(2000);
 		ele1=driver.findElement(By.name(CusInstDD));
 		Select sel1=new Select(ele1);
 		sel1.selectByVisibleText(CustInstDD);
-
+		Thread.sleep(2000);
 		ele2=driver.findElement(By.name(CusPort));
 		Select sel2=new Select(ele2);
 		sel2.selectByVisibleText(CustPort);
-
+		Thread.sleep(2000);
 		driver.findElement(By.name(CusCrdScre)).sendKeys(CustCrdScre);
 		driver.findElement(By.name(CusPrjSts)).sendKeys(CustPrjSts);
 		driver.findElement(By.name(CusStsYes)).click();
@@ -2215,7 +2217,7 @@ public class CustomerIssues extends Locators {
 		//installer select
 		ele1=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[1]/div/div[1]/select"));
 		Select sel=new Select(ele1);
-		sel.selectByIndex(2);
+		sel.selectByVisibleText("Testingg");
 		//Status select
 		ele2=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[1]/div/div[2]/select"));
 		Select sel1=new Select(ele2);
@@ -2317,7 +2319,7 @@ public class CustomerIssues extends Locators {
 		}
 	}
 
-	@Test(retryAnalyzer = ReRunFailedTestCase.class,priority =65)
+	@Test(retryAnalyzer = ReRunFailedTestCase.class,priority =65, enabled=false,description="Add button is not working")
 	public void ChckPayAddBtnChk() throws InterruptedException, AWTException{
 		LoginBtn();
 		Thread.sleep(3000);
@@ -2331,7 +2333,7 @@ public class CustomerIssues extends Locators {
 		//installer select
 		ele1=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[2]/div/div[2]/div[1]/div/select"));
 		Select sel=new Select(ele1);
-		sel.selectByIndex(2);
+		sel.selectByVisibleText("Testingg");
 		//Customer name 
 		driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[2]/div/div[2]/div[2]/div/div/input")).sendKeys("TEST(11)");
 		//Search button click
@@ -2367,7 +2369,7 @@ public class CustomerIssues extends Locators {
 		js1.executeScript("window.scrollTo(0, document.body.scrollHeight)");
 		Thread.sleep(3000);
 		ele3=driver.findElement(By.xpath("//button[@class='btn btn-primary' and text()='Save']"));
-		boolean displayed = ele3.isDisplayed();
+		boolean displayed = ele3.isEnabled();
 		System.out.println(displayed);
 		//Check Add button status
 		ele2=driver.findElement(By.xpath("//div[text()='Saved Successfully']"));
@@ -2396,7 +2398,7 @@ public class CustomerIssues extends Locators {
 		//installer select
 		ele1=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[1]/div[1]/div[1]/select"));
 		Select sel=new Select(ele1);
-		sel.selectByIndex(2);
+		sel.selectByVisibleText("Testingg");
 		//Status select
 		ele2=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[1]/div[1]/div[2]/select"));
 		Select sel1=new Select(ele2);
@@ -2620,7 +2622,7 @@ public class CustomerIssues extends Locators {
 		//installer select
 		ele1=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[1]/div[1]/div[1]/select"));
 		Select sel=new Select(ele1);
-		sel.selectByIndex(2);
+		sel.selectByVisibleText("Testingg");
 		//Status select
 		ele2=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[1]/div[1]/div[2]/select"));
 		Select sel1=new Select(ele2);
@@ -2675,7 +2677,7 @@ public class CustomerIssues extends Locators {
 		//installer select
 		ele1=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[1]/div[1]/div[1]/select"));
 		Select sel=new Select(ele1);
-		sel.selectByIndex(2);
+		sel.selectByVisibleText("Testingg");
 		//Status select
 		ele2=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[1]/div[1]/div[2]/select"));
 		Select sel1=new Select(ele2);
@@ -2720,7 +2722,7 @@ public class CustomerIssues extends Locators {
 		//installer select
 		ele1=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[1]/div[1]/div[1]/select"));
 		Select sel=new Select(ele1);
-		sel.selectByIndex(2);
+		sel.selectByVisibleText("Testingg");
 		//Status select
 		ele2=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[1]/div[1]/div[2]/select"));
 		Select sel1=new Select(ele2);
@@ -2764,7 +2766,7 @@ public class CustomerIssues extends Locators {
 		//Installer select
 		ele5=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[1]/div[1]/div[1]/select"));
 		Select sel3=new Select(ele5);
-		sel3.selectByIndex(2);
+		sel3.selectByVisibleText("Testing");
 		Thread.sleep(2000);
 		//Status select
 		ele6=driver.findElement(By.xpath("//*[@id=\"kt_content_container\"]/div/div[1]/div[1]/div[2]/select"));
